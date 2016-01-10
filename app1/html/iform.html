@@ -1,0 +1,69 @@
+<form name="iform" class="form" ng-submit="iform.$valid && NewD()" novalidate>
+
+	<div class="form-group">
+		<label for="">Nombre</label>
+		<input type="text" class="form-control" ng-model="D.Nombres" ng-model-options="{ debounce: 250 }" name="Nombre" required>
+		<div ng-show="iform.$submitted || iform.Nombre.$touched">
+			<span ng-show="iform.Nombre.$error.text">Introduzca Solo letras por favor </span>
+			<span ng-show="iform.Nombre.$error.required">Escriba su Nombre </span>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="">Apellido</label>
+		<input type="text" class="form-control" ng-model="D.Apellidos" name="Apellido">
+	</div>
+
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-6">
+				<label for="">Telefono</label>
+				<input type="number" class="form-control" ng-model="D.Telefono" name="tel" min="1000001" max="9999999" required ng-model-options="{ debounce: 500 }">
+
+				<div ng-show="iform.$submitted || iform.tel.$touched || iform.tel.$dirty">
+					<span ng-show="iform.tel.$error.min">
+						Faltan digitos!
+					</span>
+					<span ng-show="iform.tel.$error.max">
+						Sobran digitos!
+					</span>
+					<span ng-show="iform.tel.$error.number">
+						El campo telefono solo admite Números!
+					</span>
+					<span ng-show="iform.tel.$error.required">
+						Por favor ingresa tu Número!
+					</span>
+				</div>
+
+			</div>
+
+			<div class="col-md-6">
+				<label for="">Celular</label>
+				<input type="number" class="form-control" ng-model="D.Celular">
+			</div>
+
+
+
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="">E-mail</label>
+		<input type="email" class="form-control" ng-model="D.email" name="uEmail" required ng-model-options="{ debounce: 700 }">
+
+		<div ng-show="iform.$submitted || iform.uEmail.$touched">
+			<span ng-show="iform.uEmail.$error.required">Por favor ingresa tu email.</span>
+			<span ng-show="iform.uEmail.$error.email">E-mail no valido.</span>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for=""> Descripcion | Situacion </label>
+		<textarea class="form-control" name="" id="" cols="30" rows="6" ng-model="D.Descripcion"></textarea>
+	</div>
+	<hr>
+	<div class="form-group">
+		<button class="btn btn-success form-control">Registrar</button>
+	</div>
+	{{iform.$valid}}
+</form>

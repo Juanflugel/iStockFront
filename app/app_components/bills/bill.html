@@ -1,0 +1,12 @@
+
+<md-card ng-repeat="bill in bills">
+    <md-list>
+      <md-list-item>
+      <img ng-src="{{bill.providerImage}}" class="md-avatar" alt="" />
+        <div class="md-list-item-text" layout="column">
+          <h4>{{bill.providerName}}</h3>
+          <h5>{{bill.soldItems.length}}</h4>
+          <p>{{bill.billDate | date:"MM/dd/yyyy"}}</p>
+      </md-list-item>
+    </md-list>  
+</md-card>

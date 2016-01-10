@@ -1,0 +1,30 @@
+<md-card>
+	<table class="table table-hover table-responsive panel hidden-xs">    
+    		<thead>
+	   		<tr class="table" >
+		  		<th ng-repeat="val in header" style="cursor:pointer;">
+		  			{{val}}
+		 		</th>
+		  		<th>Handling</th>           
+	   		</tr>
+    		</thead>
+
+    		<tbody>
+	   		<tr ng-repeat="sample in collection">
+		  		<td>{{sample.itemCode}}</td>
+		  		<td>{{sample.itemName}}</td>
+		  		<td>{{sample.itemAmount}}</td>
+		  		<td>{{sample.itemUnits}}</td>
+	   <!--    <td>{{sample.itemSellPrice}}</td> -->
+		  <!-- <td>{{sample.itemBrand}}</td> -->
+		  		<td>{{sample.itemProvider}}</td>
+		  		<td>{{sample.itemSellPrice}}</td>
+		 		<td>
+		 		 	<i class="fa fa-pencil-square-o" ng-click="editRow(sample)"></i>&nbsp&nbsp
+			 		<i class="fa fa-trash" ng-click="deleteRow(sample.ID)"></i>&nbsp&nbsp
+			 		<i class="fa fa-info-circle"></i>
+		  		</td>
+	   		</tr>
+    		</tbody>    
+	</table>    
+</md-card>

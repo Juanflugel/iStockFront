@@ -1,0 +1,42 @@
+<!-- directiva i-input -->
+<md-card layout-padding >
+	<div layout="row">
+		<i-input></i-input>
+		<div flex layout="row" layout-align="end center"><i ng-click="newItem();show=!show" ng-hide="show" class="fa fa-plus fa-lg" ></i><i class="fa fa-reply fa-lg" ng-show="show" ng-click="show=!show"></i></div>
+	</div>
+
+	<div ng-show="show">
+		<md-divider ></md-divider><br>
+		<div layout="row" >
+
+			<md-input-container >
+				<label>Item Id (Bar Code)</label>
+				<input type="text" ng-model="obj.itemId">
+			</md-input-container>
+			<md-input-container >
+				<label>Item Name</label>
+				<input type="text" ng-model="obj.itemName">
+			</md-input-container>
+			<md-input-container >
+				<label>Item Marke</label>
+				<input type="text" ng-model="obj.itemMarke">
+			</md-input-container>
+			<md-input-container >
+				<label>Item Provider</label>
+				<input type="text" ng-model="obj.itemProvider">
+			</md-input-container>
+			<md-input-container >
+				<label>Item Price</label>
+				<input type="text" ng-model="obj.itemUnits">
+			</md-input-container>
+		</div>
+		<md-divider ></md-divider><br>
+		<div layout="row" layout-align="end center">
+			<button class="btn btn-primary" ng-click="updateObj(obj)">Update</button>
+		</div>
+	</div>
+	
+</md-card>
+<i-table></i-table>
+
+{{obj}}

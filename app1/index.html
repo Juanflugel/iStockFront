@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eje">
+<head>
+	<meta charset="UTF-8">
+	<title>ModuloDB-Mejorado</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="librerias/dist/css/bootstrap.css">
+	<script type="text/javascript" src="librerias/dist/js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/angular-ui-router.js"></script>
+	<script type="text/javascript" src="librerias/dist/js/underscore.js"></script>
+	<script type="text/javascript" src="js/PapaParse/papaparse.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/Controllers/contro.js"></script>
+	<script type="text/javascript" src="js/Services/servicios.js"></script>	
+	<script type="text/javascript" src="js/Directives/direct.js"></script>
+	
+		
+</head>
+<body>
+	<nav-main></nav-main>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-9">
+				<ol class="breadcrumb">
+					<li><a ui-sref="Inicio">Datos completos</a></li>
+					<li class="active"><a ui-sref="tabla"> Datos incompletos</a></li>
+						</ol>
+				<div class="row">
+					<div class="col-md-12">
+						<div ui-view></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="input-group" ng-controller="inputDatosController">
+					<label for="" class="input-group">Importar Base de Datos </label>
+					<input type="file"  id="archivo-csv">
+				</div>
+			</div>
+		</div>
+		
+		
+	</div>
+
+
+
+
+</body>
+</html>

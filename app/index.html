@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="iStock">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>iStock</title>
+	<link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body>
+	<md-toolbar layout="row" >
+	<h1> --e-Stock</h1>
+	</md-toolbar>
+
+	<!-- Container #2 -->
+	<div flex layout="row">
+
+		<!-- Container #3 -->
+		<md-sidenav md-is-locked-open="true" class="md-whiteframe-z2" layout="column">
+			<a ui-sref="Bills" class="md-button">Bills</a>
+	        <a ui-sref="Stock" class="md-button">Stock</a>
+	        <a ui-sref="Pending" class="md-button">Pending</a>
+	        <a ui-sref="allItems" class="md-button">All Items</a>
+	        <a ui-sref="dataInput" class="md-button">Data Input</a>
+		</md-sidenav>
+
+		<!-- Container #4 -->
+		<md-content flex id="content">
+		<div ui-view layout-margin></div>
+		</md-content>
+
+	</div>
+</body>
+<script src="bower_components/localStorageDB/localstoragedb.js"></script>
+<script src="bower_components/papaparse/papaparse.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<!-- material -->
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+<!-- material -->
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="app_components/table/table.js"></script>
+<script src="app_components/services.js"></script>
+<script src="app_components/bills/bills.js"></script>
+<script src="app_components/inputTable/inputTable.js"></script>
+<script src="app.js"></script>
+</html>
+

@@ -1,0 +1,10 @@
+.ng-invalid .ng-dirty{
+	border-color: red;
+}
+.ng-valid .ng-dirty{
+	border-color: green;
+}
+/*.ng-invalid.ng-touched {
+	background-color: #FA787E;
+}
+*/

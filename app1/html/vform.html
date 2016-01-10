@@ -1,0 +1,46 @@
+<div class="row">
+	<div class="col-md-3">
+		<p ng-repeat="R in Datos track by $index">{{R.Nombres}}</p>
+	</div>
+
+	<div class="col-md-8">
+
+		<div class="row">
+			<div class="col-md-6">
+				<label for="">NOMBRES</label>
+				<p>{{D.Nombres}}</p>
+			</div>
+			<div class="col-md-6">
+				<label for="">APELLIDOS</label>
+				<p>{{D.Apellidos}}</p>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-12">
+				<span><label for="">E-MAIL:</label><p>{{D.email}}</p></span>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-6">
+				<label for="">Telefono</label>
+				<p>{{D.Telefono}}</p>
+			</div>
+			<div class="col-md-6">
+				<label for="">Celular</label>
+				<p>{{D.Celular}}</p>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-12">
+				<label for="">Descripcion</label>
+				<div class="well">
+					<p>{{D.Descripcion}}</p>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>

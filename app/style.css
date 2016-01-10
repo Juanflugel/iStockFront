@@ -1,0 +1,22 @@
+md-sidenav {
+	width: 250px;
+}
+md-input-container {
+	margin:4px;
+}
+md-input-container .md-input {
+	border-color: transparent;
+}
+
+h4, .h4, h5, .h5, h6, .h6 {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+md-list-item .md-avatar, md-list-item .md-list-item-inner .md-avatar {
+    width: 60px;
+    height: 60px;
+}
+
+td,th{
+	text-align: center;
+}
