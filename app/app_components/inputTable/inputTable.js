@@ -3,9 +3,9 @@
 *
 * Description
 */
-angular.module('inputTableModule', [])
+angular.module('inputTableModule', ['services'])
 
-.controller('inputTableCtrl', ['$scope', function ($scope){
+.controller('inputTableCtrl', ['$scope','items', function ($scope,items){
     var stock = new localStorageDB('stock', localStorage);
     $scope.stock = stock;
 
@@ -14,19 +14,21 @@ angular.module('inputTableModule', [])
     } 
     else{
         $scope.collection = [];
-    } 
-    
+    }
+
+    items.list.query(function (data){
+        $scope.back = data;
+    },function (err){
+        console.log('error:',err);
+    });
 
 }])
 
 .directive('inputTable', [ function(){
 
-
     // Runs during compile
     return {
-        
-        // scope: {}, // {} = isolate, true = child, false/undefined = no change
-        // controller: function($scope, $element, $attrs, $transclude) {},
+
         restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
         templateUrl: 'app_components/inputTable/inputTable.html',
         link: function($scope, iElm, iAttrs, controller) {
@@ -69,18 +71,11 @@ angular.module('inputTableModule', [])
 .directive('inputTag', [ '$loStorage',function ($loStorage){
     // Runs during compile
     return {
-        // name: '',
-        // priority: 1,
-        // terminal: true,
-        // scope: {}, // {} = isolate, true = child, false/undefined = no change
-        // controller: function($scope, $element, $attrs, $transclude) {},
+        
         // require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
         restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
-        // template: '',
         templateUrl: 'app_components/table/input.html',
-        // replace: true,
-        // transclude: true,
-        // compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
+        
         link: function($scope, iElm, iAttrs, controller) {
 
             var inputFile = angular.element('#i-input');
@@ -93,26 +88,16 @@ angular.module('inputTableModule', [])
                     Papa.parse($scope.file,{
                             header:true,
                             complete:function(result){
-                                    $scope.stock = stock;
-                                    // console.log(result.data);                                    
+                                    $scope.stock = stock;                                    
                                     $scope.prueba = result.data;
                                     var l = $scope.prueba.length;
                                     $scope.prueba.splice((l-1),1);
-                                    console.log( l,$scope.prueba);
-                                    // $loStorage.setObject('table',scope.prueba);                                                                 
-                                    // var d = $loStorage.getObject('table');
-                                    // console.log('antes:',d);
                                     $scope.stock.createTableWithData('items', $scope.prueba);
-                                    // scope.table.data = scope.stock.queryAll('items');
-                                    // scope.table.header = _.keys(scope.table.data[0]);
-                                    // scope.table.data = scope.ObjtoArray(scope.table.data);
                                     $scope.stock.commit();
                                     $scope.collection =$scope.stock.queryAll('items');
-                                    $scope.$apply();
-                                    
-                                                                      
-                                    }
-                        });
+                                    $scope.$apply();           
+                            }
+                    });
                 });
 
                 $scope.click = function(){

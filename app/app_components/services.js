@@ -3,7 +3,7 @@
 *
 * Description
 */
-angular.module('services', [])
+angular.module('services', ['ngResource'])
 
 .factory('$loStorage', function(){
 
@@ -29,15 +29,15 @@ angular.module('services', [])
 .factory('Config', function () {
   return {
       version : '0.0.1',
-      ip: 'tsjuan.ddns.net',
-      port: 4000,
+      ip: '192.168.1.165',
+      port: 5006,
       protocol: 'http'
   };
 })
 
-.factory('bills',['$resource', 'Config', function ContenidoFactory($resource, Config){
+.factory('items',['$resource', 'Config', function ContenidoFactory($resource, Config){
   return {
-    list : $resource('http://' + Config.ip + ':' + Config.port + '/bills'),
+    list : $resource('http://' + Config.ip + ':' + Config.port + '/items'),
     id: $resource('http://' + Config.ip + ':' + Config.port + '/bills',{})    
   };
 }])
