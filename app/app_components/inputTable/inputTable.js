@@ -5,7 +5,13 @@
 */
 angular.module('inputTableModule', ['services'])
 
-.controller('inputTableCtrl', ['$scope','items', function ($scope,items){
+.controller('inputTableCtrl', ['$scope','items','socketio', function ($scope,items,socketio){
+    
+    socketio.on('newCollection',function (data){
+        $scope.back = data;
+        console.log($scope.back);
+    });
+
     var stock = new localStorageDB('stock', localStorage);
     $scope.stock = stock;
 
@@ -21,6 +27,22 @@ angular.module('inputTableModule', ['services'])
     },function (err){
         console.log('error:',err);
     });
+
+    socketio.on('juan',function (data){
+        console.log(data);
+
+        socketio.emit('asd',{joda:'que vaina hp'});
+    });
+
+    socketio.on('news',function (data){
+        console.log(data);
+    });
+
+    $scope.sendData = function(arr){
+        items.list.save(arr,function (data){
+            console.log(data);
+        });
+    };
 
 }])
 
