@@ -6,43 +6,52 @@
 angular.module('inputTableModule', ['services'])
 
 .controller('inputTableCtrl', ['$scope','items','socketio', function ($scope,items,socketio){
-    
+
+    $scope.data = [];
+
+    // todo lo de socket
     socketio.on('newCollection',function (data){
         $scope.back = data;
         console.log($scope.back);
     });
-
+    socketio.on('newItem', function (data){
+        $scope.obj = data;
+        $scope.show = true;
+        console.log(data);
+    });
+    // inicializacion del local storage
     var stock = new localStorageDB('stock', localStorage);
     $scope.stock = stock;
 
-    if ($scope.stock.tableExists('items')){
-        $scope.collection = $scope.stock.queryAll('items');
-    } 
-    else{
-        $scope.collection = [];
-    }
-
     items.list.query(function (data){
-        $scope.back = data;
+        $scope.data = data;
+        init();
     },function (err){
         console.log('error:',err);
     });
-
-    socketio.on('juan',function (data){
-        console.log(data);
-
-        socketio.emit('asd',{joda:'que vaina hp'});
-    });
-
-    socketio.on('news',function (data){
-        console.log(data);
-    });
+    
 
     $scope.sendData = function(arr){
         items.list.save(arr,function (data){
             console.log(data);
         });
     };
+
+    function init(){
+
+        if ($scope.data.length > 1){
+            $scope.collection = $scope.data;
+            console.log('la primera condicion');
+        }
+        else if ($scope.stock.tableExists('items')){
+            $scope.collection = $scope.stock.queryAll('items');
+            console.log('la seguda condicion');
+        }
+        else{
+            $scope.collection = [];
+            console.log('la ultima condicion');
+        }
+    }
 
 }])
 
