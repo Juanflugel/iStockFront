@@ -29,7 +29,7 @@ angular.module('services', ['ngResource'])
 .factory('Config', function () {
   return {
       version : '0.0.1',
-      ip: '192.168.1.165',
+      ip: 'tsjuan.ddns.net',
       port: 5006,
       protocol: 'http'
   };
@@ -38,12 +38,12 @@ angular.module('services', ['ngResource'])
 .factory('items',['$resource', 'Config', function ContenidoFactory($resource, Config){
   return {
     list : $resource('http://' + Config.ip + ':' + Config.port + '/items'),
-    id: $resource('http://' + Config.ip + ':' + Config.port + '/bills',{})    
+    id: $resource('http://' + Config.ip + ':' + Config.port + '/items',{})    
   };
 }])
 
 .factory('socketio',['$rootScope',function ($rootScope) {
-  var socket = io.connect('http://localhost:5006');
+  var socket = io.connect('http://tsjuan.ddns.net:5006');
   return {
     on: function (eventName, callback) {
       socket.on(eventName, function () {  

@@ -4,17 +4,20 @@
 	
 	<thead>
 		<tr class="">
-			<th ng-repeat="(key,campo) in table.header" ng-click="tableOrder(key)" style="cursor:pointer;text-align: center">
-				{{campo}}
-			</th>
-			<th></th>
+			<th>Item Code </th>
+			<th>Item Name </th>
+			<th>Item Provider </th>
+			<th>Item Price </th>
 		</tr>
 	</thead>
 
 	<tbody>
-		<tr ng-repeat="fila in table.data | filter:search:strict | orderBy: predicate:reverse">
-			<td ng-repeat="val in fila track by $index" style="text-align: center">{{val}}</td>
-			<td><i class="fa fa-pencil-square-o" ng-click="passIdObj(fila[6])"></i> &nbsp&nbsp<i class="fa fa-trash"></i></td>
+		<tr ng-repeat="obj in viewItems | filter:search">
+			<td>{{obj.itemCode}}</td>
+			<td>{{obj.itemName}}</td>
+			<td>{{obj.itemProvider}}</td>
+			<td>{{obj.itemPrice}}</td>
+			
 		</tr>
 	</tbody>
 	

@@ -7,6 +7,15 @@ angular.module('inputTableModule', ['services'])
 
 .controller('inputTableCtrl', ['$scope','items','socketio', function ($scope,items,socketio){
 
+    function request (){
+        items.list.query(function (data){
+        $scope.data = data;
+        init();
+        },function (err){
+        console.log('error:',err);
+        });
+    }
+
     $scope.data = [];
 
     // todo lo de socket
@@ -18,17 +27,13 @@ angular.module('inputTableModule', ['services'])
         $scope.obj = data;
         $scope.show = true;
         console.log(data);
+        request();
     });
     // inicializacion del local storage
     var stock = new localStorageDB('stock', localStorage);
     $scope.stock = stock;
 
-    items.list.query(function (data){
-        $scope.data = data;
-        init();
-    },function (err){
-        console.log('error:',err);
-    });
+    request();
     
 
     $scope.sendData = function(arr){
@@ -39,13 +44,13 @@ angular.module('inputTableModule', ['services'])
 
     function init(){
 
-        if ($scope.data.length > 1){
+        if ($scope.data.length >= 1){
             $scope.collection = $scope.data;
-            console.log('la primera condicion');
+            console.log('la primera condicion:', $scope.collection);
         }
         else if ($scope.stock.tableExists('items')){
             $scope.collection = $scope.stock.queryAll('items');
-            console.log('la seguda condicion');
+            console.log('la seguda condicion:',$scope.collection);
         }
         else{
             $scope.collection = [];
@@ -125,7 +130,7 @@ angular.module('inputTableModule', ['services'])
                                     $scope.prueba.splice((l-1),1);
                                     $scope.stock.createTableWithData('items', $scope.prueba);
                                     $scope.stock.commit();
-                                    $scope.collection =$scope.stock.queryAll('items');
+                                    $scope.collection = $scope.stock.queryAll('items');
                                     $scope.$apply();           
                             }
                     });

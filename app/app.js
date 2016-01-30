@@ -18,11 +18,6 @@ angular.module('iStock',[
       templateUrl: "app_components/views/view1.html",
       controller:'billsCtrl'
     })
-    .state('Stock', {
-      url: "/Stock",
-      templateUrl: "app_components/views/view2.html",
-      controller:'tableCtrl'
-    })
     .state('Pending', {
       url: "/Pending",
       templateUrl:"app_components/views/view2.html",
@@ -30,8 +25,8 @@ angular.module('iStock',[
     })
     .state('allItems', {
       url: "/allItems",
-      templateUrl:"app_components/views/view4.html",
-      controller:'tableCtrl'
+      templateUrl:"app_components/views/view3.html",
+      controller:'allItemsCtrl'
     })
     .state('dataInput', {
       url: "/dataInput",
