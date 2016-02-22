@@ -4,7 +4,8 @@ angular.module('iStock',[
 	'table',
 	'services',
   'bills',
-  'inputTableModule'
+  'inputTableModule',
+  'settingsTableModule'
 	])
 .config(function($stateProvider, $urlRouterProvider) {
   //
@@ -27,6 +28,11 @@ angular.module('iStock',[
       url: "/allItems",
       templateUrl:"app_components/views/view3.html",
       controller:'allItemsCtrl'
+    })
+    .state('settings', {
+      url: "/settings",
+      templateUrl:"app_components/views/settingsview.html",
+      controller:'settingsTableCtrl'
     })
     .state('dataInput', {
       url: "/dataInput",

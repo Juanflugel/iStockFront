@@ -1,0 +1,45 @@
+<md-content layout-wrap layout="column">
+	
+	<md-card>
+		<div layout="row">
+			<md-input-container md-no-float style="height:35px;padding-left:24px;" class="md-block" flex>
+				<md-icon><i class="fa fa-search fa-lg"></i></md-icon>
+		  		<input type="text" ng-model="search" placeholder="Here you can find all the items you don't have in your Stock">
+			</md-input-container>
+			<i layout-margin layout-padding ng-click="" ng-hide="" class="fa fa-plus fa-lg" ></i>
+			<i layout-margin layout-padding class="fa fa-cubes fa-lg text-info"></i>
+			<i ng-click="newUser=!newUser" layout-margin layout-padding class="fa fa-user-plus fa-lg text-primary"></i>	
+		</div>		
+	</md-card>
+
+	<md-card ng-show="newUser"> <br>
+	
+		<div layout="row">
+		&nbsp &nbsp &nbsp
+			<md-input-container flex>
+  			<label>Name</label>
+  			<input type="text" ng-model="obj.Name">
+		</md-input-container>
+		<md-input-container flex>
+  			<label>User Id</label>
+  			<input type="text" ng-model="obj.Id">
+		</md-input-container>
+		<md-input-container flex>
+  			<label>User Name</label>
+  			<input type="text" ng-model="obj.User">
+		</md-input-container>
+		 <i  layout-padding class="fa fa-check-circle fa-2x text-success"></i>&nbsp &nbsp &nbsp
+		 <i ng-click="newUser=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
+		&nbsp &nbsp &nbsp
+		</div>
+		
+	</md-card>
+
+    <settings-table></settings-table>
+	
+
+	
+
+	<!-- <i-table><i-table> -->
+	
+</md-content>
