@@ -38,7 +38,8 @@ angular.module('services', ['ngResource'])
 .factory('items',['$resource', 'Config', function ContenidoFactory($resource, Config){
   return {
     list : $resource('http://' + Config.ip + ':' + Config.port + '/items'),
-    id: $resource('http://' + Config.ip + ':' + Config.port + '/items',{})    
+    metodo: $resource('http://' + Config.ip + ':' + Config.port + '/items',{}),
+    idUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/items',{},{ update: {method: 'PUT'}})    
   };
 }])
 

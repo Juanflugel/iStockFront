@@ -7,6 +7,40 @@ angular.module('settingsTableModule',['services'])
 	},function (error){
 
 	})
+
+	$scope.newObj = function (){
+		$scope.obj = {};
+		$scope.editItem = false;
+		$scope.newItem = true;
+	}
+
+	$scope.createObj = function(obj){
+		items.metodo.save(obj,function (data){
+			$scope.obj = {};
+			$scope.newItem = false;
+			console.log('objeto guardado plenamente');
+		},function (error){
+			alert('error');
+		})
+	}
+	
+	$scope.editObj = function(item){		
+		$scope.obj = item;
+		$scope.newItem = false;
+		$scope.editItem = true;
+	}
+
+	$scope.updateObj = function(obj){
+		console.log(obj);
+		const idDocument = obj._id;
+	    items.idUpdate.update({idDocument:idDocument},obj,function(data){
+			 console.log('res:',data);			 
+			 $scope.editItem = false;			 	
+			 }, function(error){
+			 	alert('The item amount was not updated');
+			 });
+	}
+	
 	
 }])
 .directive('settingsTable', [function (){

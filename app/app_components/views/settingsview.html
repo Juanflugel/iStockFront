@@ -6,9 +6,9 @@
 				<md-icon><i class="fa fa-search fa-lg"></i></md-icon>
 		  		<input type="text" ng-model="search" placeholder="Here you can find all the items you don't have in your Stock">
 			</md-input-container>
-			<i layout-margin layout-padding ng-click="" ng-hide="" class="fa fa-plus fa-lg" ></i>
+			<i layout-margin layout-padding ng-click="newObj()"  class="fa fa-plus fa-lg" ></i>
 			<i layout-margin layout-padding class="fa fa-cubes fa-lg text-info"></i>
-			<i ng-click="newUser=!newUser" layout-margin layout-padding class="fa fa-user-plus fa-lg text-primary"></i>	
+			<i ng-click="newUser=!newUser;" layout-margin layout-padding class="fa fa-user-plus fa-lg text-primary"></i>	
 		</div>		
 	</md-card>
 
@@ -31,6 +31,37 @@
 		 <i  layout-padding class="fa fa-check-circle fa-2x text-success"></i>&nbsp &nbsp &nbsp
 		 <i ng-click="newUser=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
 		&nbsp &nbsp &nbsp
+		</div>
+		
+	</md-card>
+
+	<md-card layout-padding ng-show="editItem || newItem">
+	<br>
+		<div layout="row" >
+
+			<md-input-container >
+				<label>Item Id (Bar Code)</label>
+				<input type="text" ng-model="obj.itemCode">
+			</md-input-container>
+			<md-input-container >
+				<label>Item Name</label>
+				<input type="text" ng-model="obj.itemName">
+			</md-input-container>
+			<md-input-container >
+				<label>Item Marke</label>
+				<input type="text" ng-model="obj.itemBrand">
+			</md-input-container>
+			<md-input-container >
+				<label>Item Provider</label>
+				<input type="text" ng-model="obj.itemProvider">
+			</md-input-container>
+			<md-input-container >
+				<label>Item Price</label>
+				<input type="number" ng-model="obj.itemSellPrice">
+			</md-input-container>
+		    <i ng-show="editItem" ng-click="updateObj(obj)" layout-padding class="fa fa-check-circle fa-2x text-success" ></i>&nbsp &nbsp &nbsp
+		    <i ng-show="editItem" ng-click="editItem=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>&nbsp &nbsp &nbsp
+		   <i ng-click="createObj(obj)" layout-padding class="fa fa-cloud-upload fa-2x text-success" ng-show="newItem"></i>&nbsp &nbsp &nbsp
 		</div>
 		
 	</md-card>
