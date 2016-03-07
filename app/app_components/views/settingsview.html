@@ -8,7 +8,7 @@
 			</md-input-container>
 			<i layout-margin layout-padding ng-click="newObj()"  class="fa fa-plus fa-lg" ></i>
 			<i layout-margin layout-padding class="fa fa-cubes fa-lg text-info"></i>
-			<i ng-click="newUser=!newUser;" layout-margin layout-padding class="fa fa-user-plus fa-lg text-primary"></i>	
+			<i ng-click="addUser();" layout-margin layout-padding class="fa fa-user-plus fa-lg text-primary"></i>	
 		</div>		
 	</md-card>
 
@@ -18,15 +18,15 @@
 		&nbsp &nbsp &nbsp
 			<md-input-container flex>
   			<label>Name</label>
-  			<input type="text" ng-model="obj.Name">
+  			<input type="text" ng-model="user.Name">
 		</md-input-container>
 		<md-input-container flex>
   			<label>User Id</label>
-  			<input type="text" ng-model="obj.Id">
+  			<input type="text" ng-model="user.Id">
 		</md-input-container>
 		<md-input-container flex>
   			<label>User Name</label>
-  			<input type="text" ng-model="obj.User">
+  			<input type="text" ng-model="user.User">
 		</md-input-container>
 		 <i  layout-padding class="fa fa-check-circle fa-2x text-success"></i>&nbsp &nbsp &nbsp
 		 <i ng-click="newUser=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
@@ -35,33 +35,62 @@
 		
 	</md-card>
 
-	<md-card layout-padding ng-show="editItem || newItem">
+	<md-card layout-padding ng-show="editItem || newItem || viewItem">
 	<br>
-		<div layout="row" >
+		<div layout="row" layout-wrap>
 
 			<md-input-container >
 				<label>Item Id (Bar Code)</label>
-				<input type="text" ng-model="obj.itemCode">
+				<input type="text" ng-model="obj.itemCode" ng-readonly="justInfo">
 			</md-input-container>
 			<md-input-container >
 				<label>Item Name</label>
-				<input type="text" ng-model="obj.itemName">
+				<input type="text" ng-model="obj.itemName" ng-readonly="justInfo">
 			</md-input-container>
 			<md-input-container >
-				<label>Item Marke</label>
-				<input type="text" ng-model="obj.itemBrand">
+				<label>Item Amount</label>
+				<input type="number" ng-model="obj.itemAmount" ng-readonly="justInfo">
+			</md-input-container>
+			<md-input-container >
+				<label>Item Brand</label>
+				<input type="text" ng-model="obj.itemBrand" ng-readonly="justInfo">
 			</md-input-container>
 			<md-input-container >
 				<label>Item Provider</label>
-				<input type="text" ng-model="obj.itemProvider">
+				<input type="text" ng-model="obj.itemProvider" ng-readonly="justInfo">
 			</md-input-container>
 			<md-input-container >
 				<label>Item Price</label>
-				<input type="number" ng-model="obj.itemSellPrice">
+				<input type="number" ng-model="obj.itemBuyPrice" ng-readonly="justInfo">
 			</md-input-container>
-		    <i ng-show="editItem" ng-click="updateObj(obj)" layout-padding class="fa fa-check-circle fa-2x text-success" ></i>&nbsp &nbsp &nbsp
-		    <i ng-show="editItem" ng-click="editItem=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>&nbsp &nbsp &nbsp
-		   <i ng-click="createObj(obj)" layout-padding class="fa fa-cloud-upload fa-2x text-success" ng-show="newItem"></i>&nbsp &nbsp &nbsp
+			<md-input-container >
+				<label>Assembly Name</label>
+				<input type="text" ng-model="obj.itemAssemblyName" ng-readonly="justInfo">
+			</md-input-container>
+			<md-input-container >
+				<label>Item Categorie</label>
+				<input type="text" ng-model="obj.itemCategorie" ng-readonly="justInfo">
+			</md-input-container>
+			<md-input-container >
+				<label>Item Location</label>
+				<input type="text" ng-model="obj.itemLocation" ng-readonly="justInfo">
+			</md-input-container>
+			
+		    <div ng-show="editItem">
+		    	<i  ng-click="updateObj(obj)" layout-padding class="fa fa-check-circle fa-2x text-success" >	
+		    </i>&nbsp &nbsp &nbsp
+		    </div>
+		    <div ng-show="editItem">
+		    	<i  ng-click="editItem=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
+		    	&nbsp &nbsp &nbsp
+		    </div>
+		    <div ng-show="newItem">
+		    	 <i ng-click="createObj(obj)" layout-padding class="fa fa-cloud-upload fa-2x text-success"></i>
+		    	&nbsp &nbsp &nbsp
+		    </div>
+		   
+		    <i ng-show="newItem" ng-click="newItem=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
+		    <i ng-show="viewItem" ng-click="viewItem=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
 		</div>
 		
 	</md-card>

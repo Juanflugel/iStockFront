@@ -1,6 +1,10 @@
 angular.module('settingsTableModule',['services'])
 
 .controller('settingsTableCtrl', ['$scope','items', function ($scope,items){
+
+
+	// all related with the items
+	$scope.justInfo = true;
 	// Retrieve data from API the whole list without filter
 	items.list.query(function (data){
 		$scope.collection = data;
@@ -11,6 +15,8 @@ angular.module('settingsTableModule',['services'])
 	$scope.newObj = function (){
 		$scope.obj = {};
 		$scope.editItem = false;
+		$scope.viewItem = false;
+		$scope.newUser = false;
 		$scope.newItem = true;
 	}
 
@@ -27,6 +33,8 @@ angular.module('settingsTableModule',['services'])
 	$scope.editObj = function(item){		
 		$scope.obj = item;
 		$scope.newItem = false;
+		$scope.viewItem = false;
+		$scope.newUser = false;
 		$scope.editItem = true;
 	}
 
@@ -40,6 +48,28 @@ angular.module('settingsTableModule',['services'])
 			 	alert('The item amount was not updated');
 			 });
 	}
+
+	$scope.readObj = function(item){
+		$scope.obj = item;
+		$scope.newItem = false;
+		$scope.editItem = false;
+		$scope.newUser = false;
+		$scope.viewItem = true;
+	}
+	// all related with the items
+
+	// all related with the user 
+	$scope.addUser = function(){
+		$scope.newItem = false;
+		$scope.editItem = false;
+		$scope.viewItem = false;
+		$scope.newUser = true;
+
+	}
+	// all related with the user
+
+
+
 	
 	
 }])

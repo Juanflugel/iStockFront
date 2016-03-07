@@ -18,11 +18,12 @@
 	   <!--    <td>{{sample.itemSellPrice}}</td> -->
 		  <!-- <td>{{sample.itemBrand}}</td> -->
 		  		<td>{{sample.itemProvider}}</td>
-		  		<td>{{sample.itemSellPrice}}</td>
+		  		<td>{{sample.itemBuyPrice}}</td>
 		 		<td>
 		 		 	<i class="fa fa-pencil-square-o" ng-click="editObj(sample)"></i>&nbsp&nbsp
-			 		<i class="fa fa-trash" ng-click="deleteRow(sample.ID)"></i>&nbsp&nbsp
-			 		<i class="fa fa-info-circle"></i>
+		 		 	<i class="fa fa-info-circle" ng-click="readObj(sample)"></i>&nbsp&nbsp
+			 		<i class="fa fa-trash" ng-click="deleteRow(sample.ID)"></i>
+			 		
 		  		</td>
 	   		</tr>
     		</tbody>    

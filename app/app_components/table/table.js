@@ -5,7 +5,7 @@ angular.module('table', ['services'])
 
     $scope.viewItems = [];
 
-    items.id.query({cant:0}, function (data){
+    items.metodo.query({cant:0}, function (data){
         console.log(data);
 
         $scope.viewItems = data;
@@ -17,7 +17,7 @@ angular.module('table', ['services'])
 
     $scope.viewItems = [];
 
-    items.id.query(function (data){
+    items.metodo.query(function (data){
         console.log(data);
 
         $scope.viewItems = data;
