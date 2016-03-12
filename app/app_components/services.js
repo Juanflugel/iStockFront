@@ -35,11 +35,12 @@ angular.module('services', ['ngResource'])
   };
 })
 
-.factory('items',['$resource', 'Config', function ContenidoFactory($resource, Config){
+.factory('shop',['$resource', 'Config', function ContenidoFactory($resource, Config){
   return {
     list : $resource('http://' + Config.ip + ':' + Config.port + '/items'),
-    metodo: $resource('http://' + Config.ip + ':' + Config.port + '/items',{}),
-    idUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/items',{},{ update: {method: 'PUT'}})    
+    items: $resource('http://' + Config.ip + ':' + Config.port + '/items',{}),
+    itemidUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/items',{},{ update: {method: 'PUT'}}),
+    project:$resource('http://' + Config.ip + ':' + Config.port + '/projects',{})   
   };
 }])
 

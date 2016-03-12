@@ -1,12 +1,11 @@
 angular.module('settingsTableModule',['services'])
 
-.controller('settingsTableCtrl', ['$scope','items', function ($scope,items){
+.controller('settingsTableCtrl', ['$scope','shop', function ($scope,shop){
 
 
-	// all related with the items
-	$scope.justInfo = true;
+
 	// Retrieve data from API the whole list without filter
-	items.list.query(function (data){
+	shop.items.query(function (data){
 		$scope.collection = data;
 	},function (error){
 
@@ -17,11 +16,12 @@ angular.module('settingsTableModule',['services'])
 		$scope.editItem = false;
 		$scope.viewItem = false;
 		$scope.newUser = false;
+		$scope.justInfo = false;
 		$scope.newItem = true;
 	}
 
 	$scope.createObj = function(obj){
-		items.metodo.save(obj,function (data){
+		shop.items.save(obj,function (data){
 			$scope.obj = {};
 			$scope.newItem = false;
 			console.log('objeto guardado plenamente');
@@ -35,13 +35,14 @@ angular.module('settingsTableModule',['services'])
 		$scope.newItem = false;
 		$scope.viewItem = false;
 		$scope.newUser = false;
+		$scope.justInfo = false;
 		$scope.editItem = true;
 	}
 
 	$scope.updateObj = function(obj){
 		console.log(obj);
 		const idDocument = obj._id;
-	    items.idUpdate.update({idDocument:idDocument},obj,function(data){
+	    shop.itemidUpdate.update({idDocument:idDocument},obj,function(data){
 			 console.log('res:',data);			 
 			 $scope.editItem = false;			 	
 			 }, function(error){
@@ -54,7 +55,9 @@ angular.module('settingsTableModule',['services'])
 		$scope.newItem = false;
 		$scope.editItem = false;
 		$scope.newUser = false;
+		$scope.justInfo = true;
 		$scope.viewItem = true;
+		
 	}
 	// all related with the items
 
@@ -79,7 +82,11 @@ angular.module('settingsTableModule',['services'])
 		restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
 		templateUrl: 'app_components/settingstable/settingstable.html',		
 		link: function($scope, iElm, iAttrs, controller) {
-			$scope.header =['Item Code','Name','Amount','Units','Provider','Price'];
+			$scope.header ={itemCode:'Item Code',itemAmount:'Amount',itemType:'Type',itemProvider:'Provider',itemBuyPrice:'Price'};
+			$scope.order = function(predicate){
+				$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+    			$scope.predicate = predicate;
+			}
 		}
 	};
 }]);

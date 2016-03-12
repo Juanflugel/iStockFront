@@ -4,6 +4,7 @@ angular.module('iStock',[
 	'table',
 	'services',
   'bills',
+  'projectsModule',
   'inputTableModule',
   'settingsTableModule'
 	])
@@ -24,13 +25,13 @@ angular.module('iStock',[
       templateUrl:"app_components/views/view2.html",
       controller:'tableCtrl'
     })
-    .state('allItems', {
-      url: "/allItems",
-      templateUrl:"app_components/views/view3.html",
-      controller:'allItemsCtrl'
+    .state('Projects', {
+      url: "/Projects",
+      templateUrl:"app_components/views/projectsview.html",
+      controller:'projectsCtrl'
     })
-    .state('settings', {
-      url: "/settings",
+    .state('Settings', {
+      url: "/Settings",
       templateUrl:"app_components/views/settingsview.html",
       controller:'settingsTableCtrl'
     })

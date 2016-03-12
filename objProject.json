@@ -1,0 +1,10 @@
+{
+	"projectNumber":"P02",
+    "companyId":"RMB01",
+    "projectItems":[{
+        "itemCode":"w2343",
+        "itemName":"screw",
+        "itemAmount":1,
+        "itemPrice":85        
+    }]
+}

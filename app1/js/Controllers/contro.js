@@ -54,6 +54,9 @@ angular.module('ejeController',['ejeServi'])
 		$scope.tabla.datos = $scope.ObjtoArray($scope.personas); 
 		$scope.tabla.header = $scope.TablaHeader($scope.personas[0]);
 	});
+
+	console.log($scope.personas);
+
 	
 
 }])

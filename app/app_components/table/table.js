@@ -1,11 +1,11 @@
 
 angular.module('table', ['services'])
 
-.controller('tableCtrl', ['$scope','items',function ($scope,items){
+.controller('tableCtrl', ['$scope','shop',function ($scope,shop){
 
     $scope.viewItems = [];
 
-    items.metodo.query({cant:0}, function (data){
+    shop.items.query({cant:0}, function (data){
         console.log(data);
 
         $scope.viewItems = data;

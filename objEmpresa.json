@@ -1,0 +1,20 @@
+{"companyName":"Rhode MachinenBau",
+    "companyId":"RMB01",
+    "companyZipCode":"23701",
+    "companyUsers":[
+            {
+                "userName":"uno",
+                "userId":"01"
+            },
+            {
+                "userName":"dos",
+                "userId":"02"
+            }
+        ],
+    "companyLocations":[
+                {
+                	"locationId":"14.401",
+                	"locationName":"Palette"
+                }
+            ]
+}
