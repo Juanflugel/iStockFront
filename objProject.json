@@ -1,6 +1,8 @@
 {
 	"projectNumber":"P02",
     "companyId":"RMB01",
+    "projectName":"CM420",
+    "deadLine":"Sat Mar 12 2016 21:20:29 GMT+0100 (CET)",
     "projectItems":[{
         "itemCode":"w2343",
         "itemName":"screw",

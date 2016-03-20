@@ -7,6 +7,33 @@ angular.module('projectsModule',['services'])
 	},function (err){});
 
 	$scope.vaina = "entro el controlador";
+	// change name, number, type or dead line from a project
+	$scope.editProject = function(obj) {
+		const deadLine = new Date(obj.deadLine);		
+		$scope.obj = obj;
+		$scope.obj.deadLine = deadLine;
+		$scope.changeInfoProject = true;
+
+	};
+
+	$scope.updateProject = function(obj){
+		const idDocument = obj._id;
+		shop.projectUpdate.update({idDocument:idDocument},obj,function (data){
+			console.log(data);
+			$scope.changeInfoProject = false;
+		});
+	}
+
+	$scope.showNewProject = function(){
+		$scope.obj= {};
+		$scope.newProject = true;
+	}
+
+	$scope.createProject = function(obj){
+		shop.project.save(obj,function (data){
+			console.log(data);
+		});
+	}
 	
 }])
 

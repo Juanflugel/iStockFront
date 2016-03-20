@@ -1,15 +1,28 @@
-{"companyName":"Rhode MachinenBau",
+{"companyName":"Rhode MaschinenBau",
     "companyId":"RMB01",
     "companyZipCode":"23701",
     "companyUsers":[
             {
-                "userName":"uno",
-                "userId":"01"
+                "userName":"Juan Garcia",
+                "userId":"JG01"
             },
             {
-                "userName":"dos",
-                "userId":"02"
+                "userName":"Alex Grage",
+                "userId":"AG02"
+            },
+            {
+                "userName":"Christian Noel",
+                "userId":"CN03"
+            },
+            {
+                "userName":"Daniel Wagner",
+                "userId":"DN04"
+            },
+            {
+                "userName":"Lasd Wolhfahrt",
+                "userId":"LW05"
             }
+
         ],
     "companyLocations":[
                 {

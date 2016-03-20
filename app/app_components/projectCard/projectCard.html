@@ -2,11 +2,29 @@
     <md-list>
       <md-list-item>
       <img ng-src="{{project.providerImage}}" class="md-avatar" alt="" />
-        <div class="md-list-item-text" layout="column">
-          <h4>{{project.projectName}}</h3>
-          <h5>algo mas aqui</h4>
-         <!--  <p>{{bill.billDate | date:"MM/dd/yyyy"}}</p> -->
-         <p>otra cosa</p>
+        <div class="md-list-item-text" layout="column" layout-fill>
+
+          <div layout="row"  layout-align="center center">
+            <span flex><h6 class="fieldHeader">Project Name</h6></span>
+            <span flex><h6 class="fieldHeader">Project Number</h6></span>
+            <span flex><h6 class="fieldHeader">Project Type</h6></span>
+            <span flex><h6 class="fieldHeader">Begin Date</h6></span>
+            <span flex><h6 class="fieldHeader">Dead Line</h6></span>
+          </div>
+          <div layout="row" layout-align="center center">
+          <h4 flex>{{project.projectName}}</h4>
+          <h4 flex>{{project.projectNumber}}</h4>
+          <p flex layout-align="center center">{{project.projectType}}</p>
+          <span flex></span>
+          <h4 flex>{{project.deadLine | date:"MM/dd/yyyy"}}</h4>
+          </div>
+          
+        </div>
+        <div>
+          <i class="fa fa-pencil-square-o" ng-click="editProject(project)"></i>
+          <i class="fa fa-info-circle"></i>
+          <i class="fa fa-trash-o"></i>
+        </div>
       </md-list-item>
     </md-list>  
 </md-card>

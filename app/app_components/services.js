@@ -40,7 +40,8 @@ angular.module('services', ['ngResource'])
     list : $resource('http://' + Config.ip + ':' + Config.port + '/items'),
     items: $resource('http://' + Config.ip + ':' + Config.port + '/items',{}),
     itemidUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/items',{},{ update: {method: 'PUT'}}),
-    project:$resource('http://' + Config.ip + ':' + Config.port + '/projects',{})   
+    project:$resource('http://' + Config.ip + ':' + Config.port + '/projects',{}),
+    projectUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/projects',{},{ update: {method: 'PUT'}}) 
   };
 }])
 
