@@ -2,7 +2,7 @@ angular.module('settingsTableModule',['services'])
 
 .controller('settingsTableCtrl', ['$scope','shop', function ($scope,shop){
 
-
+	
 
 	// Retrieve data from API the whole list without filter
 	shop.items.query(function (data){
@@ -15,7 +15,6 @@ angular.module('settingsTableModule',['services'])
 		$scope.obj = {};
 		$scope.editItem = false;
 		$scope.viewItem = false;
-		$scope.newUser = false;
 		$scope.justInfo = false;
 		$scope.newItem = true;
 	}
@@ -34,15 +33,13 @@ angular.module('settingsTableModule',['services'])
 		$scope.obj = item;
 		$scope.newItem = false;
 		$scope.viewItem = false;
-		$scope.newUser = false;
 		$scope.justInfo = false;
 		$scope.editItem = true;
 	}
 
 	$scope.updateObj = function(obj){
-		console.log(obj);
 		const idDocument = obj._id;
-	    shop.itemidUpdate.update({idDocument:idDocument},obj,function(data){
+	    shop.itemidUpdate.update({_id:idDocument},obj,function(data){
 			 console.log('res:',data);			 
 			 $scope.editItem = false;			 	
 			 }, function(error){
@@ -54,25 +51,10 @@ angular.module('settingsTableModule',['services'])
 		$scope.obj = item;
 		$scope.newItem = false;
 		$scope.editItem = false;
-		$scope.newUser = false;
 		$scope.justInfo = true;
 		$scope.viewItem = true;
 		
 	}
-	// all related with the items
-
-	// all related with the user 
-	$scope.addUser = function(){
-		$scope.newItem = false;
-		$scope.editItem = false;
-		$scope.viewItem = false;
-		$scope.newUser = true;
-
-	}
-	// all related with the user
-
-
-
 	
 	
 }])

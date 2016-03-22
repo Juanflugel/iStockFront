@@ -1,11 +1,50 @@
-<md-content layout-wrap layout="column">
+
 	<md-card>	
-	<md-input-container md-no-float style="height:35px;padding-left:24px;" class="md-block">
-			<md-icon><i class="fa fa-search fa-lg"></i></md-icon>
-	  		<input type="text" ng-model="search" placeholder="Here you can find all the items you don't have in your Stock">
-	</md-input-container>
+		<div layout="row">
+			<md-input-container md-no-float style="height:35px;padding-left:24px;" class="md-block" flex>
+					<md-icon><i class="fa fa-search fa-lg"></i></md-icon>
+			  		<input type="text" ng-model="search" placeholder="Here you can find all the items you don't have in your Stock">
+			</md-input-container>
+			<i layout-margin layout-padding class="fa fa-university" ng-click="initOrder=!initOrder"></i>
+	    </div>
 	</md-card>
 
-	<i-table><i-table>
+	<button  ng-show ="initOrder" ng-click="exportsome()" class="btn btn-success"> export sone</button>
+
+	<md-card>
+
+		<md-card-content ng-show ="initOrder" layout="column" layout-align="center center">
+			<h4>List Of Items to Order</h4>
+			<div id="justsome">
+				<table class="table table-hover table-responsive panel hidden-xs" >
 	
-</md-content>
+				<thead>
+					<tr class="">
+						<th>Item Code </th>
+						<th>Item Name </th>
+						<th>Item Provider </th>
+						<th>Item Price </th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr ng-repeat="obj in viewItems | filter:{order:true}">
+						<td>{{obj.itemCode}}</td>
+						<td>{{obj.itemName}}</td>
+						<td>{{obj.itemProvider}}</td>
+						<td>{{obj.itemBuyPrice}}</td>			
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			
+		</md-card-content>
+
+	</md-card>
+
+	<button  ng-hide ="initOrder" ng-click="preparar()" class="btn btn-success"> Order all Items</button>
+
+	<button  ng-hide ="initOrder" ng-click="exportData()" class="btn btn-success"> Exportar tabla</button>
+	<i-table></i-table> <br><br> <br> <br> <br> <br> <br> <br>
+
+	

@@ -1,4 +1,4 @@
-<md-card>
+<md-card id="exportable">
 
 <table class="table table-hover table-responsive panel hidden-xs">
 	
@@ -8,6 +8,7 @@
 			<th>Item Name </th>
 			<th>Item Provider </th>
 			<th>Item Price </th>
+			<th ng-show="initOrder">order</th>
 		</tr>
 	</thead>
 
@@ -16,11 +17,10 @@
 			<td>{{obj.itemCode}}</td>
 			<td>{{obj.itemName}}</td>
 			<td>{{obj.itemProvider}}</td>
-			<td>{{obj.itemPrice}}</td>
-			
+			<td>{{obj.itemBuyPrice}}</td>
+			<td ng-show="initOrder"><input type="checkbox" ng-model="obj.order"></td>			
 		</tr>
 	</tbody>
-	
 </table>
 
 <div class="visible-xs-block">
@@ -32,5 +32,4 @@
 </div>
 {{fila}}
 {{val}}
-	
 </md-card>

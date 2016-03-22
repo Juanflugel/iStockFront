@@ -18,7 +18,7 @@ angular.module('projectsModule',['services'])
 
 	$scope.updateProject = function(obj){
 		const idDocument = obj._id;
-		shop.projectUpdate.update({idDocument:idDocument},obj,function (data){
+		shop.projectUpdate.update({_id:idDocument},obj,function (data){
 			console.log(data);
 			$scope.changeInfoProject = false;
 		});

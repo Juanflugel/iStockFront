@@ -1,4 +1,4 @@
-<md-content layout-wrap layout="column">
+
 	
 	<md-card>
 		<div layout="row">
@@ -8,31 +8,8 @@
 			</md-input-container>
 			<i layout-margin layout-padding ng-click="newObj()"  class="fa fa-plus fa-lg" ></i>
 			<i layout-margin layout-padding class="fa fa-cubes fa-lg text-info"></i>
-			<i ng-click="addUser();" layout-margin layout-padding class="fa fa-user-plus fa-lg text-primary"></i>	
+				
 		</div>		
-	</md-card>
-
-	<md-card ng-show="newUser"> <br>
-	
-		<div layout="row">
-		&nbsp &nbsp &nbsp
-			<md-input-container flex>
-  			<label>Name</label>
-  			<input type="text" ng-model="user.Name">
-		</md-input-container>
-		<md-input-container flex>
-  			<label>User Id</label>
-  			<input type="text" ng-model="user.Id">
-		</md-input-container>
-		<md-input-container flex>
-  			<label>User Name</label>
-  			<input type="text" ng-model="user.User">
-		</md-input-container>
-		 <i  layout-padding class="fa fa-check-circle fa-2x text-success"></i>&nbsp &nbsp &nbsp
-		 <i ng-click="newUser=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
-		&nbsp &nbsp &nbsp
-		</div>
-		
 	</md-card>
 
 	<md-card layout-padding ng-show="editItem || newItem || viewItem">
@@ -102,4 +79,3 @@
 
 	<!-- <i-table><i-table> -->
 	
-</md-content>
