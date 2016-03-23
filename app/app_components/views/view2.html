@@ -9,11 +9,11 @@
 	    </div>
 	</md-card>
 
-	<button  ng-show ="initOrder" ng-click="exportsome()" class="btn btn-success"> export sone</button>
+	<button  ng-show ="initOrder" ng-click="exportsome()" class="btn btn-success"> export some</button>
 
-	<md-card>
+	<md-card style="display:none">
 
-		<md-card-content ng-show ="initOrder" layout="column" layout-align="center center">
+		<md-card-content layout="column" layout-align="center center">
 			<h4>List Of Items to Order</h4>
 			<div id="justsome">
 				<table class="table table-hover table-responsive panel hidden-xs" >
@@ -41,10 +41,7 @@
 		</md-card-content>
 
 	</md-card>
-
-	<button  ng-hide ="initOrder" ng-click="preparar()" class="btn btn-success"> Order all Items</button>
-
 	<button  ng-hide ="initOrder" ng-click="exportData()" class="btn btn-success"> Exportar tabla</button>
-	<i-table></i-table> <br><br> <br> <br> <br> <br> <br> <br>
+	<i-table></i-table>
 
 	

@@ -2,7 +2,9 @@ angular.module('projectsModule',['services'])
 
 .controller('projectsCtrl', ['$scope','shop',function ($scope,shop){
 
-	shop.project.query(function (data){
+	var firmaId = 'RMB01';
+
+	shop.project.query({companyId:firmaId},function (data){
 		$scope.projects = data;
 	},function (err){});
 
@@ -31,6 +33,12 @@ angular.module('projectsModule',['services'])
 
 	$scope.createProject = function(obj){
 		shop.project.save(obj,function (data){
+			console.log(data);
+		});
+	}
+
+	$scope.deleteProject = function(obj){
+		shop.project.remove({_id:obj._id},function (data){
 			console.log(data);
 		});
 	}
