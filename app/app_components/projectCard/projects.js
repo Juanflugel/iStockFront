@@ -3,9 +3,22 @@ angular.module('projectsModule',['services'])
 .controller('projectsCtrl', ['$scope','shop',function ($scope,shop){
 
 	var firmaId = 'RMB01';
+	$scope.projects = [];
 
-	shop.project.query({companyId:firmaId},function (data){
-		$scope.projects = data;
+	shop.projectGeneralView.query(function (data){
+
+		$scope.modelo = [];
+		
+		_.each(data,function (obj){
+			const preObj = obj._id;
+			preObj.totalProjectCost = obj.totalProjectCost;
+			console.log(preObj);
+			$scope.modelo.push(preObj);
+
+		});
+
+		$scope.projects = $scope.modelo;
+
 	},function (err){});
 
 	
@@ -21,7 +34,7 @@ angular.module('projectsModule',['services'])
 	}
 
 	$scope.showNewProject = function(){
-		$scope.obj= {};
+		$scope.obj = {};
 		$scope.newProject = true; // ng-show
 	}
 
@@ -44,6 +57,7 @@ angular.module('projectsModule',['services'])
 		link: function($scope, iElm, iAttrs, controller) {
 
 			$scope.editProject = function(obj) {
+				console.log(obj);
 				const deadLine = new Date(obj.deadLine);		
 				$scope.obj = obj;
 				$scope.obj.deadLine = deadLine;
@@ -52,7 +66,7 @@ angular.module('projectsModule',['services'])
 			};
 
 			$scope.deleteProject = function(obj,index){
-				console.log('juan')	;
+				
 				const r = confirm('Are you sure to delete project: '+ obj.projectName);
 					if (r == true) {
 				     shop.project.remove({_id:obj._id},function (data){
@@ -67,6 +81,8 @@ angular.module('projectsModule',['services'])
 			}
 
 			$scope.createProject = function(obj){
+				obj.companyId = 'RMB01';
+				obj.projectItems = [{itemAmount:1}];
 				shop.project.save(obj,function (data){
 					console.log(data);
 					$scope.newProject = false; // ng-show

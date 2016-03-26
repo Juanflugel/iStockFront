@@ -1,8 +1,8 @@
 <md-card>
 	
 	<md-card-content>
-		<h4>Card headline</h4>
-		<p>Card content</p>
+		<h4>{{firma.companyName}}</h4>
+		<p>{{firma.companyId}}</p>
 	</md-card-content>
 	
 </md-card>
@@ -52,7 +52,7 @@
 					<td>{{person.userName}}</td>
 					<td>{{person.userId}}</td>
 					<td><i class="fa fa-pencil-square-o" ng-click="editUser(person)"></i>&nbsp&nbsp
-			 		<i class="fa fa-trash" ng-click="deletePerson(sample.ID)"></i></td>
+			 		<i class="fa fa-trash" ng-click="deleteUser(person._id)"></i></td>
 				</tr>
 			</tbody>
 		</table>

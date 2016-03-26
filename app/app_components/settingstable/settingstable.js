@@ -1,13 +1,15 @@
 angular.module('settingsTableModule',['services'])
 
 .controller('settingsTableCtrl', ['$scope','shop', function ($scope,shop){	
-
+	var query = {};
 	// Retrieve data from API the whole list without filter
-	shop.items.query(function (data){
-		$scope.collection = data;
-	},function (error){
+	var refresh = function (){
+		shop.items.query(query,function (data){
+			$scope.collection = data;
+		},function (error){});
+	}; 
 
-	})
+	refresh();
 
 	$scope.newObj = function (){
 		$scope.obj = {};
@@ -15,6 +17,17 @@ angular.module('settingsTableModule',['services'])
 		$scope.viewItem = false;
 		$scope.justInfo = false;
 		$scope.newItem = true;
+	}
+	$scope.filterModel ={};
+	$scope.filterBy= [{tagToShow:'Categorie',queryObjKey:'itemCategorie',array:['Buateile','Normteile','Kaufteile','Brennteile']},{tagToShow:'Provider', queryObjKey:'itemProvider',array:['SMC','SCHRAUBEN KÖHLER','BREMER','Edeka']},{tagToShow:'Type',queryObjKey:'itemType',array:['fastfood','SCHRAUBEN','ZYLINDER']}];
+
+	$scope.llamar = function(){
+
+		const j = {};
+		j[$scope.filterModel.queryObjKey] = $scope.queryTag;
+		console.log(j);
+		query = j;
+		refresh();
 	}
 }])
 // table to show, create and edit everything related to items

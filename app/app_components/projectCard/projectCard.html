@@ -5,18 +5,18 @@
         <div class="md-list-item-text" layout="column" layout-fill>
 
           <div layout="row"  layout-align="center center">
-            <span flex><h6 class="fieldHeader">Project Name</h6></span>
-            <span flex><h6 class="fieldHeader">Project Number</h6></span>
-            <span flex><h6 class="fieldHeader">Project Type</h6></span>
-            <span flex><h6 class="fieldHeader">Begin Date</h6></span>
-            <span flex><h6 class="fieldHeader">Dead Line</h6></span>
+            <span flex><h6 class="fieldHeader text-center">Project Name</h6></span>
+            <span flex><h6 class="fieldHeader text-center">Project Number</h6></span>
+            <span flex><h6 class="fieldHeader text-center">Project Type</h6></span>
+            <span flex><h6 class="fieldHeader text-center">Total Cost</h6></span>
+            <span flex><h6 class="fieldHeader text-center">Dead Line</h6></span>
           </div>
           <div layout="row" layout-align="center center">
-          <h4 flex>{{project.projectName}}</h4>
-          <h4 flex>{{project.projectNumber}}</h4>
-          <p flex layout-align="center center">{{project.projectType}}</p>
-          <span flex></span>
-          <h4 flex>{{project.deadLine | date:"MM/dd/yyyy"}}</h4>
+          <h4 flex class="text-center">{{project.projectName}}</h4>
+          <h4 flex class="text-center">{{project.projectNumber}}</h4>
+          <h4 flex class="text-center">{{project.projectType}}</h4>
+          <h4 flex class="text-center">{{project.totalProjectCost}}</h4>
+          <h4 flex class="text-center">{{project.deadLine | date:"MM/dd/yyyy"}}</h4>
           </div>
           
         </div>

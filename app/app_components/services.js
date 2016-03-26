@@ -41,6 +41,7 @@ angular.module('services', ['ngResource'])
     items: $resource('http://' + Config.ip + ':' + Config.port + '/items',{}),
     itemidUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/items',{},{ update: {method: 'PUT'}}),
     project:$resource('http://' + Config.ip + ':' + Config.port + '/projects',{}),
+    projectGeneralView:$resource('http://' + Config.ip + ':' + Config.port + '/projectGeneralView',{}),
     projectUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/projects',{},{ update: {method: 'PUT'}}),
     company: $resource('http://' + Config.ip + ':' + Config.port + '/company',{}),
     companyInfoUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/company',{},{ update: {method: 'PUT'}})

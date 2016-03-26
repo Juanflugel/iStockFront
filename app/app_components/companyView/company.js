@@ -26,6 +26,7 @@ angular.module('companyModule',[])
 			console.log(data);
 			$scope.user = {};
 			$scope.createUser = false;
+			$scope.employees.push(obj);
 		});
 	}
 
@@ -45,6 +46,19 @@ angular.module('companyModule',[])
 			console.log(data);
 			$scope.modifyUser = false; // ng-show
 		});
+	}
+
+	$scope.deleteUser = function(id){
+		var query = {};
+		query.companyId = firmaId;
+		query.userId = id;
+		console.log(query);
+		shop.companyInfoUpdate.update(query,{},function (data){
+			console.log(data);
+
+			// $scope.modifyUser = false; // ng-show
+		});
+
 	}
 	
 }])
