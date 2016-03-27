@@ -8,15 +8,9 @@ angular.module('projectsModule',['services'])
 		$scope.projects = data;
 	},function (err){});
 
-	$scope.vaina = "entro el controlador";
+	
 	// change name, number, type or dead line from a project
-	$scope.editProject = function(obj) {
-		const deadLine = new Date(obj.deadLine);		
-		$scope.obj = obj;
-		$scope.obj.deadLine = deadLine;
-		$scope.changeInfoProject = true;
-
-	};
+	
 
 	$scope.updateProject = function(obj){
 		const idDocument = obj._id;
@@ -28,24 +22,16 @@ angular.module('projectsModule',['services'])
 
 	$scope.showNewProject = function(){
 		$scope.obj= {};
-		$scope.newProject = true;
+		$scope.newProject = true; // ng-show
 	}
 
-	$scope.createProject = function(obj){
-		shop.project.save(obj,function (data){
-			console.log(data);
-		});
-	}
+	
 
-	$scope.deleteProject = function(obj){
-		shop.project.remove({_id:obj._id},function (data){
-			console.log(data);
-		});
-	}
+	
 	
 }])
 
-.directive('projectCard', [function (){
+.directive('projectCard', ['shop',function (shop){
 	// Runs during compile
 	return {
 		
@@ -56,6 +42,37 @@ angular.module('projectsModule',['services'])
 		// transclude: true,
 		// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
 		link: function($scope, iElm, iAttrs, controller) {
+
+			$scope.editProject = function(obj) {
+				const deadLine = new Date(obj.deadLine);		
+				$scope.obj = obj;
+				$scope.obj.deadLine = deadLine;
+				$scope.changeInfoProject = true;
+
+			};
+
+			$scope.deleteProject = function(obj,index){
+				console.log('juan')	;
+				const r = confirm('Are you sure to delete project: '+ obj.projectName);
+					if (r == true) {
+				     shop.project.remove({_id:obj._id},function (data){
+				     	$scope.projects.splice(index,1);
+					 	alert('project: '+ data.projectName+' successfully deleted');
+
+					 });
+					} else {
+					    return;
+					}
+				
+			}
+
+			$scope.createProject = function(obj){
+				shop.project.save(obj,function (data){
+					console.log(data);
+					$scope.newProject = false; // ng-show
+					$scope.projects.push(data);
+				});
+			}
 			
 		}
 	};
