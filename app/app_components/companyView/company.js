@@ -48,16 +48,19 @@ angular.module('companyModule',[])
 		});
 	}
 
-	$scope.deleteUser = function(id){
-		var query = {};
-		query.companyId = firmaId;
-		query.userId = id;
-		console.log(query);
-		shop.companyInfoUpdate.update(query,{},function (data){
-			console.log(data);
-
-			// $scope.modifyUser = false; // ng-show
-		});
+	$scope.deleteUser = function(obj,index){
+		const r = confirm('Are you sure to delete the User: '+ obj.userName);
+		if (r == true){
+			var query = {};
+			query.companyId = firmaId;
+			query.userId = obj._id;
+			shop.companyInfoUpdate.update(query,{},function (data){
+				$scope.employees.splice(index,1);
+			});
+		}
+		else{
+			return;
+		}
 
 	}
 	

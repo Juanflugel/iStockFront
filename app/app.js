@@ -36,11 +36,11 @@ angular.module('iStock',[
       templateUrl:"app_components/views/settingsview.html",
       controller:'settingsTableCtrl'
     })
-    .state('dataInput', {
-      url: "/dataInput",
-      templateUrl:"app_components/views/view5.html",
-      controller:'inputTableCtrl'
-    })
+    // .state('dataInput', {
+    //   url: "/dataInput",
+    //   templateUrl:"app_components/views/view5.html",
+    //   controller:'inputTableCtrl'
+    // })
     .state('Company', {
       url: "/Company",
       templateUrl:"app_components/companyView/company.html",

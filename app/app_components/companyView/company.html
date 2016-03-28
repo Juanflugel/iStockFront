@@ -1,19 +1,20 @@
-<md-card>
-	
+<div>
+	<md-card>
+ <md-list-item>
+	<img ng-src="{{firma.companyLogo}}" class="md-avatar" alt="" />
 	<md-card-content>
 		<h4>{{firma.companyName}}</h4>
-		<p>{{firma.companyId}}</p>
+		<p>{{firma.companyAddress}}</p>
 	</md-card-content>
-	
+ </md-list-item>	
 </md-card>
+</div>
+
 
 <div layout="row">
-	<md-card flex ="66">
-	
-	<md-card-content>
-
-		<h4>Employees</h4><br>
-			
+	<md-card flex ="66">	
+	   <md-card-content>
+		<h4>Employees</h4><br>			
 			<div layout="row" ng-show ="modifyUser || createUser">
 			&nbsp &nbsp
 				<md-input-container flex ="40">
@@ -52,7 +53,7 @@
 					<td>{{person.userName}}</td>
 					<td>{{person.userId}}</td>
 					<td><i class="fa fa-pencil-square-o" ng-click="editUser(person)"></i>&nbsp&nbsp
-			 		<i class="fa fa-trash" ng-click="deleteUser(person._id)"></i></td>
+			 		<i class="fa fa-trash" ng-click="deleteUser(person,$index)"></i></td>
 				</tr>
 			</tbody>
 		</table>
@@ -67,3 +68,4 @@
 		</md-card-content>	
 	</md-card>
 </div>
+

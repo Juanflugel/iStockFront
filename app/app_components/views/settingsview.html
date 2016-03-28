@@ -2,7 +2,7 @@
 <md-card layout="row">
 
 	<md-input-container md-no-float style="height:35px;padding-left:24px;" class="md-block" flex>
-		<md-icon><i class="fa fa-search fa-lg"></i></md-icon>
+		<md-icon><i class="fa fa-search fa-lg "></i></md-icon>
 		<input type="text" ng-model="search" placeholder="Here you can find all the items you don't have in your Stock">
 	</md-input-container>
 	<md-input-container flex="20">
@@ -20,7 +20,8 @@
 
     
 </md-card>
-
+<button ng-click="reducir()">reducir</button>
+<button ng-click="restar()">restar</button>
 <item-form></item-form>
 <settings-table></settings-table>
 

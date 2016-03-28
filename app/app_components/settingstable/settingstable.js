@@ -19,7 +19,11 @@ angular.module('settingsTableModule',['services'])
 		$scope.newItem = true;
 	}
 	$scope.filterModel ={};
-	$scope.filterBy= [{tagToShow:'Categorie',queryObjKey:'itemCategorie',array:['Buateile','Normteile','Kaufteile','Brennteile']},{tagToShow:'Provider', queryObjKey:'itemProvider',array:['SMC','SCHRAUBEN KÖHLER','BREMER','Edeka']},{tagToShow:'Type',queryObjKey:'itemType',array:['fastfood','SCHRAUBEN','ZYLINDER']}];
+	$scope.filterBy= [  {tagToShow:'Categorie',queryObjKey:'itemCategorie',array:['Buateile','Normteile','Kaufteile','Brennteile']},
+						{tagToShow:'Provider', queryObjKey:'itemProvider',array:['SMC','SCHRAUBEN KÖHLER','BREMER','Edeka']},
+						{tagToShow:'Type',queryObjKey:'itemType',array:['fastfood','SCHRAUBEN','ZYLINDER']},
+						{tagToShow:'BauGruppe',queryObjKey:'itemAssemblyName',array:['ABROLUNG','FORMSTATION','OBERJO']}
+					 ];
 
 	$scope.llamar = function(){
 
@@ -28,6 +32,33 @@ angular.module('settingsTableModule',['services'])
 		console.log(j);
 		query = j;
 		refresh();
+	}
+	var resumen = [];
+
+	var sustraendo = [['DIN 912 M6X10',6],['DIN 912 M6X25',7],['DIN 912 M6X30',10]];
+
+	$scope.reducir = function(){ 
+		resumen = [];
+		_.each($scope.collection,function (obj){ 
+			const a = [obj.itemCode,obj.itemAmount];
+			resumen.push(a);
+			
+		});
+		console.log(resumen);
+	}
+
+	$scope.restar = function(){
+			const s = sustraendo.length;
+		_.each(resumen,function(arr0){
+			console.log(arr0[0]);
+			for(i=0;i<s;i++){ 
+				if (arr0[0]==sustraendo[i][0]){
+					console.log([arr0[0],(sustraendo[i][1]-arr0[1])]);
+				}
+			}
+
+
+		});
 	}
 }])
 // table to show, create and edit everything related to items
