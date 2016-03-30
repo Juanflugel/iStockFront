@@ -5,7 +5,7 @@
 		  		<th ng-repeat="(key, val) in header" style="cursor:pointer;">
 		  			<p ng-click="order(key)">{{val}}</p>
 		 		</th>
-		  		<th>Handling</th>           
+		  		<th ng-hide="createAssembley">Handling</th>           
 	   		</tr>
     		</thead>
 
@@ -13,13 +13,14 @@
 	   		<tr ng-repeat="sample in collection | filter:search | orderBy:predicate:reverse">
 		  		<td>{{sample.itemCode}}</td>
 		  		<!-- <td>{{sample.itemName}}</td> -->
-		  		<td>{{sample.itemAmount}}</td>
+		  		<td contentEditable="{{createAssembley}}" ng-model="sample.itemAmount" type="number">{{sample.itemAmount}}</td>
+		  		<!--<td>{{sample.itemAmount}}</td>-->
 		  		<td>{{sample.itemType}}</td>
 		  		<td>{{sample.itemProvider}}</td>
 		  		<!-- <td>{{sample.itemUnits}}</td> -->
 		  		<!-- <td>{{sample.itemBrand}}</td> -->		  		
 		  		<td>{{sample.itemBuyPrice}}</td>
-		 		<td>
+		 		<td ng-hide="createAssembley">
 		 		 	<i class="fa fa-pencil-square-o" ng-click="editObj(sample)"></i>&nbsp&nbsp
 		 		 	<i class="fa fa-info-circle" ng-click="readObj(sample)"></i>&nbsp&nbsp
 			 		<i class="fa fa-trash" ng-click="deleteRow(sample.ID)"></i>

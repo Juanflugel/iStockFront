@@ -16,12 +16,17 @@
 		</md-select>
 	</md-input-container>
 	<i layout-margin layout-padding ng-click="newObj()"  class="fa fa-plus fa-lg" ></i>
-	<i layout-margin layout-padding class="fa fa-cubes fa-lg text-info"></i>
+	<i layout-margin layout-padding  ng-click="createAssembley =!createAssembley" class="fa fa-cubes fa-lg text-info"></i>
 
     
 </md-card>
 <button ng-click="reducir()">reducir</button>
 <button ng-click="restar()">restar</button>
+<button ng-click="queryArray()">pedir query array</button>
+<button ng-click="mostrar()">ver scope actual</button>{{j}}
+<button ng-click="crearSub(collection)">crear subensamble</button>
+
+
 <item-form></item-form>
 <settings-table></settings-table>
 

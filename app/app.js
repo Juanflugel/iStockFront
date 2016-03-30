@@ -31,6 +31,16 @@ angular.module('iStock',[
       templateUrl:"app_components/views/projectsview.html",
       controller:'projectsCtrl'
     })
+   /* .state('Projects.main', {
+      url: "/main",
+      template:"<project-card></project-card>",
+      controller:'projectsCtrl'
+    })
+    .state('Projects.sub', {
+      url: "/sub",
+      template:"",
+      controller:'projectsCtrl'
+    })*/
     .state('Settings', {
       url: "/Settings",
       templateUrl:"app_components/views/settingsview.html",

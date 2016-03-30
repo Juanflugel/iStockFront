@@ -1,40 +1,14 @@
 
 	<md-card>
 		<div layout="row">
-			<md-input-container md-no-float style="height:35px;padding-left:24px;" class="md-block" flex>
+			<md-input-container md-no-float style="height:35px;padding-left:30px;margin-top:10px !important;" class="md-block" flex>
 				<md-icon><i class="fa fa-search fa-lg"></i></md-icon>
 				<input type="text"  placeholder="Here you can find all the items you don't have in your Stock">
-	   		</md-input-container>	
+	   		</md-input-container>
+	   		<i ng-class="{selected:!isSubAssembly}" layout-margin layout-padding ng-click="isSubAssembly=0">Projects</i>
+			<i ng-class="{selected:isSubAssembly}" layout-margin layout-padding ng-click="isSubAssembly=1"> Baugruppen</i>	
 			<i layout-margin layout-padding class="fa fa-calendar-plus-o fa-lg text-success" ng-click="showNewProject()"></i>
 		</div>		
 	</md-card>
-	
-	<md-card ng-show="changeInfoProject || newProject" layout-padding> <br>
-	
-		<div layout="row" flex>&nbsp &nbsp &nbsp
-							
-			<md-input-container flex>
-				<label>Project Name</label>
-				<input type="text" ng-model="obj.projectName">
-			</md-input-container>
-			<md-input-container flex>
-				<label>Project Number</label>
-				<input type="text" ng-model="obj.projectNumber">
-			</md-input-container>
-			<md-input-container flex>
-				<label>Project Type</label>
-				<input type="text" ng-model="obj.projectType">
-			</md-input-container>
-
-			<md-datepicker ng-model="obj.deadLine" md-placeholder="Dead Line"></md-datepicker>&nbsp &nbsp &nbsp
-		
-			<i  layout-padding class="fa fa-check-circle fa-2x text-success" ng-click="updateProject(obj)" ng-hide="newProject"></i>
-			<i  layout-padding class="fa fa-check-circle fa-2x text-success" ng-click="createProject(obj)" ng-hide="changeInfoProject"></i>&nbsp &nbsp &nbsp
-			<i ng-click="changeInfoProject=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
-			&nbsp &nbsp &nbsp
-		</div>
-		
-	</md-card>
-
 	<project-card></project-card>
 	

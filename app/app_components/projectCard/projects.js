@@ -6,7 +6,6 @@ angular.module('projectsModule',['services'])
 	$scope.projects = [];
 
 	shop.projectGeneralView.query(function (data){
-
 		$scope.modelo = [];
 		
 		_.each(data,function (obj){
@@ -14,16 +13,13 @@ angular.module('projectsModule',['services'])
 			preObj.totalProjectCost = obj.totalProjectCost;
 			console.log(preObj);
 			$scope.modelo.push(preObj);
-
 		});
 
 		$scope.projects = $scope.modelo;
 
 	},function (err){});
-
 	
-	// change name, number, type or dead line from a project
-	
+	// change name, number, type or dead line from a project	
 
 	$scope.updateProject = function(obj){
 		const idDocument = obj._id;
@@ -37,12 +33,9 @@ angular.module('projectsModule',['services'])
 		$scope.obj = {};
 		$scope.newProject = true; // ng-show
 	}
-
-	
-
-	
 	
 }])
+
 
 .directive('projectCard', ['shop',function (shop){
 	// Runs during compile
@@ -55,6 +48,8 @@ angular.module('projectsModule',['services'])
 		// transclude: true,
 		// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
 		link: function($scope, iElm, iAttrs, controller) {
+
+			$scope.isSubAssembly = 0;
 
 			$scope.editProject = function(obj) {
 				console.log(obj);
@@ -81,6 +76,7 @@ angular.module('projectsModule',['services'])
 			}
 
 			$scope.createProject = function(obj){
+				obj.isSubAssembly = 0;
 				obj.companyId = 'RMB01';
 				obj.projectItems = [{itemAmount:1}];
 				shop.project.save(obj,function (data){

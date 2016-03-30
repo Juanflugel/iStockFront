@@ -26,3 +26,9 @@ td,th{
 	font-weight:900 !important;
 	max-width: 100%;
 }
+
+.selected{
+	border: solid 1px #3c763d;
+	color:#3c763d;
+	border-radius: 4px;
+}
