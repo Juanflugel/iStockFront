@@ -2,10 +2,15 @@ angular.module('projectsModule',['services'])
 
 .controller('projectsCtrl', ['$scope','shop',function ($scope,shop){
 
+	var query = {};
+
 	var firmaId = 'RMB01';
 	$scope.projects = [];
 
-	shop.projectGeneralView.query(function (data){
+	shop.project.query(); 
+
+	$scope.callQuery = function(){
+		shop.projectGeneralView.query(function (data){
 		$scope.modelo = [];
 		
 		_.each(data,function (obj){
@@ -18,11 +23,16 @@ angular.module('projectsModule',['services'])
 		$scope.projects = $scope.modelo;
 
 	},function (err){});
+	}
+	$scope.callQuery();
+
+	
 	
 	// change name, number, type or dead line from a project	
 
 	$scope.updateProject = function(obj){
 		const idDocument = obj._id;
+		obj.projectNumber = obj.projectNumber.toUpperCase();
 		shop.projectUpdate.update({_id:idDocument},obj,function (data){
 			console.log(data);
 			$scope.changeInfoProject = false;
@@ -67,7 +77,7 @@ angular.module('projectsModule',['services'])
 				     shop.project.remove({_id:obj._id},function (data){
 				     	$scope.projects.splice(index,1);
 					 	alert('project: '+ data.projectName+' successfully deleted');
-
+					 	$scope.callQuery();
 					 });
 					} else {
 					    return;
@@ -76,6 +86,7 @@ angular.module('projectsModule',['services'])
 			}
 
 			$scope.createProject = function(obj){
+				obj.projectState = 'open';
 				obj.isSubAssembly = 0;
 				obj.companyId = 'RMB01';
 				obj.projectItems = [{itemAmount:1}];

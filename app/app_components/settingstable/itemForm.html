@@ -1,4 +1,7 @@
-<md-card layout-padding ng-show="editItem || newItem || viewItem">
+<div ng-show="editItem || newItem || viewItem">
+	<md-divider flex></md-divider>
+
+	<div layout-padding >
 	<br>
 		<div layout="row" layout-wrap>
 
@@ -60,7 +63,7 @@
 		    	&nbsp &nbsp &nbsp
 		    </div>
 		    <div ng-show="newItem">
-		    	 <i ng-click="createObj(obj)" layout-padding class="fa fa-cloud-upload fa-2x text-success"></i>
+		    	 <i ng-click="createObj(obj)" layout-padding class="fa fa-check-circle fa-2x text-success"></i>
 		    	&nbsp &nbsp &nbsp
 		    </div>
 		   
@@ -68,4 +71,7 @@
 		    <i ng-show="viewItem" ng-click="viewItem=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
 		</div>
 		
-	</md-card>
+	</div>
+
+</div>
+

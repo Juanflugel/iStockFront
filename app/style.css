@@ -1,11 +1,25 @@
+.search{
+	margin:8px;
+}
 md-sidenav {
 	width: 250px;
 }
 md-input-container {
-	margin:4px;
+	height: 35px;
+	
 }
-md-input-container .md-input {
+md-input-container .md-input{
 	border-color: transparent;
+
+}
+md-select .md-select-value{
+	border-color: transparent;
+}
+.headerHelp{
+	height: 30px !important;
+	padding-top: 6px;
+	padding-left: 3px;
+	padding-right: 3px;
 }
 
 h4, .h4, h5, .h5, h6, .h6 {

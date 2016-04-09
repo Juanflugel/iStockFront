@@ -1,0 +1,21 @@
+<div ng-show="createAssembly">
+
+	<md-divider flex></md-divider> <!--  -->
+
+	<div  layout="row" layout-aling="center center" layout-margin>
+
+		<md-input-container md-no-float flex>
+		      <input ng-model="assembly.projectName" type="text" placeholder="Assembly Name" flex>
+		</md-input-container>
+		<md-input-container md-no-float flex>
+		      <input ng-model="assembly.projectNumber" type="text" placeholder="Assembly Number">
+		</md-input-container>
+
+		<span class="headerHelp" flex> {{itemsNewAssembly.length}} items Inserted in Assembly</span>
+		<span ></span>
+		<span class="headerHelp" ng-click="insertItemInAssembly()" flex ="15"><i class="fa fa-upload text-success"></i> Insert Items</span>
+		<span  class="headerHelp" ng-click="crearSub()" class=""><i class="fa fa-check-circle fa-lg text-success"></i> Create Assembly </span>
+		<span  class="headerHelp" ng-click="createAssembly=!createAssembly" class=""><i class="fa fa-times fa-lg text-danger"></i></span>
+
+	</div>
+</div>

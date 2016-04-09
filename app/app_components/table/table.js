@@ -2,14 +2,30 @@
 angular.module('table', ['services'])
 
 .controller('tableCtrl', ['$scope','shop',function ($scope,shop){
-
+    var firmaId ="RMB01";
+    // query var to filter by all the wanted fields
+    var query = {};
+    query.itemAmount = 0;
+    query.companyId = firmaId;
     $scope.viewItems = [];
     $scope.orderList = [];
 
-    shop.items.query({itemAmount:0}, function (data){
+    $scope.callQuery = function(){
+         shop.items.query(query, function (data){
         console.log(data);
         $scope.viewItems = data;
     });
+    }
+    $scope.callQuery();
+
+    $scope.updateQuery = function(){
+        const q = {};
+        q.itemAmount = 0;
+        q[$scope.filterModel.queryObjKey] = $scope.queryTag;
+        console.log(q);
+        query = q;
+        $scope.callQuery();
+    }
 
     $scope.exportData = function () {
         var blob = new Blob([document.getElementById('exportable').innerHTML], {
@@ -25,6 +41,13 @@ angular.module('table', ['services'])
         saveAs(blob, "OrderList.xls");
     };
 
+
+$scope.filterModel ={};
+    $scope.filterBy = [  {tagToShow:'Categorie',queryObjKey:'itemCategorie',array:['Buateile','Normteile','Kaufteile','Brennteile']},
+                        {tagToShow:'Provider', queryObjKey:'itemProvider',array:['SMC','SCHRAUBEN KÖHLER','BREMER','IFM','INA FAG','STANITECH','HASCO','FESTO','GANTER','TORWEGGE','KTR']},
+                        {tagToShow:'Type',queryObjKey:'itemType',array:['FERTIGUNSTEILE','SCHRAUBE','ZYLINDER','MUTTER','SCHEIBE']},
+                        {tagToShow:'BauGruppe',queryObjKey:'itemAssemblyName',array:['GRUNDRAHMEN','FORMSTATION MIT HEBELANTRIEB','STAPELWAGEN AJOVER','OBERJOCHVERSTELLUNG','SERVOVORSTRECKER','FOLIENUMLENKUNG']}
+                     ];
 
 
 
