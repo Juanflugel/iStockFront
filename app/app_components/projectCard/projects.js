@@ -1,6 +1,6 @@
 angular.module('projectsModule',['services'])
 
-.controller('projectsCtrl', ['$scope','shop',function ($scope,shop){
+.controller('projectsCtrl', ['$scope','shop','handleProjects',function ($scope,shop,handleProjects){
 
 	var query = {};
 
@@ -16,13 +16,13 @@ angular.module('projectsModule',['services'])
 		_.each(data,function (obj){
 			const preObj = obj._id;
 			preObj.totalProjectCost = obj.totalProjectCost;
-			console.log(preObj);
+/*			console.log(preObj);*/
 			$scope.modelo.push(preObj);
 		});
 
 		$scope.projects = $scope.modelo;
 
-	},function (err){});
+		},function (err){});
 	}
 	$scope.callQuery();
 
@@ -43,9 +43,25 @@ angular.module('projectsModule',['services'])
 		$scope.obj = {};
 		$scope.newProject = true; // ng-show
 	}
+
+	$scope.showProjectDetails = function(obj){
+		handleProjects.passProject(obj);
+
+	}
 	
 }])
+.controller('detailsCtrl',['$scope','shop','handleProjects',function ($scope,shop,handleProjects){
+	var currentProject = handleProjects.getCurrentProject();
+	var query ={};
+	query._id = currentProject._id;
 
+	shop.project.query(query,function (data){
+		console.log(data[0]);
+		$scope.project = data[0];
+		$scope.collection = $scope.project.projectItems;
+	},function(err){});
+
+}])
 
 .directive('projectCard', ['shop',function (shop){
 	// Runs during compile

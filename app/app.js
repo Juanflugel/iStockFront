@@ -12,46 +12,45 @@ angular.module('iStock',[
 .config(function($stateProvider, $urlRouterProvider) {
   //
   // For any unmatched url, redirect to /state1
-  $urlRouterProvider.otherwise("/Bills");
+  $urlRouterProvider.otherwise("/app/Bills");
   //
   // Now set up the states
   $stateProvider
-    .state('Bills', {
+   .state('app', {
+            abstract: true,
+            url: '/app',
+            templateUrl: 'app_components/menu/menu.html',
+            controller: function(){
+              console.log('pleno');
+            }
+
+        })
+    .state('app.Bills', {
       url: "/Bills",
       templateUrl: "app_components/views/view1.html",
       controller:'billsCtrl'
     })
-    .state('Pending', {
+    .state('app.Pending', {
       url: "/Pending",
       templateUrl:"app_components/views/view2.html",
       controller:'tableCtrl'
     })
-    .state('Projects', {
+    .state('app.Projects', {
       url: "/Projects",
       templateUrl:"app_components/views/projectsview.html",
       controller:'projectsCtrl'
     })
-   /* .state('Projects.main', {
-      url: "/main",
-      template:"<project-card></project-card>",
-      controller:'projectsCtrl'
+    .state('app.projectDetail', {
+      url: "/Detail",
+      templateUrl:"app_components/projectCard/subAssembly.html",
+      controller:'detailsCtrl'
     })
-    .state('Projects.sub', {
-      url: "/sub",
-      template:"",
-      controller:'projectsCtrl'
-    })*/
-    .state('Settings', {
+    .state('app.Settings', {
       url: "/Settings",
       templateUrl:"app_components/views/settingsview.html",
       controller:'settingsTableCtrl'
     })
-    // .state('dataInput', {
-    //   url: "/dataInput",
-    //   templateUrl:"app_components/views/view5.html",
-    //   controller:'inputTableCtrl'
-    // })
-    .state('Company', {
+    .state('app.Company', {
       url: "/Company",
       templateUrl:"app_components/companyView/company.html",
       controller:'companyCtrl'

@@ -54,7 +54,7 @@
         </div>
         <div>
           <i class="fa fa-pencil-square-o" ng-click="editProject(project)"></i>
-          <i class="fa fa-info-circle"></i>
+          <a ui-sref="app.projectDetail" ng-click="showProjectDetails(project)"><i class="fa fa-info-circle"></i></a>
           <i class="fa fa-trash-o" ng-click="deleteProject(project,$index)"></i>
         </div>
       </md-list-item>

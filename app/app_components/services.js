@@ -70,4 +70,38 @@ angular.module('services', ['ngResource'])
       })
     }
   };
-}]);
+}])
+
+.factory('handleProjects', function ($rootScope) {
+
+  var currentProject={};
+  var detalle ={};
+  var toBuy = {};
+
+  return {
+    updateBills:function(){
+      $rootScope.$broadcast('newBill');
+    },
+    updateBuyList:function(){
+      $rootScope.$broadcast('newProductToBuy');
+    },
+    passProject: function(obj){
+      currentProject = obj;
+      console.log(currentProject);
+    },
+    remove: function(bill) {
+      bills.splice(bills.indexOf(bill), 1);
+    },
+    getCurrentProject: function() {
+      console.log('me llamaron');
+      return currentProject;
+
+    },
+    passProduct: function(obj){
+       detalle = obj;
+    },
+    getCurrentProduct: function(){
+      return detalle;
+    }
+  }
+})

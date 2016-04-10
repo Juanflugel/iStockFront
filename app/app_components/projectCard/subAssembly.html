@@ -1,0 +1,65 @@
+<md-card>
+    <md-list>
+      <md-list-item>
+     
+        <div class="md-list-item-text" layout="column" layout-fill>
+
+          <div layout="row"  layout-align="center center">
+            <span flex><h6 class="fieldHeader text-center">Assembly Name</h6></span>
+            <span flex><h6 class="fieldHeader text-center">Assembly Number</h6></span>
+            <span flex><h6 class="fieldHeader text-center">Number of Parts</h6></span>
+            <span flex><h6 class="fieldHeader text-center">Total Cost</h6></span>
+          </div>
+          <div layout="row" layout-align="center center">
+            <h4 flex class="text-center">{{project.projectName}}</h4>
+            <h4 flex class="text-center">{{project.projectNumber}}</h4>
+            <h4 flex class="text-center">{{project.projectItems.length}}</h4>
+            <h4 flex class="text-center">{{project.totalProjectCost}}</h4>
+          </div>
+          
+        </div>
+        <div>
+          <i class="fa fa-pencil-square-o" ng-click="editProject(project)"></i>
+          <a ui-sref="app.projectDetail"><i class="fa fa-info-circle"></i></a>
+          <i class="fa fa-trash-o" ng-click="deleteProject(project,$index)"></i>
+        </div>
+      </md-list-item>
+    </md-list>
+
+<md-divider flex></md-divider>
+
+  <table class="table table-hover table-responsive panel">    
+        <thead>
+        <tr class="table" >
+          <th ng-repeat="(key, val) in header" style="cursor:pointer;">
+            <p ng-click="order(key)">{{val}}</p>
+        </th>
+          <th ng-hide="createAssembly"><p>Handling</p></th>
+          <th ng-show="createAssembly"><p>Select</p></th>          
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="sample in collection | filter:search | orderBy:predicate:reverse">
+          <td>{{sample.itemCode | limitTo:15}}</td>
+          <!-- <td>{{sample.itemName}}</td> -->
+          <td contentEditable="{{createAssembly}}" ng-model="sample.itemAmount" type="number">{{sample.itemAmount}}</td>
+          <!--<td>{{sample.itemAmount}}</td>-->
+          <td>{{sample.itemType}}</td>
+          <td>{{sample.itemProvider}}</td>
+          <!-- <td>{{sample.itemUnits}}</td> -->
+          <!-- <td>{{sample.itemBrand}}</td> -->          
+          <td>{{sample.itemBuyPrice}}</td>
+        <td ng-hide="createAssembly">
+          <i class="fa fa-pencil-square-o" ng-click="editObj(sample)"></i>&nbsp&nbsp
+          <i class="fa fa-info-circle" ng-click="readObj(sample)"></i>&nbsp&nbsp
+          <i class="fa fa-trash" ng-click="deleteRow(sample.ID)"></i>
+          
+          </td>
+          <td ng-show="createAssembly"><input type="checkbox" ng-change="" ng-model="sample.insert"></td>
+        </tr>
+        </tbody>    
+  </table>  
+
+
+</md-card>

@@ -1,0 +1,24 @@
+<md-toolbar layout="row" >
+	<h1> --e-Stock</h1>
+	</md-toolbar>
+
+	<!-- Container #2 -->
+	<div flex layout="row">
+
+		<!-- Container #3 -->
+		<md-sidenav md-is-locked-open="true" class="md-whiteframe-z2" layout="column">
+			<a ui-sref="app.Bills" class="md-button">Bills</a>
+	        <a ui-sref="app.Pending" class="md-button">Pending</a>
+	        <a ui-sref="app.Projects" class="md-button">Projects</a>
+	        <a ui-sref="app.Settings" class="md-button">Settings</a>
+	        <a ui-sref="app.Company" class="md-button">Company</a>
+<!-- 	        <a ui-sref="dataInput" class="md-button">Data Input</a> -->
+		</md-sidenav>
+
+		<!-- Container #4 -->
+		<md-content flex id="content" layout="column">
+		<div ui-view ></div>
+		<div ui-view ="projectDetails" ></div>
+		</md-content>
+
+	</div>
