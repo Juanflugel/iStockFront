@@ -2,6 +2,8 @@ angular.module('projectsModule',['services'])
 
 .controller('projectsCtrl', ['$scope','shop','handleProjects',function ($scope,shop,handleProjects){
 
+	$scope.projectTypes = ['TOOL','MACHINE'];
+
 	var query = {};
 
 	var firmaId = 'RMB01';
@@ -46,7 +48,6 @@ angular.module('projectsModule',['services'])
 
 	$scope.showProjectDetails = function(obj){
 		handleProjects.passProject(obj);
-
 	}
 	
 }])
@@ -60,6 +61,14 @@ angular.module('projectsModule',['services'])
 		$scope.project = data[0];
 		$scope.collection = $scope.project.projectItems;
 	},function(err){});
+
+	// header 
+			$scope.header = {itemCode:'Item Code',itemAmount:'Amount',itemName:'Name',itemBuyPrice:'Price'};
+			// order by header Item
+			$scope.order = function(predicate){
+				$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+				$scope.predicate = predicate;
+			}
 
 }])
 

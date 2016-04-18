@@ -14,8 +14,9 @@ angular.module('table', ['services'])
          shop.items.query(query, function (data){
         console.log(data);
         $scope.viewItems = data;
-    });
+        });
     }
+
     $scope.callQuery();
 
     $scope.updateQuery = function(){

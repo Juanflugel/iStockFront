@@ -3,20 +3,19 @@
   
     <div layout="row" flex>&nbsp &nbsp &nbsp
               
-      <md-input-container flex>
-        <label>Project Name</label>
-        <input type="text" ng-model="obj.projectName">
+      <md-input-container md-no-float class="search" flex>
+        <input type="text" ng-model="obj.projectName" placeholder="Project Name">
       </md-input-container>
-      <md-input-container flex>
-        <label>Project Number</label>
-        <input type="text" ng-model="obj.projectNumber">
+      <md-input-container md-no-float class="search" flex>
+        <input type="text" ng-model="obj.projectNumber" placeholder ="Project Number">
       </md-input-container>
-      <md-input-container flex>
-        <label>Project Type</label>
-        <input type="text" ng-model="obj.projectType">
-      </md-input-container>
+      <md-input-container flex  class="search">
+        <md-select ng-model="obj.projectType" placeholder="Project Type" flex>
+            <md-option ng-value ="opt" ng-repeat="opt in projectTypes">{{opt}}</md-option>
+        </md-select>
+     </md-input-container> 
 
-      <md-datepicker ng-model="obj.deadLine" md-placeholder="Dead Line"></md-datepicker>&nbsp &nbsp &nbsp
+      <md-datepicker ng-model="obj.deadLine" md-placeholder="Dead Line" class="search"></md-datepicker>&nbsp &nbsp &nbsp
     
       <i  layout-padding class="fa fa-check-circle fa-2x text-success" ng-click="updateProject(obj)" ng-hide="newProject"></i>
       <i  layout-padding class="fa fa-check-circle fa-2x text-success" ng-click="createProject(obj)" ng-hide="changeInfoProject"></i>&nbsp &nbsp &nbsp

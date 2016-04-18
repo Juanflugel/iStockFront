@@ -2,8 +2,10 @@ angular.module('settingsTableModule',['services'])
 
 .controller('settingsTableCtrl', ['$scope','shop', function ($scope,shop){
 
-	$scope.itemsNewAssembly = [];
 	var firmaId = 'RMB01';
+
+	$scope.itemsNewAssembly = [];
+	
 	var query = {itemType:'SCHRAUBE'}; //itemMaterial:"S235 JR"
 
 	query.companyId = firmaId;
@@ -49,10 +51,10 @@ angular.module('settingsTableModule',['services'])
 	}
 
 	$scope.filterModel ={};
-	$scope.filterBy = [  {tagToShow:'Categorie',queryObjKey:'itemCategorie',array:['Buateile','Normteile','Kaufteile','Brennteile']},
+	$scope.filterBy = [ {tagToShow:'Categorie',queryObjKey:'itemCategorie',array:['Buateile','Normteile','Kaufteile','Brennteile']},
 						{tagToShow:'Provider', queryObjKey:'itemProvider',array:['SMC','SCHRAUBEN KÖHLER','BREMER','IFM','INA FAG','STANITECH','HASCO','FESTO','GANTER','TORWEGGE','KTR']},
 						{tagToShow:'Type',queryObjKey:'itemType',array:['FERTIGUNSTEILE','SCHRAUBE','ZYLINDER','MUTTER','SCHEIBE']},
-						{tagToShow:'BauGruppe',queryObjKey:'itemAssemblyName',array:['GRUNDRAHMEN','FORMSTATION MIT HEBELANTRIEB','STAPELWAGEN AJOVER','OBERJOCHVERSTELLUNG','SERVOVORSTRECKER','FOLIENUMLENKUNG']}
+						{tagToShow:'BauGruppe',queryObjKey:'itemAssemblyName',array:['ABFALLAUFWICKLUNG','ABROLLBOCK','HEIZUNG','GRUNDRAHMEN','FOLIENTRANSPORT','FORMSTATION MIT HEBELANTRIEB','STAPELWAGEN AJOVER','OBERJOCHVERSTELLUNG','SERVOVORSTRECKER','FOLIENUMLENKUNG']}
 					 ];
 
 	$scope.llamar = function(){
@@ -60,6 +62,7 @@ angular.module('settingsTableModule',['services'])
 		j[$scope.filterModel.queryObjKey] = $scope.queryTag;
 		console.log(j);
 		query = j;
+		query.companyId = firmaId;
 		refresh();
 	}
 
@@ -95,7 +98,7 @@ angular.module('settingsTableModule',['services'])
 		templateUrl: 'app_components/settingstable/settingstable.html',		
 		link: function($scope, iElm, iAttrs, controller) {
 			// header 
-			$scope.header = {itemCode:'Item Code',itemAmount:'Amount',itemType:'Type',itemProvider:'Provider',itemBuyPrice:'Price'};
+			$scope.header = {itemCode:'Item Code',itemAmount:'Amount',itemType:'Type',itemName:'Name',itemBuyPrice:'Price'};
 			// order by header Item
 			$scope.order = function(predicate){
 				$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;

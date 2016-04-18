@@ -29,7 +29,7 @@ angular.module('services', ['ngResource'])
 .factory('Config', function () {
   return {
       version : '0.0.1',
-      ip: 'tsjuan.ddns.net',
+      ip: 'www.estock.website',
       port: 5006,
       protocol: 'http'
   };
@@ -93,7 +93,7 @@ angular.module('services', ['ngResource'])
       bills.splice(bills.indexOf(bill), 1);
     },
     getCurrentProject: function() {
-      console.log('me llamaron');
+      console.log('me llamaron:'+currentProject);
       return currentProject;
 
     },

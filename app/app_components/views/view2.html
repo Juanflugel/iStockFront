@@ -12,7 +12,7 @@
 		</md-select>
 	</md-input-container> <p layout-margin layout-padding class="search">:</p>
 	<md-input-container flex="20" class="search"> 
-		<md-select ng-model="queryTag" placeholder="Select a {{filterModel.tagToShow}}" ng-change="callQuery()">
+		<md-select ng-model="queryTag" placeholder="Select a {{filterModel.tagToShow}}" ng-change="updateQuery()">
 		<md-option ng-value ="tag" ng-repeat="tag in filterModel.array">{{tag}}</md-option>
 		</md-select>
 	</md-input-container>
