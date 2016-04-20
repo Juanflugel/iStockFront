@@ -51,7 +51,7 @@ angular.module('settingsTableModule',['services'])
 	}
 
 	$scope.filterModel ={};
-	$scope.filterBy = [ {tagToShow:'Categorie',queryObjKey:'itemCategorie',array:['Buateile','Normteile','Kaufteile','Brennteile']},
+	$scope.filterBy = [ {tagToShow:'Categorie',queryObjKey:'itemCategorie',array:['BAUTEILE','NORMTEILE','KAUFTEILE','BRENTEILE']},
 						{tagToShow:'Provider', queryObjKey:'itemProvider',array:['SMC','SCHRAUBEN KÖHLER','BREMER','IFM','INA FAG','STANITECH','HASCO','FESTO','GANTER','TORWEGGE','KTR']},
 						{tagToShow:'Type',queryObjKey:'itemType',array:['FERTIGUNSTEILE','SCHRAUBE','ZYLINDER','MUTTER','SCHEIBE']},
 						{tagToShow:'BauGruppe',queryObjKey:'itemAssemblyName',array:['ABFALLAUFWICKLUNG','ABROLLBOCK','HEIZUNG','GRUNDRAHMEN','FOLIENTRANSPORT','FORMSTATION MIT HEBELANTRIEB','STAPELWAGEN AJOVER','OBERJOCHVERSTELLUNG','SERVOVORSTRECKER','FOLIENUMLENKUNG']}
@@ -91,7 +91,7 @@ angular.module('settingsTableModule',['services'])
 
 }])
 // table to show, create and edit everything related to items
-.directive('settingsTable', [function (){
+.directive('settingsTable', ['shop',function (shop){
 	// Runs during compile
 	return {
 		restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
@@ -125,6 +125,21 @@ angular.module('settingsTableModule',['services'])
 				
 			}
 
+			$scope.deleteObj = function(item,index){
+
+				const r = confirm('Are you sure to delete Item: '+ item.itemName);
+					if (r == true) {
+				     shop.items.remove({_id:item._id},function (data){
+				     	$scope.collection.splice(index,1);
+					 	alert('Item: '+ data.itemName+' successfully deleted');
+					 	refresh();
+					 });
+					} else {
+					    return;
+					}
+
+			}
+
 
 		}
 	};
@@ -138,6 +153,7 @@ angular.module('settingsTableModule',['services'])
 		link: function($scope, iElm, iAttrs, controller) {
 
 				$scope.createObj = function(obj){
+					obj.companyId = firmaId;
 					shop.items.save(obj,function (data){
 						$scope.obj = {};
 						$scope.newItem = false;

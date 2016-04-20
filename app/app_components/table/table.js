@@ -44,10 +44,10 @@ angular.module('table', ['services'])
 
 
 $scope.filterModel ={};
-    $scope.filterBy = [  {tagToShow:'Categorie',queryObjKey:'itemCategorie',array:['Buateile','Normteile','Kaufteile','Brennteile']},
+    $scope.filterBy = [ {tagToShow:'Categorie',queryObjKey:'itemCategorie',array:['BAUTEILE','NORMTEILE','KAUFTEILE','BRENTEILE']},
                         {tagToShow:'Provider', queryObjKey:'itemProvider',array:['SMC','SCHRAUBEN KÖHLER','BREMER','IFM','INA FAG','STANITECH','HASCO','FESTO','GANTER','TORWEGGE','KTR']},
                         {tagToShow:'Type',queryObjKey:'itemType',array:['FERTIGUNSTEILE','SCHRAUBE','ZYLINDER','MUTTER','SCHEIBE']},
-                        {tagToShow:'BauGruppe',queryObjKey:'itemAssemblyName',array:['GRUNDRAHMEN','FORMSTATION MIT HEBELANTRIEB','STAPELWAGEN AJOVER','OBERJOCHVERSTELLUNG','SERVOVORSTRECKER','FOLIENUMLENKUNG']}
+                        {tagToShow:'BauGruppe',queryObjKey:'itemAssemblyName',array:['ABFALLAUFWICKLUNG','ABROLLBOCK','HEIZUNG','GRUNDRAHMEN','FOLIENTRANSPORT','FORMSTATION MIT HEBELANTRIEB','STAPELWAGEN AJOVER','OBERJOCHVERSTELLUNG','SERVOVORSTRECKER','FOLIENUMLENKUNG']}
                      ];
 
 
