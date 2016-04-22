@@ -1,33 +1,81 @@
-{"companyName":"Rhode MaschinenBau",
-    "companyId":"RMB01",
-    "companyZipCode":"23701",
-    "companyUsers":[
-            {
-                "userName":"Juan Garcia",
-                "userId":"JG01"
-            },
-            {
-                "userName":"Alex Grage",
-                "userId":"AG02"
-            },
-            {
-                "userName":"Christian Noel",
-                "userId":"CN03"
-            },
-            {
-                "userName":"Daniel Wagner",
-                "userId":"DN04"
-            },
-            {
-                "userName":"Lasd Wolhfahrt",
-                "userId":"LW05"
-            }
+{
+    "companyItemFilters": [{
+        "tagToShow": "Categorie",
+        "queryObjKey": "itemCategorie",
+        "array": ["BAUTEILE", "NORMTEILE", "KAUFTEILE", "BRENTEILE"]
+    }, {
+        "tagToShow": "Provider",
+        "queryObjKey": "itemProvider",
+        "array": ["SMC", "SCHRAUBEN KÖHLER", "BREMER", "IFM", "INA FAG", "STANITECH", "HASCO", "FESTO", "GANTER", "TORWEGGE", "KTR"]
+    }, {
+        "tagToShow": "Type",
+        "queryObjKey": "itemType",
+        "array": ["FERTIGUNSTEILE", "LAGER", "SCHRAUBE", "ZYLINDER", "MUTTER", "SCHEIBE"]
+    }, {
+        "tagToShow": "Baugruppe",
+        "queryObjKey": "itemAssemblyName",
+        "array": ["ABFALLAUFWICKLUNG", "ABROLLBOCK", "HEIZUNG", "GRUNDRAHMEN", "FOLIENTRANSPORT", "FORMSTATION MIT HEBELANTRIEB", "STAPELWAGEN AJOVER", "OBERJOCHVERSTELLUNG", "SERVOVORSTRECKER", "FOLIENUMLENKUNG"]
+    }],
+    "companyName": "Rhode MaschinenBau",
+    "companyId": "RMB01",
+    "companyZipCode": "23701",
+    "__v": 0,
 
-        ],
-    "companyLocations":[
-                {
-                	"locationId":"14.401",
-                	"locationName":"Palette"
-                }
-            ]
+    "companyLocations": [{
+        "locationName": "Palette",
+        "locationId": "14.401"
+        
+    }],
+    "companyUsers": [{
+        "userId": "JG01",
+        "userName": "Juan Garcia",
+        "realName": "Juan Jose Garcia Ibanez"
+        
+    }, {
+        "realName": "Alexander Grage",
+        "userName": "Alex Grage",
+        "userId": "AG02"
+        
+    }, {
+        "realName": "Christian Noel",
+        "userName": "Christian Noel",
+        "userId": "CN03"
+        
+    }, {
+        "realName": "Daniel Wegner",
+        "userName": "Daniel",
+        "userId": "DN04"
+        
+    }, {
+        "userName": "Lars",
+        "userId": "LW01",
+        "realName": "Lars Wohlfahrt"
+        
+    }, {
+        "userName": "Henning",
+        "userId": "HH01",
+        "realName": "Henning Hohnroth"
+        
+    }, {
+        "userName": "Darek",
+        "userId": "DK01",
+        "realName": "Darek Kopczynski"
+        
+    }, {
+        "userName": "Martin",
+        "userId": "MH01",
+        "realName": "Martin Hube"
+        
+    }, {
+        "userName": "Gerhard",
+        "userId": "GG01",
+        "realName": "Gerhard Göckelman"
+        
+    }, {
+        "userName": "Thorge",
+        "userId": "TP01",
+        "realName": "Thorge Pertersen"
+        
+    }],
+    "companyProjectsType": []
 }

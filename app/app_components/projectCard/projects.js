@@ -12,9 +12,9 @@ angular.module('projectsModule',['services'])
 	shop.project.query(); 
 
 	$scope.callQuery = function(){
+		// query para traer todos los proyectos con costo total
 		shop.projectGeneralView.query(function (data){
-		$scope.modelo = [];
-		
+		$scope.modelo = [];		
 		_.each(data,function (obj){
 			const preObj = obj._id;
 			preObj.totalProjectCost = obj.totalProjectCost;
@@ -26,6 +26,7 @@ angular.module('projectsModule',['services'])
 
 		},function (err){});
 	}
+	
 	$scope.callQuery();
 
 	

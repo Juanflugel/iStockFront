@@ -1,15 +1,16 @@
 <div>
 	<md-card>
- <md-list-item>
-	<img ng-src="{{firma.companyLogo}}" class="md-avatar" alt="" />
-	<md-card-content>
-		<h4>{{firma.companyName}}</h4>
-		<p>{{firma.companyAddress}}</p>
-	</md-card-content>
- </md-list-item>	
-</md-card>
-</div>
 
+		<md-card-content layout="row">
+			<h4>{{firma.companyName}}</h4>
+			<p>{{firma.companyAddress}}</p>
+			<p>Employees</p> <span flex></span>
+		<p>Filters</p><span flex></span>
+		<p>Providers</p><span flex></span>
+		</md-card-content>
+	
+    </md-card>
+</div>
 
 <div layout="row">
 	<md-card flex ="66">	

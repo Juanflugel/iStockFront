@@ -5,6 +5,14 @@
 */
 angular.module('services', ['ngResource'])
 
+.constant('filters',{
+  'filterCollection':[ {tagToShow:'Categorie',queryObjKey:'itemCategorie',array:['BAUTEILE','NORMTEILE','KAUFTEILE','BRENTEILE']},
+            {tagToShow:'Provider', queryObjKey:'itemProvider',array:['SMC','SCHRAUBEN KÖHLER','BREMER','IFM','INA FAG','STANITECH','HASCO','FESTO','GANTER','TORWEGGE','KTR']},
+            {tagToShow:'Type',queryObjKey:'itemType',array:['FERTIGUNSTEILE','LAGER','SCHRAUBE','ZYLINDER','MUTTER','SCHEIBE']},
+            {tagToShow:'BauGruppe',queryObjKey:'itemAssemblyName',array:['ABFALLAUFWICKLUNG','ABROLLBOCK','HEIZUNG','GRUNDRAHMEN','FOLIENTRANSPORT','FORMSTATION MIT HEBELANTRIEB','STAPELWAGEN AJOVER','OBERJOCHVERSTELLUNG','SERVOVORSTRECKER','FOLIENUMLENKUNG']}
+           ]
+})
+
 .factory('$loStorage', function(){
 
 	var store = { todos:[], vacios:[],

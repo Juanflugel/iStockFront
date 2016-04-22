@@ -1,23 +1,43 @@
 angular.module('settingsTableModule',['services'])
 
-.controller('settingsTableCtrl', ['$scope','shop', function ($scope,shop){
+.controller('settingsTableCtrl', ['$scope','shop','filters',function ($scope,shop,filters){
 
-	var firmaId = 'RMB01';
+	$scope.filterModel ={};
+	$scope.filterBy = filters.filterCollection;
 
-	$scope.itemsNewAssembly = [];
-	
-	var query = {itemType:'SCHRAUBE'}; //itemMaterial:"S235 JR"
+	var query = {itemType:'SCHRAUBE'}; //itemMaterial:"S235 JR" query inicial
 
-	query.companyId = firmaId;
+	query.companyId = $scope.firmaId;
 	// Retrieve data from API the whole list without filter
-	var refresh = function (){
+	$scope.refresh = function (){
 		shop.items.query(query,function (data){
 			$scope.collection = data;
 			console.log($scope.collection.length);
 		},function (error){});
 	}; 
 
-	refresh();
+	$scope.refresh();
+
+	$scope.queryItems = function(){
+		const j = {};
+		j[$scope.filterModel.queryObjKey] = $scope.queryTag;
+		console.log(j);
+		query = j;
+		query.companyId = $scope.firmaId;
+		$scope.refresh();
+	}
+	// auxilar forms setted false 
+	$scope.createAssembly = false;
+	$scope.newItem = false;
+	$scope.viewItem = false;
+	$scope.justInfo = false;
+	$scope.editItem = false;
+	// auxilar forms setted false 
+	$scope.firmaId = 'RMB01'; // esto hay que traerlo desde un servicio que se valide por login
+
+	$scope.itemsNewAssembly = []; // collection with all the items which belong to a new assembly
+	
+	
 
 	$scope.newAssembly = function(){		
 		$scope.createAssembly = true;
@@ -50,24 +70,7 @@ angular.module('settingsTableModule',['services'])
 		$scope.newItem = true;
 	}
 
-	$scope.filterModel ={};
-	$scope.filterBy = [ {tagToShow:'Categorie',queryObjKey:'itemCategorie',array:['BAUTEILE','NORMTEILE','KAUFTEILE','BRENTEILE']},
-						{tagToShow:'Provider', queryObjKey:'itemProvider',array:['SMC','SCHRAUBEN KÖHLER','BREMER','IFM','INA FAG','STANITECH','HASCO','FESTO','GANTER','TORWEGGE','KTR']},
-						{tagToShow:'Type',queryObjKey:'itemType',array:['FERTIGUNSTEILE','SCHRAUBE','ZYLINDER','MUTTER','SCHEIBE']},
-						{tagToShow:'BauGruppe',queryObjKey:'itemAssemblyName',array:['ABFALLAUFWICKLUNG','ABROLLBOCK','HEIZUNG','GRUNDRAHMEN','FOLIENTRANSPORT','FORMSTATION MIT HEBELANTRIEB','STAPELWAGEN AJOVER','OBERJOCHVERSTELLUNG','SERVOVORSTRECKER','FOLIENUMLENKUNG']}
-					 ];
-
-	$scope.llamar = function(){
-		const j = {};
-		j[$scope.filterModel.queryObjKey] = $scope.queryTag;
-		console.log(j);
-		query = j;
-		query.companyId = firmaId;
-		refresh();
-	}
-
-
-
+	
 
 	$scope.crearSub = function(collection){
 		var obj = {};
@@ -76,7 +79,7 @@ angular.module('settingsTableModule',['services'])
 		obj.projectNumber = $scope.assembly.projectNumber;
 		obj.projectType = 'BAUGRUPPE';
 		obj.projectItems = $scope.itemsNewAssembly;
-		obj.companyId = firmaId;
+		obj.companyId = $scope.firmaId;
 		obj.deadLine = new Date();
 
 		shop.project.save(obj,function (data){
@@ -85,9 +88,7 @@ angular.module('settingsTableModule',['services'])
 
 		$scope.createAssembly = false;
 
-	}
-
-	$scope.createAssembly = false;
+	}	
 
 }])
 // table to show, create and edit everything related to items
@@ -132,7 +133,7 @@ angular.module('settingsTableModule',['services'])
 				     shop.items.remove({_id:item._id},function (data){
 				     	$scope.collection.splice(index,1);
 					 	alert('Item: '+ data.itemName+' successfully deleted');
-					 	refresh();
+					 	$scope.refresh();
 					 });
 					} else {
 					    return;
@@ -153,7 +154,7 @@ angular.module('settingsTableModule',['services'])
 		link: function($scope, iElm, iAttrs, controller) {
 
 				$scope.createObj = function(obj){
-					obj.companyId = firmaId;
+					obj.companyId = $scope.firmaId;
 					shop.items.save(obj,function (data){
 						$scope.obj = {};
 						$scope.newItem = false;
