@@ -18,7 +18,7 @@ angular.module('settingsTableModule',['services'])
 		$scope.filterBy = shop.getCompanyFilters();
 		query.companyId = $scope.firmaId;
 		$scope.refresh();
-	},30);	
+	},750);	
 
 	$scope.queryItems = function(){
 		const j = {};

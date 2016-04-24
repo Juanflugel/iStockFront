@@ -1,23 +1,34 @@
 
 angular.module('table', ['services'])
 
-.controller('tableCtrl', ['$scope','shop',function ($scope,shop){
-    var firmaId ="RMB01";
+.controller('tableCtrl', ['$scope','shop','$timeout',function ($scope,shop,$timeout){
+
+    $scope.filterModel ={};
+
     // query var to filter by all the wanted fields
     var query = {};
     query.itemAmount = 0;
-    query.companyId = firmaId;
     $scope.viewItems = [];
     $scope.orderList = [];
 
     $scope.callQuery = function(){
-         shop.items.query(query, function (data){
+        shop.items.query(query, function (data){
         console.log(data);
         $scope.viewItems = data;
         });
     }
+    // dale tiempo para que la info pase al servicio
+    $timeout(function(){
+        $scope.firmaId = shop.getCompanyId(); // esto hay que traerlo desde un servicio que se valide por login
+        $scope.filterBy = shop.getCompanyFilters();
+        console.log($scope.filterBy);
+        query.companyId = $scope.firmaId;
+        $scope.callQuery();
+    },800);
 
-    $scope.callQuery();
+    
+
+    
 
     $scope.updateQuery = function(){
         const q = {};
@@ -41,20 +52,6 @@ angular.module('table', ['services'])
         });
         saveAs(blob, "OrderList.xls");
     };
-
-
-$scope.filterModel ={};
-    $scope.filterBy = [ {tagToShow:'Categorie',queryObjKey:'itemCategorie',array:['BAUTEILE','NORMTEILE','KAUFTEILE','BRENTEILE']},
-                        {tagToShow:'Provider', queryObjKey:'itemProvider',array:['SMC','SCHRAUBEN KÖHLER','BREMER','IFM','INA FAG','STANITECH','HASCO','FESTO','GANTER','TORWEGGE','KTR']},
-                        {tagToShow:'Type',queryObjKey:'itemType',array:['FERTIGUNSTEILE','SCHRAUBE','ZYLINDER','MUTTER','SCHEIBE']},
-                        {tagToShow:'BauGruppe',queryObjKey:'itemAssemblyName',array:['ABFALLAUFWICKLUNG','ABROLLBOCK','HEIZUNG','GRUNDRAHMEN','FOLIENTRANSPORT','FORMSTATION MIT HEBELANTRIEB','STAPELWAGEN AJOVER','OBERJOCHVERSTELLUNG','SERVOVORSTRECKER','FOLIENUMLENKUNG']}
-                     ];
-
-
-
-
-
-
     
 }])
 .controller('allItemsCtrl', ['$scope','items',function ($scope,items){
