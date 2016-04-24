@@ -1,16 +1,12 @@
 angular.module('companyModule',[])
 
-.controller('companyCtrl', ['$scope','shop',function ($scope,shop){
+.controller('companyCtrl', ['$scope','shop','$timeout','$state',function ($scope,shop,$timeout,$state){
 
-    $scope.firma = {};
-    var firmaId = 'RMB01';
-
-    shop.company.query({companyId:firmaId}, function (data){
-        console.log(data);
-        $scope.firma = data[0];
-        $scope.employees = $scope.firma.companyUsers;
-    });
-
+    $timeout(function(){
+        $scope.firmaId = shop.getCompanyId();
+        $scope.employees = shop.getCompanyEmployees();
+    },50);
+    
     $scope.addUser = function(){
         $scope.user = {};
         $scope.modifyUser = false;
@@ -19,10 +15,9 @@ angular.module('companyModule',[])
 
     $scope.saveUser = function (obj){
         var query = {};
-        query.companyId = firmaId;
+        query.companyId = $scope.firmaId;
         // console.log(obj._id);
         shop.companyInfoUpdate.update(query,obj,function (data){
-            console.log(data);
             $scope.user = {};
             $scope.createUser = false;
             $scope.employees.push(obj);
@@ -32,12 +27,11 @@ angular.module('companyModule',[])
     $scope.editUser = function(obj){
         $scope.user = obj ;
         $scope.modifyUser = true; // ng-show
-        console.log($scope.user);
     }
 
     $scope.updateUser = function(obj){
         var query = {};
-        query.companyId = firmaId;
+        query.companyId = $scope.firmaId;
         query['companyUsers._id'] = obj._id;
     
         console.log(query);
@@ -51,7 +45,7 @@ angular.module('companyModule',[])
         const r = confirm('Are you sure to delete the User: '+ obj.userName);
         if (r == true){
             var query = {};
-            query.companyId = firmaId;
+            query.companyId = $scope.firmaId;
             query.userId = obj._id;
             shop.companyInfoUpdate.update(query,{},function (data){
                 $scope.employees.splice(index,1);
@@ -65,15 +59,14 @@ angular.module('companyModule',[])
     
 }])
 
-.controller('providersCtrl', ['$scope','shop',function ($scope,shop){
-
-    var firmaId = 'RMB01';
+.controller('providersCtrl', ['$scope','shop','$timeout',function ($scope,shop,$timeout){
     $scope.modifyProvider = false;
-    shop.company.query({companyId:firmaId}, function (data){
-            console.log(data);
-            $scope.firma = data[0];
-            $scope.providers = $scope.firma.companyProviders;
-        });
+
+    $timeout(function(){
+        $scope.firmaId = shop.getCompanyId();
+        $scope.providers = shop.getCompanyProviders();
+    },50);    
+
 
     $scope.addProvider = function(){
         $scope.obj = {};
@@ -83,7 +76,7 @@ angular.module('companyModule',[])
     $scope.saveProvider = function(obj){
         console.log(obj);
         const query = {};
-        query.companyId = firmaId;
+        query.companyId = $scope.firmaId;
 
         shop.companyInfoUpdate.update(query,obj,function (data){
             console.log(data);
@@ -102,7 +95,7 @@ angular.module('companyModule',[])
 
     $scope.updateProvider = function(obj){
         var query = {};
-        query.companyId = firmaId;
+        query.companyId = $scope.firmaId;
         query['companyProviders._id'] = obj._id;    
         console.log(query);
         shop.companyInfoUpdate.update(query,obj,function (data){
@@ -115,7 +108,7 @@ angular.module('companyModule',[])
         const r = confirm('Are you sure to delete the Provider: '+ obj.providerName);
         if (r == true){
             var query = {};
-            query.companyId = firmaId;
+            query.companyId = $scope.firmaId;
             query.providerId = obj._id;
             shop.companyInfoUpdate.update(query,{},function (data){
                 $scope.providers.splice(index,1);

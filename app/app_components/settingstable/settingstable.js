@@ -1,15 +1,10 @@
 angular.module('settingsTableModule',['services'])
 
-.controller('settingsTableCtrl', ['$scope','shop',function ($scope,shop){
-	$scope.firmaId = 'RMB01'; // esto hay que traerlo desde un servicio que se valide por login
-	$scope.filterModel ={};
-	shop.company.query({companyId:$scope.firmaId}, function (data){
-		$scope.filterBy = data[0].companyItemFilters;
-	});
+.controller('settingsTableCtrl', ['$scope','shop','$timeout',function ($scope,shop,$timeout){
 
+	$scope.itemsNewAssembly = []; // collection with all the items which belong to a new assembly
 	var query = {itemType:'SCHRAUBE'}; //itemMaterial:"S235 JR" query inicial
-
-	query.companyId = $scope.firmaId;
+	$scope.filterModel = {};
 	// Retrieve data from API the whole list without filter
 	$scope.refresh = function (){
 		shop.items.query(query,function (data){
@@ -17,8 +12,13 @@ angular.module('settingsTableModule',['services'])
 			console.log($scope.collection.length);
 		},function (error){});
 	}; 
-
-	$scope.refresh();
+ 	// dale tiempo para que la info pase al servicio
+	$timeout(function(){
+		$scope.firmaId = shop.getCompanyId(); // esto hay que traerlo desde un servicio que se valide por login
+		$scope.filterBy = shop.getCompanyFilters();
+		query.companyId = $scope.firmaId;
+		$scope.refresh();
+	},30);	
 
 	$scope.queryItems = function(){
 		const j = {};
@@ -27,19 +27,7 @@ angular.module('settingsTableModule',['services'])
 		query = j;
 		query.companyId = $scope.firmaId;
 		$scope.refresh();
-	}
-	// auxilar forms setted false 
-	$scope.createAssembly = false;
-	$scope.newItem = false;
-	$scope.viewItem = false;
-	$scope.justInfo = false;
-	$scope.editItem = false;
-	// auxilar forms setted false 
-	
-
-	$scope.itemsNewAssembly = []; // collection with all the items which belong to a new assembly
-	
-	
+	}	
 
 	$scope.newAssembly = function(){		
 		$scope.createAssembly = true;
@@ -47,7 +35,6 @@ angular.module('settingsTableModule',['services'])
 		$scope.viewItem = false;
 		$scope.justInfo = false;
 		$scope.editItem = false;
-
 	}
 
 	$scope.insertItemInAssembly = function(){
@@ -71,8 +58,6 @@ angular.module('settingsTableModule',['services'])
 		$scope.justInfo = false;
 		$scope.newItem = true;
 	}
-
-	
 
 	$scope.crearSub = function(collection){
 		var obj = {};
@@ -219,3 +204,12 @@ angular.module('settingsTableModule',['services'])
 			}
 		};
 	});
+
+
+	// // auxilar forms setted false 
+	// $scope.createAssembly = false;
+	// $scope.newItem = false;
+	// $scope.viewItem = false;
+	// $scope.justInfo = false;
+	// $scope.editItem = false;
+	// // auxilar forms setted false 

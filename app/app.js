@@ -1,6 +1,7 @@
 angular.module('iStock',[
 	'ui.router',
 	'ngMaterial',
+  'menuModule',
 	'table',
 	'services',
   'bills',
@@ -21,9 +22,7 @@ angular.module('iStock',[
             abstract: true,
             url: '/app',
             templateUrl: 'app_components/menu/menu.html',
-            controller: function(){
-              console.log('pleno');
-            }
+            controller:'menuCtrl'
 
         })
     .state('app.Bills', {

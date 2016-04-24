@@ -44,7 +44,14 @@ angular.module('services', ['ngResource'])
 })
 
 .factory('shop',['$resource', 'Config', function ContenidoFactory($resource, Config){
+    var totalCompanyInfo = {};
+    var companyEmployees = [];
+    var companyProviders = [];
+    var companyFilters = [];
+    var companyId ;
   return {
+    
+    // request to the API
     list : $resource('http://' + Config.ip + ':' + Config.port + '/items'),
     items: $resource('http://' + Config.ip + ':' + Config.port + '/items',{}),
     itemidUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/items',{},{ update: {method: 'PUT'}}),
@@ -52,7 +59,29 @@ angular.module('services', ['ngResource'])
     projectGeneralView:$resource('http://' + Config.ip + ':' + Config.port + '/projectGeneralView',{}),
     projectUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/projects',{},{ update: {method: 'PUT'}}),
     company: $resource('http://' + Config.ip + ':' + Config.port + '/company',{}),
-    companyInfoUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/company',{},{ update: {method: 'PUT'}})
+    companyInfoUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/company',{},{ update: {method: 'PUT'}}),
+    // request to the API
+    // company Information
+    passCompanyInfo: function(objCompany){
+      totalCompanyInfo = objCompany;
+      companyFilters = totalCompanyInfo.companyItemFilters;
+      companyProviders = totalCompanyInfo.companyProviders;
+      companyEmployees = totalCompanyInfo.companyUsers;
+      companyId = totalCompanyInfo.companyId;
+    },
+    getCompanyId:function(){
+      return companyId;
+    },
+    getCompanyProviders:function(){
+      return companyProviders;
+    },
+    getCompanyEmployees:function(){
+      return companyEmployees;
+    },
+    getCompanyFilters:function(){
+      return companyFilters;
+    }
+
   };
 }])
 
