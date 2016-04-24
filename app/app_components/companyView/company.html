@@ -1,64 +1,21 @@
 <div>
 	<md-card>
-
 		<md-card-content layout="row">
-			<h4>{{firma.companyName}}</h4>
-			<p>{{firma.companyAddress}}</p>
-			<p>Employees</p> <span flex></span>
-		<p>Filters</p><span flex></span>
-		<p>Providers</p><span flex></span>
-		</md-card-content>
-	
+		<div layout ="column">
+			<p layout-margin>{{firma.companyName}}</p>			
+		</div>
+		<span flex></span>
+		<i ui-sref="app.Company.Employees" layout-margin>Employees</i>
+		<i layout-margin>Filters</i>
+		<i ui-sref="app.Company.Providers" layout-margin>Providers</i>
+		</md-card-content>	
     </md-card>
 </div>
 
 <div layout="row">
-	<md-card flex ="66">	
-	   <md-card-content>
-		<h4>Employees</h4><br>			
-			<div layout="row" ng-show ="modifyUser || createUser">
-			&nbsp &nbsp
-				<md-input-container flex ="40">
-		  			<label>Name</label>
-		  			<input type="text" ng-model="user.realName">
-				</md-input-container>
-				<md-input-container flex>
-		  			<label>User Id</label>
-		  			<input type="text" ng-model="user.userId">
-				</md-input-container>
-				<md-input-container flex>
-		  			<label>User Name</label>
-		  			<input type="text" ng-model="user.userName">
-				</md-input-container>
-			<!-- buttons to create and update a user -->
-				 <i ng-show ="modifyUser" ng-click="updateUser(user)" layout-padding class="fa fa-check-circle fa-2x text-success"></i>
-				 <i ng-show="createUser" ng-click="saveUser(user)" layout-padding class="fa fa-check-circle fa-2x text-success"></i>&nbsp &nbsp &nbsp
-				 <i ng-show="createUser"ng-click="createUser=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
-				 <i ng-show ="modifyUser" ng-click="modifyUser=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
-			<!-- buttons to create and update a user -->
-			</div>
-
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Real Name</th>
-					<th>User Name</th>
-					<th>User Id</th>
-					<th><i ng-click="addUser();" class="fa fa-user-plus fa-lg text-primary"></i></th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<tr ng-repeat = "person in employees">
-					<td>{{person.realName}}</td>
-					<td>{{person.userName}}</td>
-					<td>{{person.userId}}</td>
-					<td><i class="fa fa-pencil-square-o" ng-click="editUser(person)"></i>&nbsp&nbsp
-			 		<i class="fa fa-trash" ng-click="deleteUser(person,$index)"></i></td>
-				</tr>
-			</tbody>
-		</table>
-	</md-card-content>
+	<md-card flex ="66">
+	<div ui-view ></div>
+	   
 	
    </md-card>
 

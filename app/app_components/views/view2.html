@@ -18,12 +18,15 @@
 	</md-input-container>
 
 
-			<i layout-margin layout-padding class="fa fa-university" ng-click="initOrder=!initOrder"></i>
-	    </div>
+
+			<i layout-margin layout-padding class="fa fa-building fa-lg" ng-click="initOrder=!initOrder"></i>
+	    </div> 
 	</md-card>
 
-	<button  ng-show ="initOrder" ng-click="exportsome()" class="btn btn-success"> export some</button>
+	<div layout-margin>
+		<button  ng-show ="initOrder" ng-click="exportsome()" class="btn btn-success"><i class="fa fa-file-excel-o" ></i> Export Table</button>
 
+	</div>
 	<md-card style="display:none">
 
 		<md-card-content layout="column" layout-align="center center">
@@ -54,7 +57,10 @@
 		</md-card-content>
 
 	</md-card>
-	<button  ng-hide ="initOrder" ng-click="exportData()" class="btn btn-success"> Exportar tabla</button>
+	<div layout-margin>
+		<button  ng-hide ="initOrder" ng-click="exportData()" class="btn btn-success">Export Table</button>
+	</div>
+	
 	<i-table></i-table>
 
 	

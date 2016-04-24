@@ -1,9 +1,11 @@
 angular.module('settingsTableModule',['services'])
 
-.controller('settingsTableCtrl', ['$scope','shop','filters',function ($scope,shop,filters){
-
+.controller('settingsTableCtrl', ['$scope','shop',function ($scope,shop){
+	$scope.firmaId = 'RMB01'; // esto hay que traerlo desde un servicio que se valide por login
 	$scope.filterModel ={};
-	$scope.filterBy = filters.filterCollection;
+	shop.company.query({companyId:$scope.firmaId}, function (data){
+		$scope.filterBy = data[0].companyItemFilters;
+	});
 
 	var query = {itemType:'SCHRAUBE'}; //itemMaterial:"S235 JR" query inicial
 
@@ -33,7 +35,7 @@ angular.module('settingsTableModule',['services'])
 	$scope.justInfo = false;
 	$scope.editItem = false;
 	// auxilar forms setted false 
-	$scope.firmaId = 'RMB01'; // esto hay que traerlo desde un servicio que se valide por login
+	
 
 	$scope.itemsNewAssembly = []; // collection with all the items which belong to a new assembly
 	

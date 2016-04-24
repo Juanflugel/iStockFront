@@ -13,6 +13,7 @@ angular.module('iStock',[
   //
   // For any unmatched url, redirect to /state1
   $urlRouterProvider.otherwise("/app/Bills");
+  $urlRouterProvider.when('/app/Company','/app/Company/Employees');
   //
   // Now set up the states
   $stateProvider
@@ -53,6 +54,16 @@ angular.module('iStock',[
     .state('app.Company', {
       url: "/Company",
       templateUrl:"app_components/companyView/company.html",
+      controller:'companyCtrl'
+    })
+    .state('app.Company.Providers', {
+      url: "/Providers",
+      templateUrl:"app_components/companyView/providers.html",
+      controller:'providersCtrl'
+    })
+    .state('app.Company.Employees', {
+      url: "/Employees",
+      templateUrl:"app_components/companyView/employees.html",
       controller:'companyCtrl'
     })
     

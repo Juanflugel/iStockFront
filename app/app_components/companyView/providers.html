@@ -1,0 +1,45 @@
+
+		
+	   <md-card-content>
+		<h4>Providers</h4><br>			
+			<div layout="row" ng-show ="modifyProvider || createProvider">
+			&nbsp &nbsp
+				<md-input-container flex ="60">
+		  			<label> Provider Name</label>
+		  			<input type="text" ng-model="obj.providerName">
+				</md-input-container>
+				<md-input-container flex>
+		  			<label>Provider Tel</label>
+		  			<input type="text" ng-model="obj.providerTel">
+				</md-input-container>
+
+			<!-- buttons to create and update a user -->
+				 <i ng-show ="modifyProvider" ng-click="updateProvider(obj)" layout-padding class="fa fa-check-circle fa-2x text-success"></i>
+				 <i ng-show="createProvider" ng-click="saveProvider(obj)" layout-padding class="fa fa-check-circle fa-2x text-success"></i>&nbsp &nbsp &nbsp
+				 <i ng-show="createProvider"ng-click="createProvider=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
+				 <i ng-show ="modifyProvider" ng-click="modifyProvider=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
+			<!-- buttons to create and update a user -->
+			</div>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Provider Name</th>
+					<th>Telephone</th>
+					<th>Provider Id</th>
+					<th><i ng-click="addProvider();" class="fa fa-user-plus fa-lg text-primary"></i></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr ng-repeat = "provider in providers">
+					<td>{{provider.providerName}}</td>
+					<td>{{provider.providerTel}}</td>
+					<td>{{person.userId}}</td>
+					<td><i class="fa fa-pencil-square-o" ng-click="editProvider(provider)"></i>&nbsp&nbsp
+			 		<i class="fa fa-trash" ng-click="deleteProvider(provider,$index)"></i></td>
+				</tr>
+			</tbody>
+		</table>
+	</md-card-content>
+	

@@ -53,6 +53,10 @@
 				<label>Item Raw Material Dimentions</label>
 				<input type="text" ng-model="obj.itemRawMaterialDimensions" ng-readonly="justInfo">
 			</md-input-container>
+<!-- 			<md-input-container ng-hide ="!obj.itemLastDate && justInfo">
+				<label>Last Date</label>
+				<input type="text" ng-model="obj.obj.itemLastDate" ng-readonly="justInfo">
+			</md-input-container> -->
 			
 		    <div ng-show="editItem">
 		    	<i  ng-click="updateObj(obj)" layout-padding class="fa fa-check-circle fa-2x text-success" >	
