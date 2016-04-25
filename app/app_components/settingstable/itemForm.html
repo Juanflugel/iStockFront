@@ -25,18 +25,38 @@
 				<label>Item Brand</label>
 				<input type="text" ng-model="obj.itemBrand" ng-readonly="justInfo">
 			</md-input-container>
-			<md-input-container ng-hide ="!obj.itemProvider && justInfo">
+			<!-- <md-input-container ng-hide ="!obj.itemProvider && justInfo">
 				<label>Item Provider</label>
 				<input type="text" ng-model="obj.itemProvider" ng-readonly="justInfo">
-			</md-input-container>
+			</md-input-container> -->
+			<md-input-container ng-hide ="!obj.itemProvider && justInfo">
+        		<label>Provider</label>
+		        <md-select ng-model="obj.itemProvider" ng-disabled="justInfo">
+    				<md-select-label>{{obj.itemProvider}}</md-select-label>
+		          <md-option ng-repeat="pro in providersList" value="{{pro}}">
+		            {{pro}}
+		          </md-option>
+		        </md-select>
+		     </md-input-container>
 			<md-input-container ng-hide ="!obj.itemBuyPrice && justInfo">
 				<label>Item Price</label>
 				<input type="number" ng-model="obj.itemBuyPrice" ng-readonly="justInfo">
 			</md-input-container>
+			<!-- input para assembly name -->
 			<md-input-container ng-hide ="!obj.itemAssemblyName && justInfo">
+        		<label>Assembly Name</label>
+		        <md-select ng-model="obj.itemAssemblyName" ng-disabled="justInfo">
+    				<md-select-label>{{obj.itemAssemblyName}}</md-select-label>
+		          <md-option ng-repeat="assembly in assembliesList" value="{{assembly}}">
+		            {{assembly}}
+		          </md-option>
+		        </md-select>
+		     </md-input-container>
+		     <!-- input para assembly name -->
+			<!-- <md-input-container ng-hide ="!obj.itemAssemblyName && justInfo">
 				<label>Assembly Name</label>
 				<input type="text" ng-model="obj.itemAssemblyName" ng-readonly="justInfo">
-			</md-input-container>
+			</md-input-container> -->
 			<md-input-container ng-hide ="!obj.itemCategorie && justInfo">
 				<label>Item Categorie</label>
 				<input type="text" ng-model="obj.itemCategorie" ng-readonly="justInfo">
@@ -53,10 +73,12 @@
 				<label>Item Raw Material Dimentions</label>
 				<input type="text" ng-model="obj.itemRawMaterialDimensions" ng-readonly="justInfo">
 			</md-input-container>
-<!-- 			<md-input-container ng-hide ="!obj.itemLastDate && justInfo">
+			<md-input-container ng-hide ="(!obj.itemLastDate && justInfo) || editItem || newItem"  >
 				<label>Last Date</label>
-				<input type="text" ng-model="obj.obj.itemLastDate" ng-readonly="justInfo">
-			</md-input-container> -->
+				<input type="date" ng-model="obj.itemLastDate" datetime="MM/dd/yyyy" ng-readonly="justInfo">
+			</md-input-container>
+
+			
 			
 		    <div ng-show="editItem">
 		    	<i  ng-click="updateObj(obj)" layout-padding class="fa fa-check-circle fa-2x text-success" >	

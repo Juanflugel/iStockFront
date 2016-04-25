@@ -17,6 +17,8 @@ angular.module('settingsTableModule',['services'])
 		$scope.firmaId = shop.getCompanyId(); // esto hay que traerlo desde un servicio que se valide por login
 		$scope.filterBy = shop.getCompanyFilters();
 		query.companyId = $scope.firmaId;
+		$scope.assembliesList = $scope.filterBy[3].array; // lista de assemblies
+		$scope.providersList = $scope.filterBy[1].array;
 		$scope.refresh();
 	},750);	
 
@@ -93,7 +95,8 @@ angular.module('settingsTableModule',['services'])
 				$scope.predicate = predicate;
 			}
 			// edit a Object displayed on the table
-			$scope.editObj = function(item){		
+			$scope.editObj = function(item){
+				item.itemLastDate = new Date(item.itemLastDate); // string to Date obj		
 				$scope.obj = item;
 				$scope.createAssembly = false;
 				$scope.newItem = false;
@@ -103,8 +106,8 @@ angular.module('settingsTableModule',['services'])
 			}
 			// just display the Object Information
 			$scope.readObj = function(item){
+				item.itemLastDate = new Date(item.itemLastDate);// string to Date obj
 				$scope.obj = item;
-				console.log( typeof $scope.obj.itemBrand);
 				$scope.createAssembly = false;
 				$scope.newItem = false;
 				$scope.editItem = false;
