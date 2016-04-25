@@ -29,7 +29,7 @@
 				<label>Item Provider</label>
 				<input type="text" ng-model="obj.itemProvider" ng-readonly="justInfo">
 			</md-input-container> -->
-			<md-input-container ng-hide ="!obj.itemProvider && justInfo">
+			<md-input-container ng-hide ="!obj.itemProvider && justInfo" style="width:175px;">
         		<label>Provider</label>
 		        <md-select ng-model="obj.itemProvider" ng-disabled="justInfo">
     				<md-select-label>{{obj.itemProvider}}</md-select-label>
@@ -43,7 +43,7 @@
 				<input type="number" ng-model="obj.itemBuyPrice" ng-readonly="justInfo">
 			</md-input-container>
 			<!-- input para assembly name -->
-			<md-input-container ng-hide ="!obj.itemAssemblyName && justInfo">
+			<md-input-container ng-hide ="!obj.itemAssemblyName && justInfo" style="width:175px;">
         		<label>Assembly Name</label>
 		        <md-select ng-model="obj.itemAssemblyName" ng-disabled="justInfo">
     				<md-select-label>{{obj.itemAssemblyName}}</md-select-label>
