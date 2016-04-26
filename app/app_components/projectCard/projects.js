@@ -69,7 +69,7 @@ angular.module('projectsModule',['services'])
 		//console.log(query.array.length);
 		shop.items.query(query,function (data){
 			var sd = handleProjects.addAmountFromStock($scope.collection,data);
-			console.log(sd);
+			console.log('exito con stock:'+sd.length);
 			$scope.collection = sd;
 		})
 
