@@ -18,7 +18,7 @@ angular.module('projectsModule',['services'])
 		_.each(data,function (obj){
 			const preObj = obj._id;
 			preObj.totalProjectCost = obj.totalProjectCost;
-/*			console.log(preObj);*/
+            /*console.log(preObj);*/
 			$scope.modelo.push(preObj);
 		});
 
@@ -53,23 +53,35 @@ angular.module('projectsModule',['services'])
 	
 }])
 .controller('detailsCtrl',['$scope','shop','handleProjects',function ($scope,shop,handleProjects){
+
 	var currentProject = handleProjects.getCurrentProject();
 	var query ={};
 	query._id = currentProject._id;
 
 	shop.project.query(query,function (data){
+		const query = {};
+		const stockAmount = [];
+		query.companyId = "RMB01";
 		console.log(data[0]);
 		$scope.project = data[0];
 		$scope.collection = $scope.project.projectItems;
+		query.array = handleProjects.getJustCode($scope.collection);
+		//console.log(query.array.length);
+		shop.items.query(query,function (data){
+			var sd = handleProjects.addAmountFromStock($scope.collection,data);
+			console.log(sd);
+			$scope.collection = sd;
+		})
+
 	},function(err){});
 
 	// header 
-			$scope.header = {itemCode:'Item Code',itemAmount:'Amount',itemName:'Name',itemBuyPrice:'Price'};
+	$scope.header = {itemCode:'Item Code',itemAmount:'Amount',itemStockAmount:'Stock',itemName:'Name',itemBuyPrice:'Price'};
 			// order by header Item
-			$scope.order = function(predicate){
-				$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
-				$scope.predicate = predicate;
-			}
+	$scope.order = function(predicate){
+		$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+		$scope.predicate = predicate;
+	}
 
 }])
 

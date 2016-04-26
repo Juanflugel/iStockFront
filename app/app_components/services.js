@@ -139,6 +139,30 @@ angular.module('services', ['ngResource'])
     },
     getCurrentProduct: function(){
       return detalle;
+    },
+    getJustCode: function(collection){
+      var codeCol = [];
+      _.each(collection,function (obj){
+        const a = obj.itemCode;
+        codeCol.push(a);
+      });
+      return codeCol;
+    },
+    addAmountFromStock:function(colAssembly,colStock){
+      var objMitStockAmount = [];
+        lcolStock = colStock.length;
+      _.each(colAssembly,function (colAssemblyObj){
+            for(i=0;i<lcolStock;i++){
+              const currentObj = colStock[i];
+              if(colAssemblyObj.itemCode ==currentObj.itemCode){
+                colAssemblyObj.stockAmount = currentObj.itemAmount;
+                objMitStockAmount.push(colAssemblyObj);
+              }
+            }
+      });
+
+      return objMitStockAmount;
+
     }
   }
 })
