@@ -2,8 +2,25 @@ angular.module('settingsTableModule',['services'])
 
 .controller('settingsTableCtrl', ['$scope','shop','$timeout',function ($scope,shop,$timeout){
 
-	$scope.itemsNewAssembly = []; // collection with all the items which belong to a new assembly
 	var query = {itemType:'SCHRAUBE'}; //itemMaterial:"S235 JR" query inicial
+
+	$scope.queryByCode = function(){ // funcion para poder buscar una pieza cualquiera por codigo desde el input principal
+
+		if($scope.search.length >= 15){
+				// console.log($scope.search);
+				query = {};
+				query.companyId = $scope.firmaId;
+				query.itemCode = $scope.search;
+				shop.items.query(query,function (data){
+				$scope.collection = data;
+				console.log($scope.collection.length);
+			},function (error){});			
+		}		
+	}
+	
+
+	$scope.itemsNewAssembly = []; // collection with all the items which belong to a new assembly
+	
 	$scope.filterModel = {};
 	// Retrieve data from API the whole list without filter
 	$scope.refresh = function (){
@@ -20,7 +37,7 @@ angular.module('settingsTableModule',['services'])
 		$scope.assembliesList = $scope.filterBy[3].array; // lista de assemblies
 		$scope.providersList = $scope.filterBy[1].array;
 		$scope.refresh();
-	},750);	
+	},250);	
 
 	$scope.queryItems = function(){
 		const j = {};

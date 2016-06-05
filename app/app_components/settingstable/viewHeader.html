@@ -1,7 +1,7 @@
 <div layout="row" flex>
 		<md-input-container md-no-float class="search" flex>
 		<md-icon><i class="fa fa-search fa-lg "></i></md-icon>
-		<input type="text" ng-model="search" placeholder="Here you can find all the items you don't have in your Stock">
+		<input type="text" ng-model="search" placeholder="Here you can find all the items you don't have in your Stock" ng-change="queryByCode()">
 	</md-input-container>
 	<md-input-container flex="20" class="search">
 		<md-select ng-model="filterModel" placeholder="Filter By">

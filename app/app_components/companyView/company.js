@@ -5,7 +5,7 @@ angular.module('companyModule',[])
     $timeout(function(){
         $scope.firmaId = shop.getCompanyId();
         $scope.employees = shop.getCompanyEmployees();
-    },50);
+    },500);
     
     $scope.addUser = function(){
         $scope.user = {};
@@ -65,7 +65,7 @@ angular.module('companyModule',[])
     $timeout(function(){
         $scope.firmaId = shop.getCompanyId();
         $scope.providers = shop.getCompanyProviders();
-    },50);    
+    },500);    
 
 
     $scope.addProvider = function(){

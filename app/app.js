@@ -10,6 +10,16 @@ angular.module('iStock',[
   'settingsTableModule',
   'companyModule'
 	])
+.run(function (shop){
+
+  var firmaId = "RMB01"
+
+  shop.company.query({companyId:firmaId}, function (data){
+        console.log('from run',data[0]);
+        shop.passCompanyInfo(data[0]);
+    });
+
+})
 .config(function($stateProvider, $urlRouterProvider) {
   //
   // For any unmatched url, redirect to /state1
