@@ -6,12 +6,12 @@ angular.module('settingsTableModule',['services'])
 
 	$scope.queryByCode = function(){ // funcion para poder buscar una pieza cualquiera por codigo desde el input principal
 
-		if($scope.search.length >= 15){
+		if($scope.search.length >= 12){
 				// console.log($scope.search);
 				query = {};
 				query.companyId = $scope.firmaId;
 				query.itemCode = $scope.search;
-				shop.items.query(query,function (data){
+				shop.itemsCode.query(query,function (data){
 				$scope.collection = data;
 				console.log($scope.collection.length);
 			},function (error){});			

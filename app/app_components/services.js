@@ -54,6 +54,7 @@ angular.module('services', ['ngResource'])
     // request to the API
     list : $resource('http://' + Config.ip + ':' + Config.port + '/items'),
     items: $resource('http://' + Config.ip + ':' + Config.port + '/items',{}),
+    itemsCode: $resource('http://' + Config.ip + ':' + Config.port + '/itemsCode',{}),
     itemidUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/items',{},{ update: {method: 'PUT'}}),
     project:$resource('http://' + Config.ip + ':' + Config.port + '/projects',{}),
     projectGeneralView:$resource('http://' + Config.ip + ':' + Config.port + '/projectGeneralView',{}),
