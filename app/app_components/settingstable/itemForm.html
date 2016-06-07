@@ -75,6 +75,14 @@
 				<label>Last Date</label>
 				<input type="date" ng-model="obj.itemLastDate" datetime="MM/dd/yyyy" ng-readonly="justInfo">
 			</md-input-container>
+			<md-input-container ng-show ="justInfo">
+				<label>Last Person</label>
+				<input type="text" ng-model="obj.itemLastPerson.userName" ng-readonly="justInfo">
+			</md-input-container>
+			<md-input-container ng-show ="justInfo">
+				<label>Last Person Amount</label>
+				<input type="text" ng-model="obj.itemLastPerson.insertedAmount" ng-readonly="justInfo">
+			</md-input-container>
 
 			
 			
