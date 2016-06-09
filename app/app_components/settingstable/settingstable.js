@@ -78,17 +78,14 @@ angular.module('settingsTableModule',['services'])
 		$scope.newItem = true;
 	}
 
-	$scope.crearSub = function(collection){
+	$scope.crearSub = function(collection){ // funcion para crear nuevo emsamble desde la vista configraciones
 		var obj = {};
-		obj.isSubAssembly = 1;
-		obj.projectName = $scope.assembly.projectName;
-		obj.projectNumber = $scope.assembly.projectNumber;
-		obj.projectType = 'BAUGRUPPE';
-		obj.projectItems = $scope.itemsNewAssembly;
+		obj.assemblyName = $scope.assembly.projectName;
+		obj.assemblyNumber = $scope.assembly.projectNumber;
+		obj.assemblyItems = $scope.itemsNewAssembly;
 		obj.companyId = $scope.firmaId;
-		obj.deadLine = new Date();
 
-		shop.project.save(obj,function (data){
+		shop.assembly.save(obj,function (data){
 			console.log('todo bien primo se creo esa monda'+ data);
 		});
 

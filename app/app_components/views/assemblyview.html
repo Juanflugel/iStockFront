@@ -1,0 +1,139 @@
+<md-card>
+		<div layout="row">
+			<md-input-container md-no-float  class="search" flex>
+				<md-icon><i class="fa fa-search fa-lg"></i></md-icon>
+				<input type="text"  placeholder="Here you can find all the Assemblies">
+	   		</md-input-container>
+	  	
+			<i layout-margin layout-padding class="fa fa-calendar-plus-o fa-lg text-success" ng-click="showNewProject()"></i>
+		</div>		
+</md-card>
+
+<!-- form para editar la info principal Assembly -->
+<md-card ng-show="changeInfoAssembly || newAssembly" > <br>
+  
+    <div layout="row" flex>&nbsp &nbsp &nbsp
+              
+      <md-input-container md-no-float class="search" flex>
+        <input type="text" ng-model="obj.assemblyName" placeholder="Assembly Name">
+      </md-input-container>
+      <md-input-container md-no-float class="search" flex>
+        <input type="text" ng-model="obj.assemblyNumber" placeholder ="Assembly Number">
+      </md-input-container>
+      <md-input-container flex  class="search">
+        <md-select ng-model="obj.projectType" placeholder="Project Type" flex>
+            <md-option ng-value ="opt" ng-repeat="opt in projectTypes">{{opt}}</md-option>
+        </md-select>
+     </md-input-container> 
+
+      <md-datepicker ng-model="obj.deadLine" md-placeholder="Dead Line" class="search"></md-datepicker>&nbsp &nbsp &nbsp
+    
+      <i  layout-padding class="fa fa-check-circle fa-2x text-success" ng-click="updateAssembly(obj)" ng-hide="newAssembly"></i>
+      <i  layout-padding class="fa fa-check-circle fa-2x text-success" ng-click="createProject(obj)" ng-hide="changeInfoAssembly"></i>&nbsp &nbsp &nbsp
+      <i ng-click="changeInfoAssembly=false" ng-hide="newAssembly" layout-padding class="fa fa-times fa-2x text-danger"></i>
+      <i ng-click="newAssembly=false" ng-hide="changeInfoAssembly" layout-padding class="fa fa-times fa-2x text-danger"></i>
+      &nbsp &nbsp &nbsp
+    </div>
+    
+</md-card>
+<!-- form para editar la info principal del proyecto -->
+
+
+
+<md-card ng-repeat="assembly in assemblies">
+    <md-list>
+      <md-list-item>
+      <img ng-src="http://resizer.webbuilder.hosteurope.de/hosteurope54051/image/becher.jpg?w=960" class="md-avatar" alt="" />
+      
+     
+        <div class="md-list-item-text" layout="column" layout-fill>
+
+          <div layout="row"  layout-align="center center">
+            <span flex><h6 class="fieldHeader text-center">Assembly Name</h6></span>
+            <span flex><h6 class="fieldHeader text-center">Assembly Number</h6></span>
+            <span flex><h6 class="fieldHeader text-center">Number Of Parts</h6></span>
+            <span flex><h6 class="fieldHeader text-center">Total Cost</h6></span>
+            <span flex><h6 class="fieldHeader text-center">Dead Line</h6></span>
+          </div>
+          <div layout="row" layout-align="center center">
+          <h4 flex class="text-center">{{assembly.assemblyName}}</h4>
+          <h4 flex class="text-center">{{assembly.assemblyNumber}}</h4>
+          <h4 flex class="text-center">{{assembly.assemblyItems.length}}</h4>
+          <h4 flex class="text-center">{{assembly.totalProjectCost}}</h4>
+          <h4 flex class="text-center">{{assembly.deadLine | date:"MM/dd/yyyy"}}</h4>
+          </div>
+          
+        </div>
+        <div>
+          <i class="fa fa-pencil-square-o" ng-click="editAssembly(assembly)"></i>
+          <a ui-sref="app.projectDetail" ng-click="showProjectDetails(project)"><i class="fa fa-info-circle"></i></a>
+          <i class="fa fa-trash-o" ng-click="deleteAssembly(assembly,$index)"></i>
+        </div>
+      </md-list-item>
+    </md-list>  
+</md-card>
+
+
+
+
+<!-- <md-card>
+    <md-list>
+      <md-list-item>
+     
+        <div class="md-list-item-text" layout="column" layout-fill>
+
+          <div layout="row"  layout-align="center center">
+            <span flex><h6 class="fieldHeader text-center">Assembly Name</h6></span>
+            <span flex><h6 class="fieldHeader text-center">Assembly Number</h6></span>
+            <span flex><h6 class="fieldHeader text-center">Number of Parts</h6></span>
+            <span flex><h6 class="fieldHeader text-center">Total Cost</h6></span>
+          </div>
+          <div layout="row" layout-align="center center">
+            <h4 flex class="text-center">{{project.projectName}}</h4>
+            <h4 flex class="text-center">{{project.projectNumber}}</h4>
+            <h4 flex class="text-center">{{project.projectItems.length}}</h4>
+            <h4 flex class="text-center">{{project.totalProjectCost}}</h4>
+          </div>
+          
+        </div>
+        <div>
+          <i class="fa fa-pencil-square-o" ng-click="editProject(project)"></i>
+          <a ui-sref="app.projectDetail"><i class="fa fa-info-circle"></i></a>
+          <i class="fa fa-trash-o" ng-click="deleteProject(project,$index)"></i>
+        </div>
+      </md-list-item>
+    </md-list>
+
+<md-divider flex></md-divider>
+
+  <table class="table table-hover table-responsive panel">    
+        <thead>
+        <tr class="table" >
+          <th ng-repeat="(key, val) in header" style="cursor:pointer;">
+            <p ng-click="order(key)">{{val}}</p>
+        </th>
+          <th ng-hide="createAssembly"><p>Handling</p></th>
+          <th ng-show="createAssembly"><p>Select</p></th>          
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="sample in collection | filter:search | orderBy:predicate:reverse">
+          <td>{{sample.itemCode | limitTo:17}}</td>
+
+          <td contentEditable="{{createAssembly}}" ng-model="sample.itemAmount" type="number">{{sample.itemAmount}}</td>
+          <td>{{sample.stockAmount}}</td>
+          <td>{{sample.itemName | limitTo:20}}</td>         
+          <td>{{sample.itemBuyPrice}}</td>
+       	  <td ng-hide="createAssembly">
+	          <i class="fa fa-pencil-square-o" ng-click="editObj(sample)"></i>&nbsp&nbsp
+	          <i class="fa fa-info-circle" ng-click="readObj(sample)"></i>&nbsp&nbsp
+	          <i class="fa fa-trash" ng-click="deleteRow(sample.ID)"></i>          
+          </td>
+          <td ng-show="createAssembly"><input type="checkbox" ng-change="" ng-model="sample.insert"></td>
+        </tr>
+        </tbody>    
+  </table>  
+
+
+</md-card> -->

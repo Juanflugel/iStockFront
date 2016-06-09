@@ -37,7 +37,7 @@ angular.module('services', ['ngResource'])
 .factory('Config', function () {
   return {
       version : '0.0.1',
-      ip: 'www.estock.website', //www.estock.website
+      ip: 'localhost', //www.estock.website
       port: 5006,
       protocol: 'http'
   };
@@ -54,11 +54,13 @@ angular.module('services', ['ngResource'])
     // request to the API
     list : $resource('http://' + Config.ip + ':' + Config.port + '/items'),
     items: $resource('http://' + Config.ip + ':' + Config.port + '/items',{}),
-    itemsCode: $resource('http://' + Config.ip + ':' + Config.port + '/itemsCode',{}),
+    itemsCode: $resource('http://' + Config.ip + ':' + Config.port + '/itemsCode',{}),// con regular expresions
     itemidUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/items',{},{ update: {method: 'PUT'}}),
     project:$resource('http://' + Config.ip + ':' + Config.port + '/projects',{}),
     projectGeneralView:$resource('http://' + Config.ip + ':' + Config.port + '/projectGeneralView',{}),
     projectUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/projects',{},{ update: {method: 'PUT'}}),
+    assembly:$resource('http://' + Config.ip + ':' + Config.port + '/assemblies',{}),
+    assemblyUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/assembly',{},{ update: {method: 'PUT'}}),
     company: $resource('http://' + Config.ip + ':' + Config.port + '/company',{}),
     companyInfoUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/company',{},{ update: {method: 'PUT'}}),
     // request to the API

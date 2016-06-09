@@ -6,6 +6,7 @@ angular.module('iStock',[
 	'services',
   'bills',
   'projectsModule',
+  'assemblyModule',
   'inputTableModule',
   'settingsTableModule',
   'companyModule'
@@ -54,6 +55,11 @@ angular.module('iStock',[
       url: "/Detail",
       templateUrl:"app_components/projectCard/subAssembly.html",
       controller:'detailsCtrl'
+    })
+    .state('app.Assemblies', {
+      url: "/Assemblies",
+      templateUrl:"app_components/views/assemblyview.html",
+      controller:'assemblyCtrl'
     })
     .state('app.Settings', {
       url: "/Settings",
