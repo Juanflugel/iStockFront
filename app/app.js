@@ -61,6 +61,11 @@ angular.module('iStock',[
       templateUrl:"app_components/views/assemblyview.html",
       controller:'assemblyCtrl'
     })
+    .state('app.AssemblyDetail', {
+      url: "/AssembliesDetail",
+      templateUrl:"app_components/assembly/assemblyDetail.html",
+      controller:'assemblyDetailCtrl'
+    })
     .state('app.Settings', {
       url: "/Settings",
       templateUrl:"app_components/views/settingsview.html",

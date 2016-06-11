@@ -20,7 +20,7 @@
       <md-input-container md-no-float class="search" flex>
         <input type="text" ng-model="obj.assemblyNumber" placeholder ="Assembly Number">
       </md-input-container>
-      <md-input-container flex  class="search">
+      <md-input-container flex  class="search" style="width:175px;margin-right:10px;">
         <md-select ng-model="obj.projectType" placeholder="Project Type" flex>
             <md-option ng-value ="opt" ng-repeat="opt in projectTypes">{{opt}}</md-option>
         </md-select>
@@ -56,7 +56,7 @@
             <span flex><h6 class="fieldHeader text-center">Dead Line</h6></span>
           </div>
           <div layout="row" layout-align="center center">
-          <h4 flex class="text-center">{{assembly.assemblyName}}</h4>
+          <h4 flex class="text-center">{{assembly.assemblyName |limitTo:14}}</h4>
           <h4 flex class="text-center">{{assembly.assemblyNumber}}</h4>
           <h4 flex class="text-center">{{assembly.assemblyItems.length}}</h4>
           <h4 flex class="text-center">{{assembly.totalProjectCost}}</h4>
@@ -66,7 +66,7 @@
         </div>
         <div>
           <i class="fa fa-pencil-square-o" ng-click="editAssembly(assembly)"></i>
-          <a ui-sref="app.projectDetail" ng-click="showProjectDetails(project)"><i class="fa fa-info-circle"></i></a>
+          <a ui-sref="app.AssemblyDetail" ng-click="showAssemblyDetails(assembly)"><i class="fa fa-info-circle"></i></a>
           <i class="fa fa-trash-o" ng-click="deleteAssembly(assembly,$index)"></i>
         </div>
       </md-list-item>

@@ -1,6 +1,6 @@
 angular.module('assemblyModule',[])
 
-.controller('assemblyCtrl', ['$scope','shop',function ($scope,shop){
+.controller('assemblyCtrl', ['$scope','shop','handleProjects',function ($scope,shop,handleProjects){
 
 	$scope.refreshQuery = function(){
 			shop.assembly.query(function (data){
@@ -39,5 +39,15 @@ angular.module('assemblyModule',[])
 					}
 				
 			};
+
+
+	$scope.showAssemblyDetails = function(assembly){
+			handleProjects.passAssembly(assembly);
+		}
 	
+}])
+.controller('assemblyDetailCtrl', ['$scope','handleProjects',function ($scope,handleProjects){
+	$scope.obj = handleProjects.getCurrentAssembly();
+	$scope.header = {itemCode:'Item Code',itemAmount:'Amount',itemStockAmount:'Stock',itemName:'Name',itemBuyPrice:'Price'};
+	$scope.collection = $scope.obj.assemblyItems;
 }])

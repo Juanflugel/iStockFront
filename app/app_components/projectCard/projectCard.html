@@ -3,13 +3,14 @@
   
     <div layout="row" flex>&nbsp &nbsp &nbsp
               
-      <md-input-container md-no-float class="search" flex>
+      <md-input-container  class="search" flex>
         <input type="text" ng-model="obj.projectName" placeholder="Project Name">
       </md-input-container>
-      <md-input-container md-no-float class="search" flex>
+      <md-input-container  class="search" flex>
         <input type="text" ng-model="obj.projectNumber" placeholder ="Project Number">
       </md-input-container>
       <md-input-container flex  class="search">
+      <label>Project Type</label>
         <md-select ng-model="obj.projectType" placeholder="Project Type" flex>
             <md-option ng-value ="opt" ng-repeat="opt in projectTypes">{{opt}}</md-option>
         </md-select>
@@ -23,6 +24,8 @@
       <i ng-click="newProject=false" ng-hide="changeInfoProject" layout-padding class="fa fa-times fa-2x text-danger"></i>
       &nbsp &nbsp &nbsp
     </div>
+
+    
     
 </md-card>
 <!-- form para editar la info principal del proyecto -->
@@ -33,7 +36,7 @@
       <img ng-src="http://resizer.webbuilder.hosteurope.de/hosteurope54051/image/becher.jpg?w=960" class="md-avatar" alt="" ng-show ="project.projectType =='TOOL'"/>
       <img ng-src=" http://files.webbuilder.hosteurope.de/hosteurope54051/image/6a63613d39c3414790be34ade1aa5f47.jpg" class="md-avatar" alt="" ng-show="project.projectType =='MACHINE'"/>
      
-        <div class="md-list-item-text" layout="column" layout-fill>
+        <div class="md-list-item-text" layout="column" layout-fill flex>
 
           <div layout="row"  layout-align="center center">
             <span flex><h6 class="fieldHeader text-center">Project Name</h6></span>
@@ -54,8 +57,41 @@
         <div>
           <i class="fa fa-pencil-square-o" ng-click="editProject(project)"></i>
           <a ui-sref="app.projectDetail" ng-click="showProjectDetails(project)"><i class="fa fa-info-circle"></i></a>
+          <i class="fa fa-cog" aria-hidden="true" ng-click="configurationProject()"></i>
           <i class="fa fa-trash-o" ng-click="deleteProject(project,$index)"></i>
+
+
         </div>
+
+        
+
       </md-list-item>
-    </md-list>  
+    </md-list>
+
+
+
+    <table class="table table-hover table-responsive panel">    
+        
+        <tbody>
+        <tr ng-repeat="assembly in assemblies">
+          <td><input type="checkbox"/></td>
+          <td>{{assembly.assemblyName}}</td>
+          <!-- <td>{{sample.itemName}}</td> -->
+          <td>-{{assembly.assemblyNumber}}</td>
+          <td>{{assembly.assemblyItems.length}}</td>
+          <td>{{sample.itemName | limitTo:20}}</td>
+          <!-- <td>{{sample.itemUnits}}</td> -->
+          <!-- <td>{{sample.itemBrand}}</td> -->          
+          <td>{{sample.itemBuyPrice}}</td>
+        <td ng-hide="createAssembly">
+          <i class="fa fa-pencil-square-o" ng-click="editObj(sample)"></i>&nbsp&nbsp
+          <i class="fa fa-info-circle" ng-click="readObj(sample)"></i>&nbsp&nbsp
+          <i class="fa fa-trash" ng-click="deleteRow(sample.ID)"></i>
+          
+          </td>
+          <td ng-show="createAssembly"><input type="checkbox" ng-change="" ng-model="sample.insert"></td>
+        </tr>
+        </tbody>    
+  </table>
+
 </md-card>

@@ -29,7 +29,11 @@ angular.module('projectsModule',['services'])
 	
 	$scope.callQuery();
 
-	
+	$scope.configurationProject = function(){
+		shop.assembly.query({},function (data){
+			$scope.assemblies = data;
+		},function(){});
+	}
 	
 	// change name, number, type or dead line from a project	
 
@@ -134,6 +138,8 @@ angular.module('projectsModule',['services'])
 					$scope.projects.push(data);
 				});
 			}
+
+
 			
 		}
 	};

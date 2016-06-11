@@ -114,9 +114,10 @@ angular.module('services', ['ngResource'])
 
 .factory('handleProjects', function ($rootScope) {
 
-  var currentProject={};
-  var detalle ={};
+  var currentProject = {};
+  var detalle = {};
   var toBuy = {};
+  var currentAssembly = {};
 
   return {
     updateBills:function(){
@@ -129,19 +130,22 @@ angular.module('services', ['ngResource'])
       currentProject = obj;
       console.log(currentProject);
     },
+    passAssembly: function(obj){
+      currentAssembly = obj;
+      console.log(currentAssembly);
+    },
     remove: function(bill) {
       bills.splice(bills.indexOf(bill), 1);
     },
     getCurrentProject: function() {
-      console.log('me llamaron:'+currentProject);
+      console.log('me llamaron:'+ currentProject);
       return currentProject;
 
     },
-    passProduct: function(obj){
-       detalle = obj;
-    },
-    getCurrentProduct: function(){
-      return detalle;
+    getCurrentAssembly: function() {
+      console.log('me llamaron:'+ currentAssembly);
+      return currentAssembly;
+
     },
     getJustCode: function(collection){
       var codeCol = [];
@@ -151,13 +155,13 @@ angular.module('services', ['ngResource'])
       });
       return codeCol;
     },
-    addAmountFromStock:function(colAssembly,colStock){
+    addAmountFromStock:function(colAssembly,colStock){ // para mostrar la cantidad en stock de cada item
       var objMitStockAmount = [];
         lcolStock = colStock.length;
       _.each(colAssembly,function (colAssemblyObj){
             for(i=0;i<lcolStock;i++){
               const currentObj = colStock[i];
-              if(colAssemblyObj.itemCode ==currentObj.itemCode){
+              if(colAssemblyObj.itemCode == currentObj.itemCode){
                 colAssemblyObj.stockAmount = currentObj.itemAmount;
                 objMitStockAmount.push(colAssemblyObj);
               }
