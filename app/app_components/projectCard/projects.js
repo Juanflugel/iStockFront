@@ -1,8 +1,36 @@
 angular.module('projectsModule',['services'])
 
 .controller('projectsCtrl', ['$scope','shop','handleProjects',function ($scope,shop,handleProjects){
-
+	// cabecera de la tabla con todos los emsambles para insertaren un proyecto
+	$scope.headerForInsert = {assemblySelected:'Select',assemblyName:'Assembly Name',assemblyNumber:'Assembly Number',itemAmount:'Number Of Pieces'};
+	$scope.headerForShow = {assemblySelected:'Select',assemblyName:'Assembly Name',assemblyNumber:'Assembly Number'};
 	$scope.projectTypes = ['TOOL','MACHINE'];
+
+	$scope.assembliesInProject = [];// collecion con todos los emsables seleccionados para ser insertados en una projecto
+
+	$scope.insertAssembliesInProject = function(){
+		var al = $scope.assemblies.length;
+		var arr = $scope.assemblies;
+
+		for (i=0;i<al;i++){
+			if (arr[i].insert == true){
+				$scope.assembliesInProject.push(arr[i]);
+				console.log($scope.assembliesInProject);
+			}
+		}
+	}
+
+	$scope.registerAssembliesInProject = function(){
+		console.log($scope.currentProject);
+		var projectId = $scope.currentProject._id;
+		var assembliesCollection = $scope.assembliesInProject;
+		console.log('aqui voy a llamar a la api para guardar esa monda');
+		shop.projectUpdate.update({_id:projectId},assembliesCollection,function (data){
+			console.log('ensambles insertados'+ data);
+			$scope.callQuery();
+			$scope.assembliesInProject = [];
+		},function (err){});
+	}
 
 	var query = {};
 
@@ -13,23 +41,26 @@ angular.module('projectsModule',['services'])
 
 	$scope.callQuery = function(){
 		// query para traer todos los proyectos con costo total
-		shop.projectGeneralView.query(function (data){
-		$scope.modelo = [];		
-		_.each(data,function (obj){
-			const preObj = obj._id;
-			preObj.totalProjectCost = obj.totalProjectCost;
-            /*console.log(preObj);*/
-			$scope.modelo.push(preObj);
-		});
+		shop.project.query(function (data){
+		// $scope.modelo = [];	
+		// console.log(data);	
+		// _.each(data,function (obj){
+		// 	const preObj = obj._id;
+		// 	preObj.totalProjectCost = obj.totalProjectCost;
+  //           /*console.log(preObj);*/
+		// 	$scope.modelo.push(preObj);
+		// });
 
-		$scope.projects = $scope.modelo;
-
+		$scope.projects = data;
+		// console.log('funcionando');
 		},function (err){});
 	}
 	
 	$scope.callQuery();
 
-	$scope.configurationProject = function(){
+	$scope.configurationProject = function(obj){
+		console.log(obj);
+		$scope.currentProject = obj;
 		shop.assembly.query({},function (data){
 			$scope.assemblies = data;
 		},function(){});
@@ -52,8 +83,12 @@ angular.module('projectsModule',['services'])
 	}
 
 	$scope.showProjectDetails = function(obj){
-		handleProjects.passProject(obj);
+		console.log('todo bien');
+
+
 	}
+
+	
 	
 }])
 .controller('detailsCtrl',['$scope','shop','handleProjects',function ($scope,shop,handleProjects){
@@ -129,7 +164,6 @@ angular.module('projectsModule',['services'])
 
 			$scope.createProject = function(obj){
 				obj.projectState = 'open';
-				obj.isSubAssembly = 0;
 				obj.companyId = 'RMB01';
 				obj.projectItems = [{itemAmount:1}];
 				shop.project.save(obj,function (data){

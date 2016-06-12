@@ -51,11 +51,11 @@ angular.module('iStock',[
       templateUrl:"app_components/views/projectsview.html",
       controller:'projectsCtrl'
     })
-    .state('app.projectDetail', {
-      url: "/Detail",
-      templateUrl:"app_components/projectCard/subAssembly.html",
-      controller:'detailsCtrl'
-    })
+    // .state('app.projectDetail', {
+    //   url: "/Detail",
+    //   templateUrl:"app_components/projectCard/subAssembly.html",
+    //   controller:'detailsCtrl'
+    // })
     .state('app.Assemblies', {
       url: "/Assemblies",
       templateUrl:"app_components/views/assemblyview.html",
