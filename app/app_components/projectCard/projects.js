@@ -165,7 +165,6 @@ angular.module('projectsModule',['services'])
 			$scope.createProject = function(obj){
 				obj.projectState = 'open';
 				obj.companyId = 'RMB01';
-				obj.projectItems = [{itemAmount:1}];
 				shop.project.save(obj,function (data){
 					console.log(data);
 					$scope.newProject = false; // ng-show

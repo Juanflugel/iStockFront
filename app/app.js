@@ -5,6 +5,7 @@ angular.module('iStock',[
 	'table',
 	'services',
   'bills',
+  'pendingsModule',
   'projectsModule',
   'assemblyModule',
   'inputTableModule',
@@ -43,8 +44,8 @@ angular.module('iStock',[
     })
     .state('app.Pending', {
       url: "/Pending",
-      templateUrl:"app_components/views/view2.html",
-      controller:'tableCtrl'
+      templateUrl:"app_components/views/pendings.html",
+      controller:'pendingsCtrl'
     })
     .state('app.Projects', {
       url: "/Projects",

@@ -14,7 +14,7 @@ angular.module('assemblyModule',[])
 		const idDocument = obj._id;
 		obj.projectNumber = obj.projectNumber.toUpperCase();
 		shop.assemblyUpdate.update({_id:idDocument},obj,function (data){
-			console.log(data);
+			// console.log(data);
 			$scope.changeInfoProject = false;
 		});
 	}
@@ -46,8 +46,27 @@ angular.module('assemblyModule',[])
 		}
 	
 }])
-.controller('assemblyDetailCtrl', ['$scope','handleProjects',function ($scope,handleProjects){
-	$scope.obj = handleProjects.getCurrentAssembly();
+.controller('assemblyDetailCtrl', ['$scope','shop','handleProjects',function ($scope,shop,handleProjects){
+
+	$scope.objAssembly = handleProjects.getCurrentAssembly();
 	$scope.header = {itemCode:'Item Code',itemAmount:'Amount',itemStockAmount:'Stock',itemName:'Name',itemBuyPrice:'Price'};
-	$scope.collection = $scope.obj.assemblyItems;
+	$scope.collection = $scope.objAssembly.assemblyItems;
+
+	$scope.editItemInAssembly = function(obj){
+		// console.log(obj);
+		$scope.obj = obj;
+		$scope.editObjInAssembly = true;
+	}
+
+	$scope.updateItemInAssembly = function(obj){
+		var query = {};
+		query.companyId = 'RMB01';
+		query.assemblyNumber = $scope.objAssembly.assemblyNumber;
+		query['assemblyItems._id'] = obj._id;
+		// console.log(query);
+		shop.assemblyUpdate.update(query,obj,function (data){
+			console.log('item en emsable actualizado');
+			$scope.editObjInAssembly = false;
+		},function (error){});
+	}
 }])

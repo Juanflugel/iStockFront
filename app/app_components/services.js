@@ -37,7 +37,7 @@ angular.module('services', ['ngResource'])
 .factory('Config', function () {
   return {
       version : '0.0.1',
-      ip: 'www.estock.website', //www.estock.website
+      ip: 'localhost', //www.estock.website
       port: 5006,
       protocol: 'http'
   };
@@ -57,10 +57,11 @@ angular.module('services', ['ngResource'])
     itemsCode: $resource('http://' + Config.ip + ':' + Config.port + '/itemsCode',{}),// con regular expresions
     itemidUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/items',{},{ update: {method: 'PUT'}}),
     project:$resource('http://' + Config.ip + ':' + Config.port + '/projects',{}),
+    projectRequiredAmounts:$resource('http://' + Config.ip + ':' + Config.port + '/requiredAmounts',{}),
     projectGeneralView:$resource('http://' + Config.ip + ':' + Config.port + '/projectGeneralView',{}),
     projectUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/projects',{},{ update: {method: 'PUT'}}),
     assembly:$resource('http://' + Config.ip + ':' + Config.port + '/assemblies',{}),
-    assemblyUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/assembly',{},{ update: {method: 'PUT'}}),
+    assemblyUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/assemblies',{},{ update: {method: 'PUT'}}),
     company: $resource('http://' + Config.ip + ':' + Config.port + '/company',{}),
     companyInfoUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/company',{},{ update: {method: 'PUT'}}),
     // request to the API
@@ -143,7 +144,7 @@ angular.module('services', ['ngResource'])
 
     },
     getCurrentAssembly: function() {
-      console.log('me llamaron:'+ currentAssembly);
+      // console.log('me llamaron:'+ currentAssembly);
       return currentAssembly;
 
     },
@@ -154,6 +155,27 @@ angular.module('services', ['ngResource'])
         codeCol.push(a);
       });
       return codeCol;
+    },
+    resumeCodeAndAmount:function  (collection) {
+        const sample = [];
+        _.each(collection,function (obj) {
+          const a = [obj.itemCode,obj.itemAmount];
+          sample.push(a);
+        });
+        return sample;
+    },
+    subtract2arrays: function (a,b) { // a = array whit values from Stock ['itemCode',3]; b= array from values from the project ['itemCode',5]
+      var diff = [];
+      const lb = b.length;
+      _.each(a,function (aObj) {
+        for( i=0 ; i<lb ;i++){
+          var bObj = b[i];
+          if (aObj[0] == bObj[0]){
+            diff.push([aObj[0],aObj[1]-bObj[1]]);
+          }
+        }
+      });
+      return diff;
     },
     addAmountFromStock:function(colAssembly,colStock){ // para mostrar la cantidad en stock de cada item
       var objMitStockAmount = [];

@@ -11,10 +11,10 @@
             <span flex><h6 class="fieldHeader text-center">Total Cost</h6></span>
           </div>
           <div layout="row" layout-align="center center">
-            <h4 flex class="text-center">{{obj.assemblyName}}</h4>
-            <h4 flex class="text-center">{{obj.assemblyNumber}}</h4>
-            <h4 flex class="text-center">{{obj.assemblyItems.length}}</h4>
-            <h4 flex class="text-center">{{obj.totalProjectCost}}</h4>
+            <h4 flex class="text-center">{{objAssembly.assemblyName}}</h4>
+            <h4 flex class="text-center">{{objAssembly.assemblyNumber}}</h4>
+            <h4 flex class="text-center">{{objAssembly.assemblyItems.length}}</h4>
+            <h4 flex class="text-center">{{objAssembly.totalProjectCost}}</h4>
           </div>
           
         </div>
@@ -25,6 +25,49 @@
         </div>
       </md-list-item>
     </md-list>
+
+
+<div ng-show="editObjInAssembly">
+<md-divider flex></md-divider>
+
+  <div layout-padding >
+  <br>
+    <div layout="row" layout-wrap>
+
+      <md-input-container>
+        <label>Item Id (Bar Code)</label>
+        <input type="text" ng-model="obj.itemCode" ng-readonly="justInfo">
+      </md-input-container>
+      <md-input-container  flex="50">
+        <label>Item Name</label>
+        <input type="text" ng-model="obj.itemName" ng-readonly="justInfo">
+      </md-input-container>
+
+      <md-input-container ng-hide ="!obj.itemAmount && justInfo">
+        <label>Item Amount</label>
+        <input type="number" ng-model="obj.itemAmount" ng-readonly="justInfo">
+      </md-input-container>
+          
+      &nbsp
+        <div ng-show="editObjInAssembly">
+          <i  ng-click="updateItemInAssembly(obj)" layout-padding class="fa fa-check-circle fa-2x text-success" >  
+        </i>&nbsp &nbsp &nbsp
+        </div>
+        <div ng-show="editObjInAssembly">
+          <i  ng-click="editObjInAssembly=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
+          &nbsp &nbsp &nbsp
+        </div>
+    
+    </div>
+    
+  </div>
+
+</div>
+
+
+
+
+
 
 <md-divider flex></md-divider>
 
@@ -41,6 +84,7 @@
 
         <tbody>
         <tr ng-repeat="sample in collection | filter:search | orderBy:predicate:reverse">
+          <td>{{$index}}</td>
           <td>{{sample.itemCode | limitTo:17}}</td>
           <!-- <td>{{sample.itemName}}</td> -->
           <td contentEditable="{{createAssembly}}" ng-model="sample.itemAmount" type="number">{{sample.itemAmountInAssembly}}</td>
@@ -50,8 +94,7 @@
           <!-- <td>{{sample.itemBrand}}</td> -->          
           <td>{{sample.itemBuyPrice}}</td>
         <td ng-hide="createAssembly">
-          <i class="fa fa-pencil-square-o" ng-click="editObj(sample)"></i>&nbsp&nbsp
-          <i class="fa fa-info-circle" ng-click="readObj(sample)"></i>&nbsp&nbsp
+          <i class="fa fa-pencil-square-o" ng-click="editItemInAssembly(sample)"></i>&nbsp&nbsp
           <i class="fa fa-trash" ng-click="deleteRow(sample.ID)"></i>
           
           </td>
