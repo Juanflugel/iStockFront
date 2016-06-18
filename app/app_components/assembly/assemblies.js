@@ -63,7 +63,7 @@ angular.module('assemblyModule',[])
 		query.companyId = 'RMB01';
 		query.assemblyNumber = $scope.objAssembly.assemblyNumber;
 		query['assemblyItems._id'] = obj._id;
-		// console.log(query);
+		console.log(query);
 		shop.assemblyUpdate.update(query,obj,function (data){
 			console.log('item en emsable actualizado');
 			$scope.editObjInAssembly = false;

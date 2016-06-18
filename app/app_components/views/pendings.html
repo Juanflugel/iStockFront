@@ -8,11 +8,11 @@
 	</md-input-container>
 	<md-input-container flex="20" class="search">
 		<md-select ng-model="filterModel" placeholder="Filter By">
-		<md-option ng-value ="opt" ng-repeat="opt in filterBy">{{opt.tagToShow}}</md-option>
+		<md-option ng-value ="opt" ng-repeat="opt in filterBy track by $index">{{opt.tagToShow}}</md-option>
 		</md-select>
 	</md-input-container> <p layout-margin layout-padding class="search">:</p>
 	<md-input-container flex="20" class="search"> 
-		<md-select ng-model="queryTag" placeholder="Select a {{filterModel.tagToShow}}" ng-change="updateQuery()">
+		<md-select ng-model="queryTag" placeholder="Select a {{filterModel.tagToShow}}" ng-change="queryItems()">
 		<md-option ng-value ="tag" ng-repeat="tag in filterModel.array">{{tag}}</md-option>
 		</md-select>
 	</md-input-container>
@@ -23,10 +23,7 @@
 	    </div> 
 	</md-card>
 
-	<div layout-margin>
-		<button  ng-show ="initOrder" ng-click="exportsome()" class="btn btn-success"><i class="fa fa-file-excel-o" ></i> Export Table</button>
-		<button type="button" ng-click="restar()">restar</button>
-	</div>
+
 	<md-card style="display:none">
 
 		<md-card-content layout="column" layout-align="center center">
@@ -62,5 +59,7 @@
 	</div>
 	
 	<i-table></i-table>
-{{mostrar}}
+	{{prueba}}
+	<br>
+
 	

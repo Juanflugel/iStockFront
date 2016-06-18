@@ -4,20 +4,22 @@
 	
 	<thead>
 		<tr class="">
-			<th>Item Code </th>
-			<th>Item Name </th>
-			<th>Item Provider </th>
-			<th>Item Price </th>
+			<th>Code</th>
+			<th>Name </th>
+			<th>provider</th>
+			<th>Stock </th>
+			<th>Needed </th>
 			<th ng-show="initOrder">order</th>
 		</tr>
 	</thead>
 
 	<tbody>
-		<tr ng-repeat="obj in viewItems | filter:search">
-			<td>{{obj.itemCode}}</td>
-			<td>{{obj.itemName}}</td>
+		<tr ng-repeat="obj in viewItems | filter:search |filter:filtrar">
+			<td>{{obj.itemCode |limitTo:16}}</td>
+			<td>{{obj.itemName |limitTo:13}}</td>
 			<td>{{obj.itemProvider}}</td>
-			<td>{{obj.itemBuyPrice}}</td>
+			<td>{{obj.itemAmount}}</td>
+			<td>{{obj.remainingAmount}}</td>
 			<td ng-show="initOrder"><input type="checkbox" ng-model="obj.order"></td>			
 		</tr>
 	</tbody>

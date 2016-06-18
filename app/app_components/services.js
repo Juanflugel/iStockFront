@@ -37,7 +37,7 @@ angular.module('services', ['ngResource'])
 .factory('Config', function () {
   return {
       version : '0.0.1',
-      ip: 'www.estock.website', //www.estock.website
+      ip: 'localhost', //www.estock.website
       port: 5006,
       protocol: 'http'
   };
@@ -52,6 +52,7 @@ angular.module('services', ['ngResource'])
   return {
     
     // request to the API
+    prueba : $resource('http://' + Config.ip + ':' + Config.port + '/handleProject'),
     list : $resource('http://' + Config.ip + ':' + Config.port + '/items'),
     items: $resource('http://' + Config.ip + ':' + Config.port + '/items',{}),
     itemsCode: $resource('http://' + Config.ip + ':' + Config.port + '/itemsCode',{}),// con regular expresions
@@ -176,6 +177,15 @@ angular.module('services', ['ngResource'])
         }
       });
       return diff;
+    },
+    checkIfNegative:function(collection){
+      var allNegative = [];
+      _.each(collection,function (array){
+            if(array[1]<0){
+              allNegative.push(array);
+            }
+      })
+      return allNegative;
     },
     addAmountFromStock:function(colAssembly,colStock){ // para mostrar la cantidad en stock de cada item
       var objMitStockAmount = [];
