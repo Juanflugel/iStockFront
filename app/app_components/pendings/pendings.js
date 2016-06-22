@@ -8,6 +8,7 @@ query.projectState = 'open';
 
 $scope.filterBy = shop.getCompanyFilters();
 console.log($scope.filterBy);
+$scope.filtrar = {itemType:'SCHRAUBE'};
 $scope.queryItems = function(){
 		const j = {};
 		j[$scope.filterModel.queryObjKey] = $scope.queryTag;

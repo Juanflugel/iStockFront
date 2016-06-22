@@ -37,7 +37,7 @@ angular.module('services', ['ngResource'])
 .factory('Config', function () {
   return {
       version : '0.0.1',
-      ip: 'www.estock.website', //www.estock.website
+      ip: 'localhost', //www.estock.website
       port: 5006,
       protocol: 'http'
   };
@@ -52,7 +52,7 @@ angular.module('services', ['ngResource'])
   return {
     
     // request to the API
-    prueba : $resource('http://' + Config.ip + ':' + Config.port + '/handleProject'),
+    prueba : $resource('http://' + Config.ip + ':' + Config.port + '/handleProjects'),
     list : $resource('http://' + Config.ip + ':' + Config.port + '/items'),
     items: $resource('http://' + Config.ip + ':' + Config.port + '/items',{}),
     itemsCode: $resource('http://' + Config.ip + ':' + Config.port + '/itemsCode',{}),// con regular expresions
@@ -140,7 +140,7 @@ angular.module('services', ['ngResource'])
       bills.splice(bills.indexOf(bill), 1);
     },
     getCurrentProject: function() {
-      console.log('me llamaron:'+ currentProject);
+      console.log(currentProject);
       return currentProject;
 
     },

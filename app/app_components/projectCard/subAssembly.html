@@ -40,7 +40,7 @@
         </thead>
 
         <tbody>
-        <tr ng-repeat="sample in collection | filter:search | orderBy:predicate:reverse">
+        <tr ng-repeat="sample in collection | filter:search | filter:{itemAssembled:true}| orderBy:predicate:reverse">
           <td>{{sample.itemCode | limitTo:17}}</td>
           <!-- <td>{{sample.itemName}}</td> -->
           <td contentEditable="{{createAssembly}}" ng-model="sample.itemAmount" type="number">{{sample.itemAmount}}</td>

@@ -1,12 +1,32 @@
 angular.module('projectsModule',['services'])
 
 .controller('projectsCtrl', ['$scope','shop','handleProjects',function ($scope,shop,handleProjects){
+	var firmaId = 'RMB01';
+	var query = {};
+	query.companyId = firmaId;
+	
+	$scope.projects = [];
+		// query para traer todos los proyectos con costo total
+
+	$scope.callQuery = function(){
+		shop.project.query(query,function (data){
+
+		$scope.projects = data;
+
+		},function (err){});	
+	}
+	
+	$scope.callQuery();
+
 	// cabecera de la tabla con todos los emsambles para insertaren un proyecto
 	$scope.headerForInsert = {assemblySelected:'Select',assemblyName:'Assembly Name',assemblyNumber:'Assembly Number',itemAmount:'Number Of Pieces'};
 	$scope.headerForShow = {assemblySelected:'Select',assemblyName:'Assembly Name',assemblyNumber:'Assembly Number'};
 	$scope.projectTypes = ['TOOL','MACHINE'];
 
 	$scope.assembliesInProject = [];// collecion con todos los emsables seleccionados para ser insertados en una projecto
+
+
+	
 
 	$scope.insertAssembliesInProject = function(){
 		var al = $scope.assemblies.length;
@@ -32,31 +52,9 @@ angular.module('projectsModule',['services'])
 		},function (err){});
 	}
 
-	var query = {};
-
-	var firmaId = 'RMB01';
-	$scope.projects = [];
-
-	shop.project.query(); 
-
-	$scope.callQuery = function(){
-		// query para traer todos los proyectos con costo total
-		shop.project.query(function (data){
-		// $scope.modelo = [];	
-		// console.log(data);	
-		// _.each(data,function (obj){
-		// 	const preObj = obj._id;
-		// 	preObj.totalProjectCost = obj.totalProjectCost;
-  //           /*console.log(preObj);*/
-		// 	$scope.modelo.push(preObj);
-		// });
-
-		$scope.projects = data;
-		// console.log('funcionando');
-		},function (err){});
-	}
 	
-	$scope.callQuery();
+
+	
 
 	$scope.configurationProject = function(obj){
 		console.log(obj);
@@ -88,32 +86,31 @@ angular.module('projectsModule',['services'])
 
 	}
 
+	$scope.passProject = function(project){
+		console.log(project);
+		handleProjects.passProject(project);
+	}
+
 	
 	
 }])
 .controller('detailsCtrl',['$scope','shop','handleProjects',function ($scope,shop,handleProjects){
+	 $scope.currentProject = handleProjects.getCurrentProject();
+	 var query = {};
+	 query.companyId ='RMB01';
+	 query.projectNumber = $scope.currentProject.projectNumber;
+	 query['projectAssemblies.assemblyNumber'] = '19.402.00.00.00-A';
 
-	var currentProject = handleProjects.getCurrentProject();
-	var query ={};
-	query._id = currentProject._id;
+	
+	console.log(query);
 
-	shop.project.query(query,function (data){
-		const query = {};
-		const stockAmount = [];
-		query.companyId = "RMB01";
-		console.log(data[0]);
-		$scope.project = data[0];
-		$scope.collection = $scope.project.projectItems;
-		query.array = handleProjects.getJustCode($scope.collection);
-		//console.log(query.array.length);
-		shop.items.query(query,function (data){
-			var sd = handleProjects.addAmountFromStock($scope.collection,data);
-			console.log('exito con stock:'+sd.length);
-			$scope.collection = sd;
-		})
-
-	},function(err){});
-
+	shop.prueba.query(query,function (data){
+		$scope.collection = data;
+	},function (err){
+		console.log('error');
+	});
+	 
+;
 	// header 
 	$scope.header = {itemCode:'Item Code',itemAmount:'Amount',itemStockAmount:'Stock',itemName:'Name',itemBuyPrice:'Price'};
 			// order by header Item
