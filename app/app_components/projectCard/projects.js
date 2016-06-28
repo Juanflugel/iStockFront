@@ -87,7 +87,7 @@ angular.module('projectsModule',['services'])
 	}
 
 	$scope.passProject = function(project){
-		console.log(project);
+		// console.log(project);
 		handleProjects.passProject(project);
 	}
 
@@ -96,21 +96,22 @@ angular.module('projectsModule',['services'])
 }])
 .controller('detailsCtrl',['$scope','shop','handleProjects',function ($scope,shop,handleProjects){
 	 $scope.currentProject = handleProjects.getCurrentProject();
-	 var query = {};
-	 query.companyId ='RMB01';
-	 query.projectNumber = $scope.currentProject.projectNumber;
-	 query['projectAssemblies.assemblyNumber'] = '19.402.00.00.00-A';
+	 $scope.assemblyIndex = 0;
+	 // var query = {};
+	 // query.companyId ='RMB01';
+	 // query.projectNumber = $scope.currentProject.projectNumber;
+	 // query['projectAssemblies.assemblyNumber'] = '19.402.00.00.00-A';
+	$scope.assemblyList = $scope.currentProject.projectAssemblies;
+	$scope.collection = $scope.assemblyList[0].assemblyItems;
 
-	
-	console.log(query);
+	$scope.filterByAssembly = function(index){
+		console.log(index);
+		$scope.collection = $scope.assemblyList[index].assemblyItems;
+		console.log($scope.collection.length);
 
-	shop.prueba.query(query,function (data){
-		$scope.collection = data;
-	},function (err){
-		console.log('error');
-	});
+	}
+
 	 
-;
 	// header 
 	$scope.header = {itemCode:'Item Code',itemAmount:'Amount',itemStockAmount:'Stock',itemName:'Name',itemBuyPrice:'Price'};
 			// order by header Item

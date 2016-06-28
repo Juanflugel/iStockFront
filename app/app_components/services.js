@@ -130,17 +130,17 @@ angular.module('services', ['ngResource'])
     },
     passProject: function(obj){
       currentProject = obj;
-      console.log(currentProject);
+
     },
     passAssembly: function(obj){
       currentAssembly = obj;
-      console.log(currentAssembly);
+
     },
     remove: function(bill) {
       bills.splice(bills.indexOf(bill), 1);
     },
     getCurrentProject: function() {
-      console.log(currentProject);
+
       return currentProject;
 
     },

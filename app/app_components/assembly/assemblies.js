@@ -14,7 +14,6 @@ angular.module('assemblyModule',[])
 		const idDocument = obj._id;
 		obj.projectNumber = obj.projectNumber.toUpperCase();
 		shop.assemblyUpdate.update({_id:idDocument},obj,function (data){
-			// console.log(data);
 			$scope.changeInfoProject = false;
 		});
 	}
@@ -53,7 +52,6 @@ angular.module('assemblyModule',[])
 	$scope.collection = $scope.objAssembly.assemblyItems;
 
 	$scope.editItemInAssembly = function(obj){
-		// console.log(obj);
 		$scope.obj = obj;
 		$scope.editObjInAssembly = true;
 	}
@@ -63,9 +61,9 @@ angular.module('assemblyModule',[])
 		query.companyId = 'RMB01';
 		query.assemblyNumber = $scope.objAssembly.assemblyNumber;
 		query['assemblyItems._id'] = obj._id;
-		console.log(query);
+
 		shop.assemblyUpdate.update(query,obj,function (data){
-			console.log('item en emsable actualizado');
+			//console.log(data);
 			$scope.editObjInAssembly = false;
 		},function (error){});
 	}

@@ -1,3 +1,5 @@
+
+
 <md-card>
     <md-list>
       <md-list-item>
@@ -5,23 +7,22 @@
         <div class="md-list-item-text" layout="column" layout-fill>
 
           <div layout="row"  layout-align="center center">
-            <span flex><h6 class="fieldHeader text-center">Assembly Name</h6></span>
-            <span flex><h6 class="fieldHeader text-center">Assembly Number</h6></span>
-            <span flex><h6 class="fieldHeader text-center">Number of Parts</h6></span>
-            <span flex><h6 class="fieldHeader text-center">Total Cost</h6></span>
+            <span flex ="25"><h6 class="fieldHeader text-center">Project Name</h6></span>
+            <span flex ="30"><h6 class="fieldHeader text-center">Project Number</h6></span>
+            <span flex ="15"><h6 class="fieldHeader text-center">Baugruppen</h6></span>
+            <span flex ="30"><h6 class="fieldHeader text-center">Filter By</h6></span>
           </div>
           <div layout="row" layout-align="center center">
-            <h4 flex class="text-center">{{project.projectName}}</h4>
-            <h4 flex class="text-center">{{project.projectNumber}}</h4>
-            <h4 flex class="text-center">{{project.projectItems.length}}</h4>
-            <h4 flex class="text-center">{{project.totalProjectCost}}</h4>
-          </div>
-          
-        </div>
-        <div>
-          <i class="fa fa-pencil-square-o" ng-click="editProject(project)"></i>
-          <a ui-sref="app.projectDetail"><i class="fa fa-info-circle"></i></a>
-          <i class="fa fa-trash-o" ng-click="deleteProject(project,$index)"></i>
+            <h4 flex ="25" class="text-center">{{currentProject.projectName}}</h4>
+            <h4 flex ="30" class="text-center">{{currentProject.projectNumber}}</h4>
+            <h4 flex ="15" class="text-center">{{currentProject.projectAssemblies.length}}</h4>
+            <h4 flex ="30" class="text-center">
+              <md-select ng-model="assemblyIndex" ng-change="filterByAssembly(assemblyIndex)" aria-label >            
+              <md-option ng-repeat="assembly in assemblyList track by $index" value="{{$index}}">
+                {{assembly.assemblyName |limitTo:20}}
+              </md-option>
+            </md-select></h4>
+          </div>          
         </div>
       </md-list-item>
     </md-list>
@@ -40,7 +41,8 @@
         </thead>
 
         <tbody>
-        <tr ng-repeat="sample in collection | filter:search | filter:{itemAssembled:true}| orderBy:predicate:reverse">
+        <tr ng-repeat="sample in collection  | filter:search |filter:{itemAssembled:true} | orderBy:predicate:reverse"> <!--  -->
+          <td>{{$index}}</td>
           <td>{{sample.itemCode | limitTo:17}}</td>
           <!-- <td>{{sample.itemName}}</td> -->
           <td contentEditable="{{createAssembly}}" ng-model="sample.itemAmount" type="number">{{sample.itemAmount}}</td>
