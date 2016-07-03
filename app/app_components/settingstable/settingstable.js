@@ -1,6 +1,6 @@
 angular.module('settingsTableModule',['services'])
 
-.controller('settingsTableCtrl', ['$scope','shop','$timeout',function ($scope,shop,$timeout){
+.controller('settingsTableCtrl', ['$scope','shop','$timeout','handleProjects',function ($scope,shop,$timeout,handleProjects){
 
 	var query = {itemType:'SCHRAUBE'}; //itemMaterial:"S235 JR" query inicial
 
@@ -13,23 +13,40 @@ angular.module('settingsTableModule',['services'])
 				query.itemCode = $scope.search;
 				shop.itemsCode.query(query,function (data){
 				$scope.collection = data;
-				console.log($scope.collection.length);
+				// console.log($scope.collection.length);
 			},function (error){});			
 		}		
+	}
+	
+	$scope.insertedItems = function(codesArray){
+		var q = {};
+		q.companyId = 'RMB01';
+		q.projectState = 'open';
+		q.codesArray = codesArray;
+
+		shop.itemsInserted.query(q,function (data){
+			var newCol  = handleProjects.addInsertedAmount($scope.collection,data);
+			// console.log(newCol);
+
+		},function (err){});
 	}
 	
 
 	$scope.itemsNewAssembly = []; // collection with all the items which belong to a new assembly
 	
 	$scope.filterModel = {};
+
 	// Retrieve data from API the whole list without filter
 	$scope.refresh = function (){
 		shop.items.query(query,function (data){
-			$scope.collection = data;
-			console.log($scope.collection.length);
+			$scope.collection = data; // show the results
+			var codesArray = handleProjects.getJustCode($scope.collection);
+			$scope.insertedItems(codesArray);
+			// console.log($scope.collection.length);
 		},function (error){});
 	}; 
- 	// dale tiempo para que la info pase al servicio
+
+	// dale tiempo para que la info pase al servicio
 	$timeout(function(){
 		$scope.firmaId = shop.getCompanyId(); // esto hay que traerlo desde un servicio que se valide por login
 		$scope.filterBy = shop.getCompanyFilters();
@@ -42,7 +59,7 @@ angular.module('settingsTableModule',['services'])
 	$scope.queryItems = function(){
 		const j = {};
 		j[$scope.filterModel.queryObjKey] = $scope.queryTag;
-		console.log(j);
+		// console.log(j);
 		query = j;
 		query.companyId = $scope.firmaId;
 		$scope.refresh();
@@ -64,7 +81,7 @@ angular.module('settingsTableModule',['services'])
 		for (i=0;i<al;i++){
 			if (stuck[i].insert == true){
 				$scope.itemsNewAssembly.push(stuck[i]);
-				console.log($scope.itemsNewAssembly);
+				// console.log($scope.itemsNewAssembly);
 			}
 		}
 	}
@@ -86,7 +103,9 @@ angular.module('settingsTableModule',['services'])
 		obj.companyId = $scope.firmaId;
 
 		shop.assembly.save(obj,function (data){
-			console.log('todo bien primo se creo esa monda'+ data);
+			// console.log('todo bien primo se creo esa monda'+ data);
+		},function (err){
+			alert('error'+ err);
 		});
 
 		$scope.createAssembly = false;
@@ -102,7 +121,7 @@ angular.module('settingsTableModule',['services'])
 		templateUrl: 'app_components/settingstable/settingstable.html',		
 		link: function($scope, iElm, iAttrs, controller) {
 			// header 
-			$scope.header = {itemCode:'Item Code',itemAmount:'Amount',itemType:'Type',itemName:'Name',itemBuyPrice:'Price'};
+			$scope.header = {itemCode:'Item Code',itemAmount:'Stock',insertedAmount:'Assembled' ,itemType:'Type',itemName:'Name',itemBuyPrice:'Price'};
 			// order by header Item
 			$scope.order = function(predicate){
 				$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
@@ -134,13 +153,13 @@ angular.module('settingsTableModule',['services'])
 
 				const r = confirm('Are you sure to delete Item: '+ item.itemName);
 					if (r == true) {
-				     shop.items.remove({_id:item._id},function (data){
-				     	$scope.collection.splice(index,1);
-					 	alert('Item: '+ data.itemName+' successfully deleted');
-					 	$scope.refresh();
+					 shop.items.remove({_id:item._id},function (data){
+						$scope.collection.splice(index,1);
+						alert('Item: '+ data.itemName+' successfully deleted');
+						$scope.refresh();
 					 });
 					} else {
-					    return;
+						return;
 					}
 
 			}
@@ -162,7 +181,7 @@ angular.module('settingsTableModule',['services'])
 					shop.items.save(obj,function (data){
 						$scope.obj = {};
 						$scope.newItem = false;
-						console.log('objeto guardado plenamente');
+						// console.log('objeto guardado plenamente');
 					},function (error){
 						alert('error');
 					})
@@ -171,7 +190,7 @@ angular.module('settingsTableModule',['services'])
 				$scope.updateObj = function(obj){
 					const idDocument = obj._id;
 					shop.itemidUpdate.update({_id:idDocument},obj,function(data){
-						 console.log('res:',data);			 
+						 // console.log('res:',data);			 
 						 $scope.editItem = false;			 	
 						 }, function(error){
 							alert('The item amount was not updated');

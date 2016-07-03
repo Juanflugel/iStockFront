@@ -42,11 +42,11 @@
 
         <tbody>
         <tr ng-repeat="sample in collection  | filter:search |filter:{itemAssembled:true} | orderBy:predicate:reverse"> <!--  -->
-          <td>{{$index}}</td>
+          
           <td>{{sample.itemCode | limitTo:17}}</td>
           <!-- <td>{{sample.itemName}}</td> -->
           <td contentEditable="{{createAssembly}}" ng-model="sample.itemAmount" type="number">{{sample.itemAmount}}</td>
-          <td>{{sample.stockAmount}}</td>
+          
           <td>{{sample.itemName | limitTo:20}}</td>
           <!-- <td>{{sample.itemUnits}}</td> -->
           <!-- <td>{{sample.itemBrand}}</td> -->          

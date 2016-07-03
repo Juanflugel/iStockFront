@@ -37,7 +37,7 @@ angular.module('services', ['ngResource'])
 .factory('Config', function () {
   return {
       version : '0.0.1',
-      ip: 'www.estock.website', //www.estock.website
+      ip: 'localhost', //www.estock.website
       port: 5006,
       protocol: 'http'
   };
@@ -55,6 +55,7 @@ angular.module('services', ['ngResource'])
     prueba : $resource('http://' + Config.ip + ':' + Config.port + '/handleProjects'),
     list : $resource('http://' + Config.ip + ':' + Config.port + '/items'),
     items: $resource('http://' + Config.ip + ':' + Config.port + '/items',{}),
+    itemsInserted: $resource('http://' + Config.ip + ':' + Config.port + '/insertedItems',{}),
     itemsCode: $resource('http://' + Config.ip + ':' + Config.port + '/itemsCode',{}),// con regular expresions
     itemidUpdate:$resource('http://' + Config.ip + ':' + Config.port + '/items',{},{ update: {method: 'PUT'}}),
     project:$resource('http://' + Config.ip + ':' + Config.port + '/projects',{}),
@@ -201,6 +202,22 @@ angular.module('services', ['ngResource'])
       });
 
       return objMitStockAmount;
+
+    },
+    addInsertedAmount:function(colStock,colAssembly){ // para mostrar la cantidad en stock de cada item
+      var objWithInsertedAmount = [];
+        lcolStock = colStock.length;
+      _.each(colAssembly,function (colAssemblyObj){
+            for(i=0;i<lcolStock;i++){
+              const currentObj = colStock[i];
+              if(colAssemblyObj.itemCode == currentObj.itemCode){
+               currentObj.insertedAmount = colAssemblyObj.itemAmount;
+                objWithInsertedAmount.push(currentObj);
+              }
+            }
+      });
+
+      return objWithInsertedAmount;
 
     }
   }

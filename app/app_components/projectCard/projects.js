@@ -113,7 +113,7 @@ angular.module('projectsModule',['services'])
 
 	 
 	// header 
-	$scope.header = {itemCode:'Item Code',itemAmount:'Amount',itemStockAmount:'Stock',itemName:'Name',itemBuyPrice:'Price'};
+	$scope.header = {itemCode:'Item Code',itemAmount:'Amount',itemName:'Name',itemBuyPrice:'Price'};
 			// order by header Item
 	$scope.order = function(predicate){
 		$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;

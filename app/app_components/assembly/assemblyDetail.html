@@ -20,14 +20,14 @@
         </div>
         <div>
           <i class="fa fa-pencil-square-o" ng-click="editProject(project)"></i>
-          <a ui-sref="app.projectDetail"><i class="fa fa-info-circle"></i></a>
+          <i class="fa fa-plus" aria-hidden="true" ng-click="createNewItem"></i>
           <i class="fa fa-trash-o" ng-click="deleteProject(project,$index)"></i>
         </div>
       </md-list-item>
     </md-list>
 
 
-<div ng-show="editObjInAssembly">
+<div ng-show="editObjInAssembly || insertObjInAssembly">
 <md-divider flex></md-divider>
 
   <div layout-padding >
@@ -49,14 +49,26 @@
       </md-input-container>
           
       &nbsp
-        <div ng-show="editObjInAssembly">
+      <!-- editing part -->
+        <div ng-show="editObjInAssembly" ng-hide="insertObjInAssembly">
           <i  ng-click="updateItemInAssembly(obj)" layout-padding class="fa fa-check-circle fa-2x text-success" >  
         </i>&nbsp &nbsp &nbsp
         </div>
-        <div ng-show="editObjInAssembly">
+        <div ng-show="editObjInAssembly" ng-hide="insertObjInAssembly">
           <i  ng-click="editObjInAssembly=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
           &nbsp &nbsp &nbsp
         </div>
+        <!-- editing part -->
+        <!-- inserting part -->
+        <div ng-hide="editObjInAssembly" ng-show="insertObjInAssembly">
+          <i  ng-click="insertItemInAssembly(obj)" layout-padding class="fa fa-check-circle fa-2x text-success" >  
+        </i>&nbsp &nbsp &nbsp
+        </div>
+        <div ng-hide="editObjInAssembly" ng-show="insertObjInAssembly">
+          <i  ng-click="insertObjInAssembly=false"  layout-padding class="fa fa-times fa-2x text-danger"></i>
+          &nbsp &nbsp &nbsp
+        </div>
+        <!-- inserting part -->
     
     </div>
     
@@ -86,12 +98,9 @@
         <tr ng-repeat="sample in collection | filter:search | orderBy:predicate:reverse">
           <!-- <td>{{$index}}</td> -->
           <td>{{sample.itemCode | limitTo:17}}</td>
-          <!-- <td>{{sample.itemName}}</td> -->
           <td contentEditable="{{createAssembly}}" ng-model="sample.itemAmount" type="number">{{sample.itemAmountInAssembly}}</td>
-          <td>{{sample.stockAmount}}</td>
-          <td>{{sample.itemName | limitTo:20}}</td>
-          <!-- <td>{{sample.itemUnits}}</td> -->
-          <!-- <td>{{sample.itemBrand}}</td> -->          
+<!--           <td>{{sample.stockAmount}}</td> -->
+          <td>{{sample.itemName | limitTo:20}}</td>         
           <td>{{sample.itemBuyPrice}}</td>
         <td ng-hide="createAssembly">
           <i class="fa fa-pencil-square-o" ng-click="editItemInAssembly(sample)"></i>&nbsp&nbsp

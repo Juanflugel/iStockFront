@@ -46,10 +46,28 @@ angular.module('assemblyModule',[])
 	
 }])
 .controller('assemblyDetailCtrl', ['$scope','shop','handleProjects',function ($scope,shop,handleProjects){
+	var firmaId = 'RMB01';
 
 	$scope.objAssembly = handleProjects.getCurrentAssembly();
-	$scope.header = {itemCode:'Item Code',itemAmount:'Amount',itemStockAmount:'Stock',itemName:'Name',itemBuyPrice:'Price'};
+	$scope.header = {itemCode:'Item Code',itemAmount:'Amount',itemName:'Name',itemBuyPrice:'Price'};
 	$scope.collection = $scope.objAssembly.assemblyItems;
+
+	$scope.createNewItem = function(){
+		$scope.obj = {};
+		$scope.editObjInAssembly = false;
+		$scope.insertObjInAssembly = true;
+	}
+	$scope.insertItemInAssembly = function(obj){
+		console.log(obj);
+		var query = {};
+		query.companyId = firmaId;
+		query.assemblyNumber = $scope.objAssembly.assemblyNumber;
+		shop.assemblyUpdate.update(query,obj,function (data){
+			//console.log(data);
+			$scope.collection.push(obj);
+			$scope.insertObjInAssembly = false;
+		},function (error){});
+	}
 
 	$scope.editItemInAssembly = function(obj){
 		$scope.obj = obj;
@@ -58,7 +76,7 @@ angular.module('assemblyModule',[])
 
 	$scope.updateItemInAssembly = function(obj){
 		var query = {};
-		query.companyId = 'RMB01';
+		query.companyId = firmaId;
 		query.assemblyNumber = $scope.objAssembly.assemblyNumber;
 		query['assemblyItems._id'] = obj._id;
 
