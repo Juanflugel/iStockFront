@@ -13,7 +13,10 @@ angular.module('settingsTableModule',['services'])
 				query.itemCode = $scope.search;
 				shop.itemsCode.query(query,function (data){
 				$scope.collection = data;
-				// console.log($scope.collection.length);
+				var codesArray = handleProjects.getJustCode($scope.collection);
+				codesArray.push('0');
+				$scope.insertedItems(codesArray);
+				// console.log(codesArray);
 			},function (error){});			
 		}		
 	}
@@ -25,8 +28,8 @@ angular.module('settingsTableModule',['services'])
 		q.codesArray = codesArray;
 
 		shop.itemsInserted.query(q,function (data){
-			var newCol  = handleProjects.addInsertedAmount($scope.collection,data);
-			// console.log(newCol);
+			handleProjects.addInsertedAmount($scope.collection,data);
+			// console.log($scope.collection);
 
 		},function (err){});
 	}
@@ -42,7 +45,7 @@ angular.module('settingsTableModule',['services'])
 			$scope.collection = data; // show the results
 			var codesArray = handleProjects.getJustCode($scope.collection);
 			$scope.insertedItems(codesArray);
-			// console.log($scope.collection.length);
+			// console.log(codesArray);
 		},function (error){});
 	}; 
 
